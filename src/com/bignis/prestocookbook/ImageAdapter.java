@@ -1,5 +1,7 @@
 package com.bignis.prestocookbook;
 import android.content.*;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -50,7 +52,11 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 		if (convertView == null)
 		{
 			imageView = new ImageView(this._context);
-			imageView.setLayoutParams(new Gallery.LayoutParams(115, 100));
+			
+			Drawable drawable = this._context.getResources().getDrawable(ImageIds[position]);
+			Gallery.LayoutParams params = new Gallery.LayoutParams(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+			//imageView.setLayoutParams(new Gallery.LayoutParams(115, 100));
+			imageView.setLayoutParams(params);
 		}
 		else
 		{
