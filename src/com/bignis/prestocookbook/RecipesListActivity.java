@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.*;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,8 @@ public class RecipesListActivity extends Activity {
 
 	public final static String RECIPE_ID = "com.bignis.PrestoCookbook.RECIPE_ID";
 	public final static String RECIPE_XML_FILENAME = "com.bignis.PrestoCookbook.RECIPE_XML_FILENAME";
+
+	private Gallery _gallery;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,9 @@ public class RecipesListActivity extends Activity {
 		setContentView(R.layout.activity_recipes_list);
 		
 		LinearLayout linearLayout =  (LinearLayout)this.findViewById(R.id.linearLayoutMgn);
+		
+		Gallery _gallery = (Gallery)this.findViewById(R.id.gallery1);
+		_gallery.setAdapter(new ImageAdapter(this));
 		
 		RecipeForList[] recipes = this.GetRecipesForList();
 		
