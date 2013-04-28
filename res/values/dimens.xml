@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mgn_lorem_ipsum_size">40px</dimen>
+    <dimen name="TitleSize">30dp</dimen>
+    <dimen name="IngredientsSize">18dp</dimen>
+    <dimen name="StepsSize">17dp</dimen>
+</resources>

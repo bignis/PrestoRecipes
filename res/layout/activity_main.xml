@@ -1,0 +1,27 @@
+
+   <ScrollView
+       android:id="@+id/scrollView1"
+       android:layout_width="fill_parent"
+       android:layout_height="match_parent"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true"
+       xmlns:android="http://schemas.android.com/apk/res/android"
+   	xmlns:tools="http://schemas.android.com/tools"
+       tools:context=".MainActivity" 
+       >
+       
+       	<LinearLayout
+       	    android:id="@+id/recipeContentLayout"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        >
+
+       	    <!-- Controls will be dynamically added -->
+       	    
+       	</LinearLayout>
+       
+       
+
+
+   </ScrollView>
