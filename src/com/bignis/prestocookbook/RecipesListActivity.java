@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import com.bignis.prestocookbook.database.RecipeDBHelper;
 
@@ -18,11 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.*;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class RecipesListActivity extends Activity {
 
@@ -37,15 +35,12 @@ public class RecipesListActivity extends Activity {
 		
 		LinearLayout linearLayout =  (LinearLayout)this.findViewById(R.id.linearLayoutMgn);
 		
-		Gallery _gallery = (Gallery)this.findViewById(R.id.gallery1);
-		_gallery.setAdapter(new ImageAdapter(this));
-		_gallery.setHorizontalFadingEdgeEnabled(false);
-		_gallery.setUnselectedAlpha(1.0f);
+		RecipeForList[] recipes = this.GetRecipesForList();
+		
+		int[] recipeIds = this.GetRecipeIds(recipes);
 		
 		GridView gridView = (GridView)this.findViewById(R.id.gridView1);
-		gridView.setAdapter(new ImageAdapter(this));
-		
-		RecipeForList[] recipes = this.GetRecipesForList();
+		gridView.setAdapter(new ImageAdapter(this, recipeIds));
 		
 		if (recipes == null || recipes.length == 0)
 		{
@@ -146,6 +141,29 @@ public class RecipesListActivity extends Activity {
 		dbHelper.close();
 		
 		return (RecipeForList[]) rfls.toArray(new RecipeForList[0]); // http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
+	}
+	
+	private int[] GetRecipeIds(RecipeForList[] rfls)
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		for (RecipeForList rfl : rfls)
+		{
+			list.add(rfl.Id);
+		}
+		
+		return convertIntegers(list);
+	}
+	
+	public static int[] convertIntegers(List<Integer> integers)
+	{
+	    int[] ret = new int[integers.size()];
+	    Iterator<Integer> iterator = integers.iterator();
+	    for (int i = 0; i < ret.length; i++)
+	    {
+	        ret[i] = iterator.next().intValue();
+	    }
+	    return ret;
 	}
 	
 	private class RecipeForList

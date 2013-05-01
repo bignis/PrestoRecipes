@@ -22,12 +22,7 @@ public final class R {
         public static final int mgn_lorem_ipsum_size=0x7f050000;
     }
     public static final class drawable {
-        public static final int curry=0x7f020000;
-        public static final int fruit=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int salmon=0x7f020003;
-        public static final int soulfood=0x7f020004;
-        public static final int spagetti=0x7f020005;
+        public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
         public static final int gallery1=0x7f090004;
