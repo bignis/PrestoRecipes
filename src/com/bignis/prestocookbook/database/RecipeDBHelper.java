@@ -12,16 +12,17 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
 	    "CREATE TABLE Recipes" +
 	    "(" +
 	    "Id INTEGER NOT NULL PRIMARY KEY," +
-	    "Title TEXT NOT NULL," +
-	    "Notes TEXT," +
+	    "Title TEXT NOT NULL collate nocase," +
+	    "Notes TEXT collate nocase," +
 	    "Xml TEXT NOT NULL," +
 	    "XmlHash TEXT NOT NULL," +
-	    "XmlFileName TEXT," +
+	    "XmlFileName TEXT collate nocase," +
 	    "Image BLOB," +
 	    "ImageHash TEXT," +
-	    "ImageFileName TEXT," +
+	    "ImageFileName TEXT collate nocase," +
 	    "LastUpdated DATETIME NOT NULL," +
-	    "UNIQUE (Id)" +
+	    "UNIQUE (Id)," +
+	    "UNIQUE (XmlFileName)" +  // XmlFileName is the identifier to figure out what Recipe an Image is associated with when loading data.
 	    ");";
     
     private static final String CREATE_CATEGORIES_TABLE =

@@ -29,7 +29,6 @@ public class RecipesListActivity extends Activity {
 	public final static String RECIPE_ID = "com.bignis.PrestoCookbook.RECIPE_ID";
 	public final static String RECIPE_XML_FILENAME = "com.bignis.PrestoCookbook.RECIPE_XML_FILENAME";
 
-	private Gallery _gallery;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,11 @@ public class RecipesListActivity extends Activity {
 		
 		Gallery _gallery = (Gallery)this.findViewById(R.id.gallery1);
 		_gallery.setAdapter(new ImageAdapter(this));
+		_gallery.setHorizontalFadingEdgeEnabled(false);
+		_gallery.setUnselectedAlpha(1.0f);
+		
+		GridView gridView = (GridView)this.findViewById(R.id.gridView1);
+		gridView.setAdapter(new ImageAdapter(this));
 		
 		RecipeForList[] recipes = this.GetRecipesForList();
 		
@@ -93,8 +97,8 @@ public class RecipesListActivity extends Activity {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	    case R.id.menu_load_recipes:
-	    	int recipesLoadedCount = RecipesLoader.LoadRecipes(this.getApplicationContext());
-	    	Toast.makeText(this, Integer.toString(recipesLoadedCount) + " recipes done loading", Toast.LENGTH_SHORT).show();
+	    	String message = RecipesLoader.LoadRecipes(this.getApplicationContext());
+	    	Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	        return true;
 	    default:
 	        return super.onOptionsItemSelected(item);

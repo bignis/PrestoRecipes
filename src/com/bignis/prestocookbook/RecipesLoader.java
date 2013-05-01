@@ -19,18 +19,20 @@ import android.database.sqlite.SQLiteStatement;
 import android.os.Environment;
 
 public class RecipesLoader {
-	public static int LoadRecipes(Context context)
+	public static String LoadRecipes(Context context)
 	{
 		if (context == null)
 		{
 			throw new RuntimeException("context cannot be null");
 		}
 		
-		File[] xmlFiles = GetXmlFiles();
+		String message = "";
 		
-		File[] xmlFilesThatNeedLoading = null;
-		
-	
+		{
+			File[] xmlFiles = GetXmlFiles();
+			
+			File[] xmlFilesThatNeedLoading = null;
+			
 			try {
 				xmlFilesThatNeedLoading = GetXmlFilesThatNeedLoading(xmlFiles, context);
 			
@@ -39,11 +41,33 @@ public class RecipesLoader {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
-				return 0;
+				return "Nothing was loaded due to an error";
 			}
-
+			
+			message += Integer.toString(xmlFilesThatNeedLoading.length) + " recipes done loading";
+		}
+	
 		
-		return xmlFilesThatNeedLoading.length;
+		{
+			File[] imageFiles = GetImageFiles();
+			
+			File[] imageFilesThatNeedLoading = null;
+			
+			try {
+				imageFilesThatNeedLoading = GetImageFilesThatNeedLoading(imageFiles, context);
+			
+				LoadImageFiles(imageFilesThatNeedLoading, context);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				return "Nothing was loaded due to an error";
+			}
+			
+			message += Integer.toString(imageFilesThatNeedLoading.length) + " images done loading";
+		}
+		
+		return message;
 	}
 	
 	private static void LoadXmlFiles(File[] xmlFilesThatNeedLoading, Context context) throws Exception {
@@ -179,6 +203,131 @@ public class RecipesLoader {
 		return xmlFiles;
 	}
 	
+	public static File[] GetImageFiles()
+	{
+		String state = Environment.getExternalStorageState();
+
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+			String foo = "";
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		    String foo = "";
+		} 
+		
+		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
+		
+		//File folder = new File("/Presto Recipes");
+		
+		FilenameFilter filter = new FilenameFilter() {
+		    public boolean accept(File directory, String fileName) {
+		        return fileName.endsWith(".jpg");
+		    }
+		};
+		
+		File[] imageFiles = folder.listFiles(filter);
+		
+		return imageFiles;
+	}
+	
+	public static File[] GetImageFilesThatNeedLoading(File[] imageFiles, Context context) throws FileNotFoundException, IOException
+	{
+		if (imageFiles.length == 0)
+		{
+			return new File[0];
+		}
+	
+		ArrayList<File> filesThatNeedLoading = new ArrayList<File>();
+		
+		RecipeChecksumInfo[] rcis = ReadRecipesFromDatabase(context);
+	
+		HashSet<Long> checksumsInDatabase = new HashSet<Long>();
+		
+		for (RecipeChecksumInfo rci : rcis)
+		{
+			checksumsInDatabase.add(rci.ImageHash);
+		}
+		
+		for (File imageFile : imageFiles)
+		{
+			long checksum = GetChecksum(imageFile);
+			
+			if (checksumsInDatabase.contains(checksum))
+			{
+				continue;
+			}
+			
+			filesThatNeedLoading.add(imageFile);
+		}
+		
+		return (File[]) filesThatNeedLoading.toArray(new File[0]); //http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
+	}
+	
+	private static void LoadImageFiles(File[] imageFilesThatNeedLoading, Context context) throws Exception {
+		
+		if (imageFilesThatNeedLoading.length == 0)
+		{
+			return;
+		}
+		
+		RecipeDBHelper dbHelper = new RecipeDBHelper(context);
+		
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
+		/*
+		 	    "CREATE TABLE Recipes" +
+	    "(" +
+	    "Id INTEGER NOT NULL PRIMARY KEY," +
+	    "Title TEXT NOT NULL," +
+	    "Notes TEXT," +
+	    "Xml TEXT NOT NULL," +
+	    "XmlHash TEXT NOT NULL," +
+	    "XmlFileName TEXT," +
+	    "Image BLOB," +
+	    "ImageHash TEXT," +
+	    "ImageFileName TEXT," +
+	    "LastUpdated DATETIME NOT NULL," +
+	    "UNIQUE (Id)" +
+	    ");";
+		 */
+		
+		for (File file : imageFilesThatNeedLoading)
+		{
+			String correspondingXmlFileName = file.getName().substring(0, file.getName().lastIndexOf('.')) + ".xml";
+			
+			String countSql = String.format("SELECT COUNT(*) FROM Recipes WHERE XmlFileName = %s", 
+					DatabaseUtils.sqlEscapeString(correspondingXmlFileName));
+			
+		    SQLiteStatement statement = db.compileStatement(countSql);
+		    long existingRowCount = statement.simpleQueryForLong();
+			
+		    if (existingRowCount != 1)
+		    {
+		    	// Images are guaranteed to be an "update" since the Recipe XML must have been loaded already
+		    	
+		    	// The only thing weird might be an image (mis-named, say) without a corresponding recipe.  In that case don't load it.
+		    	continue;
+		    }
+		    
+			long fileHash = GetChecksum(file);
+			
+			byte[] data = new byte[(int) file.length()];
+			new FileInputStream(file).read(data);
+			
+			SQLiteStatement update = db.compileStatement(
+					"UPDATE Recipes " + 
+					"SET Image = ?, ImageHash = ?, LastUpdated = datetime('now')" +
+					"WHERE XmlFileName = ?");
+			
+			update.bindBlob(1, data);
+			update.bindLong(2, fileHash);
+			update.bindString(3, correspondingXmlFileName);
+			String debug = update.toString();
+			update.execute();
+		}
+		
+		dbHelper.close();
+	}
+	
 	public static File[] GetXmlFilesThatNeedLoading(File[] xmlFiles, Context context) throws FileNotFoundException, IOException
 	{
 		if (xmlFiles.length == 0)
@@ -233,7 +382,9 @@ public class RecipesLoader {
 			    "Id",
 			    "Title",
 			    "XmlFileName",
-			    "XmlHash"
+			    "XmlHash",
+			    "ImageFileName",
+			    "ImageHash"
 			    };
 		
 		Cursor cursor = db.query(
@@ -261,6 +412,8 @@ public class RecipesLoader {
 			rci.Title = cursor.getString(cursor.getColumnIndexOrThrow("Title"));
 			rci.XmlFileName = cursor.getString(cursor.getColumnIndexOrThrow("XmlFileName"));
 			rci.XmlHash = cursor.getLong(cursor.getColumnIndexOrThrow("XmlHash"));
+			rci.ImageFileName = cursor.getString(cursor.getColumnIndexOrThrow("ImageFileName"));
+			rci.ImageHash = cursor.getLong(cursor.getColumnIndexOrThrow("ImageHash"));
 
         } while (cursor.moveToNext());
 		

@@ -6,6 +6,8 @@ public class RecipeChecksumInfo
 	public String Title;
 	public String XmlFileName;
 	public long XmlHash;
+	public String ImageFileName;
+	public long ImageHash;
 	
 	public RecipeChecksumInfo()
 	{
