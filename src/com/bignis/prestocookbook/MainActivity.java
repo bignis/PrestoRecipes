@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 		Cursor cursor = db.query(
 			    "Recipes",  // The table to query
 			    projection,                               // The columns to return
-			    null,                                // The columns for the WHERE clause
+			    "ID = " + recipeId,                                // The columns for the WHERE clause
 			    null,                            // The values for the WHERE clause
 			    null,                                     // don't group the rows
 			    null,                                     // don't filter by row groups
@@ -71,6 +71,11 @@ public class MainActivity extends Activity {
 		}
 		
 		String xml = cursor.getString(cursor.getColumnIndexOrThrow("Xml"));
+		
+		if (cursor.moveToNext())
+		{
+			throw new RuntimeException("got multiple recipes in database query?!?");
+		}
 		
 		dbHelper.close();
 		

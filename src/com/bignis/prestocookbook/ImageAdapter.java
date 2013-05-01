@@ -68,8 +68,10 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 		
 		LinearLayout layout = new LinearLayout(_context);
 		layout.setOrientation(LinearLayout.VERTICAL);
+		int recipeId = this._recipeIds[position];
+		layout.setTag(recipeId); // For onclick
 		
-		RecipeImage recipeImage = getRecipeImage(position);
+		RecipeImage recipeImage = getRecipeImage(recipeId);
 		
 		TextView textView = new TextView(this._context);
 		textView.setText(recipeImage.title);
@@ -92,10 +94,8 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 		
 	}
 
-	private RecipeImage getRecipeImage(int position)
-	{
-		int recipeId = this._recipeIds[position];
-		
+	private RecipeImage getRecipeImage(int recipeId)
+	{		
 		RecipeDBHelper dbHelper = new RecipeDBHelper(this._context);		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		

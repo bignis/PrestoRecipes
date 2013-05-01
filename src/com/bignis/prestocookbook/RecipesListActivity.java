@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class RecipesListActivity extends Activity {
 
@@ -41,6 +42,7 @@ public class RecipesListActivity extends Activity {
 		
 		GridView gridView = (GridView)this.findViewById(R.id.gridView1);
 		gridView.setAdapter(new ImageAdapter(this, recipeIds));
+		gridView.setOnItemClickListener(new StupidClickHandler(this));
 		
 		if (recipes == null || recipes.length == 0)
 		{
@@ -49,17 +51,48 @@ public class RecipesListActivity extends Activity {
 			linearLayout.addView(text);
 			return;
 		}
-		
+		/*
 		for (RecipeForList recipe : recipes)
 		{
 			Button button = new Button(this);
 			button.setText(recipe.Title);
 			linearLayout.addView(button);
 			button.setOnClickListener(new StupidClickHandler(this, recipe.Id));
-		}
+		}*/
 		
 	}
 	
+	private class StupidClickHandler implements OnItemClickListener 
+	{
+
+		private Activity _activity;
+		
+		public StupidClickHandler(Activity activity)
+		{
+			this._activity = activity;
+		}
+		
+		@Override
+		public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+		{
+			Object tag = v.getTag();
+			
+			if (tag == null)
+			{
+				throw new RuntimeException("Null tag");
+			}
+			
+			int recipeId = (Integer)tag;
+			
+			Intent intent = new Intent(this._activity, MainActivity.class);
+			intent.putExtra(RECIPE_ID, recipeId);
+			this._activity.startActivity(intent);
+			
+		}
+	
+	}
+	
+	/*
 	private class StupidClickHandler implements OnClickListener
 	{
 		private int _recipeId;
@@ -79,6 +112,7 @@ public class RecipesListActivity extends Activity {
 		}
 	
 	}
+	*/
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
