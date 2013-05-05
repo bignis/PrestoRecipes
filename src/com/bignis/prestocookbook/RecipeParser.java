@@ -201,7 +201,7 @@ public class RecipeParser {
     	NodeList stepNodes = (NodeList) xpath.evaluate("/recipeml/recipe/directions/step", document, XPathConstants.NODESET);
     	
     	for (int i = 0; i < stepNodes.getLength(); i++) {
-            recipe.Ingredients.add(stepNodes.item(i).getTextContent().trim());
+            recipe.Steps.add(stepNodes.item(i).getTextContent().trim());
         }
     	
     	//recipe.Title = nodes.item(0).getTextContent();

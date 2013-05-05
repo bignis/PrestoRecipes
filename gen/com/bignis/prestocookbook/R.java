@@ -19,26 +19,28 @@ public final class R {
         public static final int red=0x7f040000;
     }
     public static final class dimen {
-        public static final int IngredientsSize=0x7f050002;
-        public static final int StepsSize=0x7f050003;
-        public static final int TitleSize=0x7f050001;
-        public static final int mgn_lorem_ipsum_size=0x7f050000;
+        public static final int IngredientsSize=0x7f050001;
+        public static final int StepsSize=0x7f050002;
+        public static final int TitleSize=0x7f050000;
     }
     public static final class drawable {
         public static final int ic_action_search=0x7f020000;
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_search=0x7f090009;
-        public static final int gridView1=0x7f090005;
-        public static final int linearLayoutMgn=0x7f090002;
-        public static final int menu_load_recipes=0x7f090007;
-        public static final int menu_reset_database=0x7f090008;
-        public static final int menu_settings=0x7f090006;
-        public static final int noRecipesFoundFromSearchMessage=0x7f090004;
-        public static final int noRecipesInDatabaseMessage=0x7f090003;
+        public static final int action_search=0x7f09000c;
+        public static final int gridView1=0x7f090008;
+        public static final int ingredientsContentLayout=0x7f090003;
+        public static final int linearLayoutMgn=0x7f090005;
+        public static final int menu_load_recipes=0x7f09000a;
+        public static final int menu_reset_database=0x7f09000b;
+        public static final int menu_settings=0x7f090009;
+        public static final int noRecipesFoundFromSearchMessage=0x7f090007;
+        public static final int noRecipesInDatabaseMessage=0x7f090006;
         public static final int recipeContentLayout=0x7f090001;
         public static final int scrollView1=0x7f090000;
+        public static final int stepsContentLayout=0x7f090004;
+        public static final int titleTextView=0x7f090002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

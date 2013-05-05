@@ -5,7 +5,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 
 import com.bignis.prestocookbook.database.RecipeDBHelper;
-
+import android.view.ViewGroup.LayoutParams;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
+import android.view.View;
 import android.widget.*;
 
 public class MainActivity extends Activity {
@@ -98,7 +99,8 @@ public class MainActivity extends Activity {
     	
     	//recipeTextView.setText(recipe.Title);
     	
-    	LinearLayout contentView = (LinearLayout)this.findViewById(R.id.recipeContentLayout);
+    	LinearLayout ingredientsLayout = (LinearLayout)this.findViewById(R.id.ingredientsContentLayout);
+    	LinearLayout stepsLayout = (LinearLayout)this.findViewById(R.id.stepsContentLayout);
     	//style="@android:style/TextAppearance.Medium"
     	
     	
@@ -108,28 +110,32 @@ public class MainActivity extends Activity {
     	
     	// Body
     	
-    	TextView title = new TextView(this);
-    	contentView.addView(title);
-    	title.setText(recipe.Title);
-    	//title.setTextSize(this.getResources().getDimension(R.dimen.TitleSize));
-    	title.setTextAppearance(this, android.R.style.TextAppearance_Large);
+    	TextView titleTextView = (TextView)this.findViewById(R.id.titleTextView);
+    	titleTextView.setText(recipe.Title);
     	
     	for (int i = 0; i < recipe.Ingredients.size(); ++i)
     	{
     		TextView ingredient = new TextView(this);
-        	contentView.addView(ingredient);
+    		ingredientsLayout.addView(ingredient);
         	ingredient.setText(recipe.Ingredients.get(i));
-        	//ingredient.setTextSize(ingredientsSize);
-        	ingredient.setTextAppearance(this, android.R.style.TextAppearance_Medium);
+        	ingredient.setTextSize(ingredientsSize);
+        	//ingredient.setTextAppearance(this, android.R.style.TextAppearance_Medium);
     	}
+    	
+    	LinearLayout.LayoutParams stepLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    	stepLayoutParams.bottomMargin = 10;  // Space between steps
+    	
     	
     	for (int i = 0; i < recipe.Steps.size(); ++i)
     	{
     		TextView step = new TextView(this);
-        	contentView.addView(step);
-        	step.setText(recipe.Steps.get(i));
-        	//step.setTextSize(stepsSize);
-        	step.setTextAppearance(this, android.R.style.TextAppearance_Medium);
+    		stepsLayout.addView(step);
+        	step.setText(Integer.valueOf(i+1).toString() + ") " + recipe.Steps.get(i));
+        	
+        	step.setLayoutParams(stepLayoutParams);
+        	
+        	step.setTextSize(stepsSize);
+        	//step.setTextAppearance(this, android.R.style.TextAppearance_Medium);
     	}
     }
 
