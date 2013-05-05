@@ -12,8 +12,10 @@ import com.bignis.prestocookbook.database.RecipeDBHelper;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -143,6 +145,34 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	    	Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	    	this.PopulateRecipes(null);  // Reload the recipe list from scratch
 	        return true;
+	    case R.id.menu_reset_database:
+	    {
+	    	RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+	    	/*
+	    	new AlertDialog.Builder(this)
+	        .setIcon(android.R.drawable.ic_dialog_alert)
+	        .setTitle("All your data will be lost")
+	        .setMessage("Are you sure you want to reset?")
+	        .setPositiveButton("Delete it all!", new DialogInterface.OnClickListener() {
+
+	            @Override
+	            public void onClick(DialogInterface dialog, int which) {
+
+	                //Stop the activity
+	                YourClass.this.finish();    
+	            }
+
+	        })
+	        .setNegativeButton(R.string.no, null)
+	        .show();
+	    	*/
+	    	dbHelper.onUpgrade(dbHelper.getWritableDatabase(), 1, 1);  // Triggers drop / recreate
+	    	Toast.makeText(this, "Database has been reset", Toast.LENGTH_SHORT).show();
+	    	this.PopulateRecipes(null); // Reload the recipe list from scratch
+	    	return true;
+	    }
+	    	
+	    
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }
