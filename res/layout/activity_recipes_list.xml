@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayoutMgn"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
 
     <!-- 
     <GridView android:id="@+id/gridView1" 
@@ -17,6 +15,22 @@
     android:scrollbars="vertical" android:fadeScrollbars="false"
     android:scrollbarAlwaysDrawVerticalTrack="true" />
      -->
+
+    <TextView
+        android:id="@+id/noRecipesInDatabaseMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Recipes Have Been Loaded - Use the &quot;Load Recipes&quot; Menu Option"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/noRecipesFoundFromSearchMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Recipes Found Matching Your Search"
+        android:visibility="visible"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
      
          <GridView android:id="@+id/gridView1" 
 	android:background="@color/recipeListRowDivider"

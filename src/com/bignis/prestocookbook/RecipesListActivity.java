@@ -12,9 +12,11 @@ import com.bignis.prestocookbook.database.RecipeDBHelper;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,8 +24,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.SearchView.OnQueryTextListener;
 
-public class RecipesListActivity extends Activity {
+public class RecipesListActivity extends Activity implements OnQueryTextListener {
 
 	public final static String RECIPE_ID = "com.bignis.PrestoCookbook.RECIPE_ID";
 	public final static String RECIPE_XML_FILENAME = "com.bignis.PrestoCookbook.RECIPE_XML_FILENAME";
@@ -34,32 +37,44 @@ public class RecipesListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recipes_list);
 		
-		LinearLayout linearLayout =  (LinearLayout)this.findViewById(R.id.linearLayoutMgn);
+		//You can enable type-to-search in your activity by calling setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL) during your activity's onCreate() method.
+		//this.setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);		
 		
-		RecipeForList[] recipes = this.GetRecipesForList();
-		
-		int[] recipeIds = this.GetRecipeIds(recipes);
+		this.PopulateRecipes(null); // null = Get all recipes
+	}
+	
+	private void PopulateRecipes(String searchQuery)
+	{
+		RecipeForList[] recipes = this.GetRecipesForList(searchQuery);  
 		
 		GridView gridView = (GridView)this.findViewById(R.id.gridView1);
-		gridView.setAdapter(new ImageAdapter(this, recipeIds));
-		gridView.setOnItemClickListener(new StupidClickHandler(this));
+		View noRecipesInDatabaseMessage = this.findViewById(R.id.noRecipesInDatabaseMessage);
+		View noRecipesFoundFromSearchMessage = this.findViewById(R.id.noRecipesFoundFromSearchMessage);
 		
 		if (recipes == null || recipes.length == 0)
 		{
-			TextView text = new TextView(this);
-			text.setText("No xml files found");
-			linearLayout.addView(text);
+			if (searchQuery == null)
+			{
+				// No Recipes in DB
+				noRecipesInDatabaseMessage.setVisibility(View.VISIBLE);
+			}
+			else
+			{
+				// No search results
+				noRecipesFoundFromSearchMessage.setVisibility(View.VISIBLE);
+			}
+			
+			gridView.setAdapter(null);
 			return;
 		}
-		/*
-		for (RecipeForList recipe : recipes)
-		{
-			Button button = new Button(this);
-			button.setText(recipe.Title);
-			linearLayout.addView(button);
-			button.setOnClickListener(new StupidClickHandler(this, recipe.Id));
-		}*/
 		
+		int[] recipeIds = this.GetRecipeIds(recipes);
+		
+		noRecipesInDatabaseMessage.setVisibility(View.GONE);
+		noRecipesFoundFromSearchMessage.setVisibility(View.GONE);
+		
+		gridView.setAdapter(new ImageAdapter(this, recipeIds));
+		gridView.setOnItemClickListener(new StupidClickHandler(this));
 	}
 	
 	private class StupidClickHandler implements OnItemClickListener 
@@ -92,32 +107,30 @@ public class RecipesListActivity extends Activity {
 	
 	}
 	
-	/*
-	private class StupidClickHandler implements OnClickListener
-	{
-		private int _recipeId;
-		private Activity _activity;
-		
-		public StupidClickHandler(Activity activity, int recipeId)
-		{
-			this._activity = activity;
-			this._recipeId = recipeId;
-		}
-
-		@Override
-		public void onClick(View v) {
-			Intent intent = new Intent(this._activity, MainActivity.class);
-    		intent.putExtra(RECIPE_ID, this._recipeId);
-    		this._activity.startActivity(intent);
-		}
 	
-	}
-	*/
+	public boolean onQueryTextChange(String newText) {
+		PopulateRecipes(newText);
+		//Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
+        return false;
+    }
+ 
+    public boolean onQueryTextSubmit(String query) {
+    	PopulateRecipes(query);
+    	//Toast.makeText(this, "Submit: " + query, Toast.LENGTH_SHORT).show();
+        return false;
+    }
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_recipes_list, menu);
+		
+		//http://stackoverflow.com/questions/11276043/how-to-add-a-searchwidget-to-the-actionbar
+		MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+
 		return true;
 	}
 	
@@ -128,13 +141,14 @@ public class RecipesListActivity extends Activity {
 	    case R.id.menu_load_recipes:
 	    	String message = RecipesLoader.LoadRecipes(this.getApplicationContext());
 	    	Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	    	this.PopulateRecipes(null);  // Reload the recipe list from scratch
 	        return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }
 	}
 	
-	private RecipeForList[] GetRecipesForList()
+	private RecipeForList[] GetRecipesForList(String searchQuery)
 	{
 		Context context = this.getApplicationContext();
 		
@@ -147,15 +161,33 @@ public class RecipesListActivity extends Activity {
 			    "Title"
 			    };
 		
+		// Should really use FTS3 to make searches faster
+		//http://blog.andresteingress.com/2011/09/30/android-quick-tip-using-sqlite-fts-tables/
+		
+		String query = "SELECT Id, Title FROM Recipes";
+		String whereClause = null;  // all rows
+		String[] whereArgs = null;
+		
+		if (searchQuery != null && searchQuery.length() != 0)
+		{
+			whereClause = "Title LIKE '%?%'";
+			whereArgs = new String[] { searchQuery };
+			query += " WHERE Title LIKE '%" + searchQuery + "%'"; // Eh, ignoring sql injection because I can't figure out how to swap out param 
+					
+		}
+		/*
 		Cursor cursor = db.query(
 			    "Recipes",  // The table to query
 			    projection,                               // The columns to return
-			    null,                                // The columns for the WHERE clause
-			    null,                            // The values for the WHERE clause
+			    whereClause,                                // The columns for the WHERE clause
+			    whereArgs,                            // The values for the WHERE clause
 			    null,                                     // don't group the rows
 			    null,                                     // don't filter by row groups
 			    "Title"                                 // The sort order
 			    );		
+		*/
+		Cursor cursor = db.rawQuery(query + " ORDER BY Title", null);
+		
 		
 		if (!(cursor.moveToFirst()))
 		{

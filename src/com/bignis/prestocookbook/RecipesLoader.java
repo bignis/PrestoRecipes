@@ -16,6 +16,8 @@ import android.database.DatabaseUtils;
 import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 public class RecipesLoader {
@@ -56,15 +58,17 @@ public class RecipesLoader {
 			try {
 				imageFilesThatNeedLoading = GetImageFilesThatNeedLoading(imageFiles, context);
 			
-				LoadImageFiles(imageFilesThatNeedLoading, context);
+				message += "\n" + Integer.toString(imageFilesThatNeedLoading.length) + " images detected to load";
+				
+				int imagesActuallyLoadedCount = LoadImageFiles(imageFilesThatNeedLoading, context);
+				
+				message += "\n" + Integer.toString(imagesActuallyLoadedCount) + " images successfully loaded";
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
 				return "Nothing was loaded due to an error";
 			}
-			
-			message += Integer.toString(imageFilesThatNeedLoading.length) + " images done loading";
 		}
 		
 		return message;
@@ -262,11 +266,11 @@ public class RecipesLoader {
 		return (File[]) filesThatNeedLoading.toArray(new File[0]); //http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
 	}
 	
-	private static void LoadImageFiles(File[] imageFilesThatNeedLoading, Context context) throws Exception {
+	private static int LoadImageFiles(File[] imageFilesThatNeedLoading, Context context) throws Exception {
 		
 		if (imageFilesThatNeedLoading.length == 0)
 		{
-			return;
+			return 0;
 		}
 		
 		RecipeDBHelper dbHelper = new RecipeDBHelper(context);
@@ -290,6 +294,8 @@ public class RecipesLoader {
 	    ");";
 		 */
 		
+		int imagesActuallyLoaded = 0;
+		
 		for (File file : imageFilesThatNeedLoading)
 		{
 			String correspondingXmlFileName = file.getName().substring(0, file.getName().lastIndexOf('.')) + ".xml";
@@ -308,10 +314,11 @@ public class RecipesLoader {
 		    	continue;
 		    }
 		    
+		    imagesActuallyLoaded++; // Since there's an existing row, increment the fact we're actually going to load an image
+		    
 			long fileHash = GetChecksum(file);
 			
-			byte[] data = new byte[(int) file.length()];
-			new FileInputStream(file).read(data);
+			byte[] data = GetSizedImageData(file);
 			
 			SQLiteStatement update = db.compileStatement(
 					"UPDATE Recipes " + 
@@ -326,6 +333,35 @@ public class RecipesLoader {
 		}
 		
 		dbHelper.close();
+		
+		return imagesActuallyLoaded;
+	}
+	
+	private static byte[] GetSizedImageData(File file) throws FileNotFoundException, IOException
+	{
+		final int maxAcceptableHeight = 300;
+		
+		// Read the file
+		byte[] data = new byte[(int) file.length()];
+		new FileInputStream(file).read(data);
+		
+		// Make it a bitmap
+		Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+		
+		if (bitmap.getHeight() <= maxAcceptableHeight)
+		{
+			return data;  // Fine as-is
+		}
+		
+		double scaleFactor = (double)maxAcceptableHeight / (double)bitmap.getHeight();
+		double newWidth = bitmap.getWidth() * scaleFactor;
+		
+		Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, (int)Math.floor(newWidth), maxAcceptableHeight, true);
+		
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		resizedBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		
+		return stream.toByteArray();
 	}
 	
 	public static File[] GetXmlFilesThatNeedLoading(File[] xmlFiles, Context context) throws FileNotFoundException, IOException
