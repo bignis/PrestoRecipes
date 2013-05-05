@@ -14,8 +14,10 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
 
 
@@ -66,29 +68,55 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 			//return convertView;
 		}
 		
-		LinearLayout layout = new LinearLayout(_context);
-		layout.setOrientation(LinearLayout.VERTICAL);
+		final int textWidth = 300;
+		final int textHeight = 70;
+		
+		RelativeLayout layout = new RelativeLayout(_context);
+
+		int backgroundColor = position % 2 == 0 ? 0xFFA6A3FF : 0xFFD5D4FF;
+		layout.setBackgroundColor(backgroundColor);
+
 		int recipeId = this._recipeIds[position];
 		layout.setTag(recipeId); // For onclick
 		
 		RecipeImage recipeImage = getRecipeImage(recipeId);
 		
-		TextView textView = new TextView(this._context);
-		textView.setText(recipeImage.title);
-		layout.addView(textView);
-		
 		// Not every recipe has an image
 		if (recipeImage.drawable != null)
-		{
+		{	
+			//layout.setBackgroundDrawable(recipeImage.drawable);
+	//		layout.setLayoutParams(new RelativeLayout.LayoutParams(recipeImage.drawable.getIntrinsicWidth(), recipeImage.drawable.getIntrinsicHeight()));
+			
+			
 			ImageView imageView = new ImageView(this._context);
+			imageView.setId(1);  // just picked a number
 			Drawable drawable = recipeImage.drawable;
-			Gallery.LayoutParams params = new Gallery.LayoutParams(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+			LayoutParams params = new LayoutParams(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 			imageView.setLayoutParams(params);
 			
 			imageView.setImageDrawable(drawable);
 			
 			layout.addView(imageView);
+			
 		}
+		
+		TextView textView = new TextView(this._context);
+		textView.setText(recipeImage.title);
+		textView.setTextColor(0xFFFFFFFF);
+		textView.setWidth(textWidth);
+		textView.setHeight(textHeight);
+		textView.setPadding(20, 20, 20, 20);
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+		textView.setBackgroundColor(0x66000000);  // FF at the beginning means fully opaque
+		
+
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		
+		textView.setLayoutParams(params);
+
+		
+		layout.addView(textView);
 		
 		return layout;
 		

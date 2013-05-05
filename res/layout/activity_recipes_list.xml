@@ -1,30 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayoutMgn"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Left hand side3" />
 
-    <Gallery
-        android:id="@+id/gallery1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/red"
-        android:gravity="center" />
-    
+    <!-- 
     <GridView android:id="@+id/gridView1" 
-        android:background="@color/green"
+
     android:layout_width="400dp"  android:layout_height="fill_parent"
     android:verticalSpacing="2dp"   android:numColumns="1" 
     android:stretchMode="columnWidth" android:layout_marginLeft="1dp"
     android:layout_alignParentTop="true"  android:scrollingCache="true"
+    android:scrollbars="vertical" android:fadeScrollbars="false"
+    android:scrollbarAlwaysDrawVerticalTrack="true" />
+     -->
+     
+         <GridView android:id="@+id/gridView1" 
+	android:background="@color/recipeListRowDivider"
+    android:layout_width="fill_parent"  android:layout_height="fill_parent"
+    android:verticalSpacing="2dp"   android:numColumns="1" 
+    android:stretchMode="columnWidth" android:layout_marginLeft="1dp"
+      android:scrollingCache="true"
     android:scrollbars="vertical" android:fadeScrollbars="false"
     android:scrollbarAlwaysDrawVerticalTrack="true" />
 
