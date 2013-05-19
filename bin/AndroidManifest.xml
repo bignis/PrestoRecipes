@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name="com.bignis.prestocookbook.RecipesListActivity"
-            android:label="@string/title_activity_recipes_list" >
+            android:label="Presto Recipes - Recipe List" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

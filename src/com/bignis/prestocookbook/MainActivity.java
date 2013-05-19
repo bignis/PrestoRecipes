@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         
+        
         Intent intent = this.getIntent();
         int recipeId = intent.getIntExtra(RecipesListActivity.RECIPE_ID, -69);
 
@@ -35,6 +36,8 @@ public class MainActivity extends Activity {
         try
         {
 	        Recipe recipe = getRecipe(recipeId);
+	        
+	        this.setTitle(recipe.Title);
 	        
 	        displayRecipe(recipe);
         }

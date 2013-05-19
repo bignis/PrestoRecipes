@@ -1,7 +1,10 @@
 package com.bignis.prestocookbook;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.Collection;
 import java.util.Iterator;
@@ -115,7 +118,13 @@ public class RecipeParser {
     	DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
     	builderFactory.setNamespaceAware(true);
     	DocumentBuilder builder = builderFactory.newDocumentBuilder();
-    	Document document = builder.parse(new File(xmlFilePath));
+    	
+    	// If you get a "Unexpected token (position:TEXT ﻿@1:2 in java.io.StringReader@41182568)"
+    	// error, make sure the "UTF-8" in the header of the XML file is uppercase!
+    	
+    	//Document document = builder.parse(new File(xmlFilePath));
+    	Document document = builder.parse(new InputSource(new InputStreamReader(
+                new FileInputStream(xmlFilePath), "UTF8")));
     	
     	return Parse(document);
 	}
@@ -130,7 +139,11 @@ public class RecipeParser {
     	DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
     	builderFactory.setNamespaceAware(true);
     	DocumentBuilder builder = builderFactory.newDocumentBuilder();
-    	Document document = builder.parse(new InputSource(new StringReader(xml)));
+    	
+    	// If you get a "Unexpected token (position:TEXT ﻿@1:2 in java.io.StringReader@41182568)"
+    	// error, make sure the "UTF-8" in the header of the XML file is uppercase!
+    	//Document document = builder.parse(new InputSource(new StringReader(xml)));
+    	Document document = builder.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
     	
     	return Parse(document);
 	}

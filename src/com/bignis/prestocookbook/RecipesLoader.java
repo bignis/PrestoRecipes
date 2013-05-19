@@ -43,7 +43,7 @@ public class RecipesLoader {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
-				return "Nothing was loaded due to an error";
+				return "Nothing was loaded due to an error: " + e.toString();
 			}
 			
 			message += Integer.toString(xmlFilesThatNeedLoading.length) + " recipes done loading";
@@ -183,16 +183,7 @@ public class RecipesLoader {
 
 	public static File[] GetXmlFiles()
 	{
-		String state = Environment.getExternalStorageState();
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-			String foo = "";
-		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-		    String foo = "";
-		} 
-		
-		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
+		File folder = GetDataFolder();
 		
 		//File folder = new File("/Presto Recipes");
 		
@@ -204,21 +195,17 @@ public class RecipesLoader {
 		
 		File[] xmlFiles = folder.listFiles(filter);
 		
+		if (xmlFiles == null)
+		{
+			return new File[0];
+		}
+		
 		return xmlFiles;
 	}
 	
 	public static File[] GetImageFiles()
 	{
-		String state = Environment.getExternalStorageState();
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-			String foo = "";
-		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-		    String foo = "";
-		} 
-		
-		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
+		File folder = GetDataFolder();
 		
 		//File folder = new File("/Presto Recipes");
 		
@@ -230,7 +217,43 @@ public class RecipesLoader {
 		
 		File[] imageFiles = folder.listFiles(filter);
 		
+		if (imageFiles == null)
+		{
+			return new File[0];
+		}
+		
 		return imageFiles;
+	}
+	
+	private static File GetDataFolder()
+	{
+		/*  // SD card
+		String state = Environment.getExternalStorageState();
+
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+			String foo = "";
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		    String foo = "";
+		} 
+		
+		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
+		*/
+		File folder = new File("sdcard/Presto Recipes");  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
+		
+		if (!(folder.exists()))
+		{
+			throw new RuntimeException("Folder " + folder.toString() + " does not exist");
+		}
+		
+		if (!(folder.isDirectory()))
+		{
+			throw new RuntimeException("Folder " + folder.toString() + " is not directory");
+		}
+	
+		
+		
+		return folder;
 	}
 	
 	public static File[] GetImageFilesThatNeedLoading(File[] imageFiles, Context context) throws FileNotFoundException, IOException
