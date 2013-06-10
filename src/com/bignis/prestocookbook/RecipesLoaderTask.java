@@ -7,19 +7,17 @@ import android.widget.Toast;
 
 public class RecipesLoaderTask extends AsyncTask<Void, String, String> implements RecipeLoadProgressListener {
 	
-	private Context _context;
+	private RecipesListActivity _context;
 	private ProgressDialog _progressDialog;
 	
-	public RecipesLoaderTask(Context context) {
+	public RecipesLoaderTask(RecipesListActivity context) {
 		if (context == null) {
 			throw new NullPointerException("context");
 		}
 		
 		this._context = context;
 		
-		this._progressDialog = new ProgressDialog(context);
-    	this._progressDialog.setTitle("Loading");
-    	this._progressDialog.show();
+
 	}	
 
 	@Override
@@ -28,12 +26,26 @@ public class RecipesLoaderTask extends AsyncTask<Void, String, String> implement
         return RecipesLoader.LoadRecipes(_context, this);
     }
 
-    protected void onProgressUpdate(String progressDescription) {
-        this._progressDialog.setMessage(progressDescription);
+	@Override
+    protected void onPreExecute()
+    {
+		this._progressDialog = new ProgressDialog(this._context);
+    	this._progressDialog.setTitle("Loading");
+    	this._progressDialog.show();
+
+    }
+	
+	@Override
+    protected void onProgressUpdate(String... progressDescriptions) {
+    	super.onProgressUpdate(progressDescriptions);
+        this._progressDialog.setMessage(progressDescriptions[0]);
     }
 
+    @Override
     protected void onPostExecute(String result) {
+    	this._progressDialog.dismiss();
     	Toast.makeText(this._context, result, Toast.LENGTH_SHORT).show();
+    	this._context.PopulateRecipes(null); // Reload the recipe list from scratch
     }
     
     public void progressUpdate(String updateDescription) {

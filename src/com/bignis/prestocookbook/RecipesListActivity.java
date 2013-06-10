@@ -45,7 +45,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		this.PopulateRecipes(null); // null = Get all recipes
 	}
 	
-	private void PopulateRecipes(String searchQuery)
+	public void PopulateRecipes(String searchQuery)
 	{
 		RecipeForList[] recipes = this.GetRecipesForList(searchQuery);  
 		
@@ -141,19 +141,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	    switch (item.getItemId()) {
 	    case R.id.menu_load_recipes:
 	    {
-	    	//new RecipesLoaderTask(this).execute();
-	    	
-	    	//this._progressDialog = new ProgressDialog(this);
-	    	//this._progressDialog.setTitle("Loading");
-	    	String message = RecipesLoader.LoadRecipes(this.getApplicationContext(), null);
-	    	//this._progressDialog.dismiss();
-	    	//this._progressDialog.setMessage("foobarmgn");
-	    	//this._progressDialog.show();
-	    	
-	    	
-	    	//Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-	    	
-	    	this.PopulateRecipes(null);  // Reload the recipe list from scratch
+	    	new RecipesLoaderTask(this).execute();	    	
 	        return true;
 	    }
 	    case R.id.menu_reset_database:
