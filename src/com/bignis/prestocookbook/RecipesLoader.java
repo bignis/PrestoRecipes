@@ -21,7 +21,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 public class RecipesLoader {
-	public static String LoadRecipes(Context context)
+	public static String LoadRecipes(Context context, RecipeLoadProgressListener progressListener)
 	{
 		if (context == null)
 		{
@@ -38,7 +38,7 @@ public class RecipesLoader {
 			try {
 				xmlFilesThatNeedLoading = GetXmlFilesThatNeedLoading(xmlFiles, context);
 			
-				LoadXmlFiles(xmlFilesThatNeedLoading, context);
+				LoadXmlFiles(xmlFilesThatNeedLoading, context, progressListener);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -60,7 +60,7 @@ public class RecipesLoader {
 			
 				message += "\n" + Integer.toString(imageFilesThatNeedLoading.length) + " images detected to load";
 				
-				int imagesActuallyLoadedCount = LoadImageFiles(imageFilesThatNeedLoading, context);
+				int imagesActuallyLoadedCount = LoadImageFiles(imageFilesThatNeedLoading, context, progressListener);
 				
 				message += "\n" + Integer.toString(imagesActuallyLoadedCount) + " images successfully loaded";
 			} catch (Exception e) {
@@ -74,11 +74,16 @@ public class RecipesLoader {
 		return message;
 	}
 	
-	private static void LoadXmlFiles(File[] xmlFilesThatNeedLoading, Context context) throws Exception {
+	private static void LoadXmlFiles(File[] xmlFilesThatNeedLoading, Context context, RecipeLoadProgressListener progressListener) throws Exception {
 		
 		if (xmlFilesThatNeedLoading.length == 0)
 		{
 			return;
+		}
+		
+		if (progressListener != null)
+		{
+			progressListener.progressUpdate("Loading " + xmlFilesThatNeedLoading.length + " recipes");
 		}
 		
 		RecipeDBHelper dbHelper = new RecipeDBHelper(context);
@@ -178,6 +183,7 @@ public class RecipesLoader {
 			insert.execute();
 		}
 		
+		db.close();
 		dbHelper.close();
 	}
 
@@ -189,7 +195,7 @@ public class RecipesLoader {
 		
 		FilenameFilter filter = new FilenameFilter() {
 		    public boolean accept(File directory, String fileName) {
-		        return fileName.endsWith(".xml");
+		        return RecipesLoader.endsWith(fileName, ".xml", true);
 		    }
 		};
 		
@@ -211,7 +217,8 @@ public class RecipesLoader {
 		
 		FilenameFilter filter = new FilenameFilter() {
 		    public boolean accept(File directory, String fileName) {
-		        return fileName.endsWith(".jpg");
+		    	return RecipesLoader.endsWith(fileName, ".jpg", true)
+		    			|| RecipesLoader.endsWith(fileName, ".png", true);
 		    }
 		};
 		
@@ -289,7 +296,7 @@ public class RecipesLoader {
 		return (File[]) filesThatNeedLoading.toArray(new File[0]); //http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
 	}
 	
-	private static int LoadImageFiles(File[] imageFilesThatNeedLoading, Context context) throws Exception {
+	private static int LoadImageFiles(File[] imageFilesThatNeedLoading, Context context, RecipeLoadProgressListener progressListener) throws Exception {
 		
 		if (imageFilesThatNeedLoading.length == 0)
 		{
@@ -321,6 +328,11 @@ public class RecipesLoader {
 		
 		for (File file : imageFilesThatNeedLoading)
 		{
+			if (progressListener != null)
+			{
+				progressListener.progressUpdate("Loading " + (imagesActuallyLoaded + 1) + " of " + imageFilesThatNeedLoading.length + " recipe pictures");
+			}
+			
 			String correspondingXmlFileName = file.getName().substring(0, file.getName().lastIndexOf('.')) + ".xml";
 			
 			String countSql = String.format("SELECT COUNT(*) FROM Recipes WHERE XmlFileName = %s", 
@@ -355,6 +367,7 @@ public class RecipesLoader {
 			update.execute();
 		}
 		
+		db.close();
 		dbHelper.close();
 		
 		return imagesActuallyLoaded;
@@ -456,29 +469,36 @@ public class RecipesLoader {
 			    null                                 // The sort order
 			    );		
 		
-		if (!(cursor.moveToFirst()))
+		try
 		{
-			return new RecipeChecksumInfo[0];
-		}
-		
-		ArrayList<RecipeChecksumInfo> rcis = new ArrayList<RecipeChecksumInfo>();
-		
-		do {
-			RecipeChecksumInfo rci = new RecipeChecksumInfo();
-			rcis.add(rci);
+			if (!(cursor.moveToFirst()))
+			{			
+				return new RecipeChecksumInfo[0];
+			}
 			
-			rci.Id = cursor.getInt(cursor.getColumnIndexOrThrow("Id"));
-			rci.Title = cursor.getString(cursor.getColumnIndexOrThrow("Title"));
-			rci.XmlFileName = cursor.getString(cursor.getColumnIndexOrThrow("XmlFileName"));
-			rci.XmlHash = cursor.getLong(cursor.getColumnIndexOrThrow("XmlHash"));
-			rci.ImageFileName = cursor.getString(cursor.getColumnIndexOrThrow("ImageFileName"));
-			rci.ImageHash = cursor.getLong(cursor.getColumnIndexOrThrow("ImageHash"));
-
-        } while (cursor.moveToNext());
-		
-		dbHelper.close();
-		
-		return (RecipeChecksumInfo[]) rcis.toArray(new RecipeChecksumInfo[0]); // http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
+			ArrayList<RecipeChecksumInfo> rcis = new ArrayList<RecipeChecksumInfo>();
+			
+			do {
+				RecipeChecksumInfo rci = new RecipeChecksumInfo();
+				rcis.add(rci);
+				
+				rci.Id = cursor.getInt(cursor.getColumnIndexOrThrow("Id"));
+				rci.Title = cursor.getString(cursor.getColumnIndexOrThrow("Title"));
+				rci.XmlFileName = cursor.getString(cursor.getColumnIndexOrThrow("XmlFileName"));
+				rci.XmlHash = cursor.getLong(cursor.getColumnIndexOrThrow("XmlHash"));
+				rci.ImageFileName = cursor.getString(cursor.getColumnIndexOrThrow("ImageFileName"));
+				rci.ImageHash = cursor.getLong(cursor.getColumnIndexOrThrow("ImageHash"));
+	
+	        } while (cursor.moveToNext());
+			
+			return (RecipeChecksumInfo[]) rcis.toArray(new RecipeChecksumInfo[0]); // http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
+		}
+		finally
+		{
+			cursor.close();
+			db.close();
+			dbHelper.close();
+		}
 	}
 	
 	public static String convertStreamToString(InputStream is) throws Exception {
@@ -498,6 +518,17 @@ public class RecipesLoader {
 	    fin.close();        
 	    return ret;
 	}
+	
+	  private static boolean endsWith(String str, String suffix, boolean ignoreCase) {
+	      if (str == null || suffix == null) {
+	          return (str == null && suffix == null);
+	      }
+	      if (suffix.length() > str.length()) {
+	          return false;
+	      }
+	      int strOffset = str.length() - suffix.length();
+	      return str.regionMatches(ignoreCase, strOffset, suffix, 0, suffix.length());
+	  }
 }
 
 

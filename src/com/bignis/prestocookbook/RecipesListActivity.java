@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,7 +33,6 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 
 	public final static String RECIPE_ID = "com.bignis.PrestoCookbook.RECIPE_ID";
 	public final static String RECIPE_XML_FILENAME = "com.bignis.PrestoCookbook.RECIPE_XML_FILENAME";
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +121,6 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
     	//Toast.makeText(this, "Submit: " + query, Toast.LENGTH_SHORT).show();
         return false;
     }
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -141,13 +140,25 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	    case R.id.menu_load_recipes:
-	    	String message = RecipesLoader.LoadRecipes(this.getApplicationContext());
-	    	Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	    {
+	    	//new RecipesLoaderTask(this).execute();
+	    	
+	    	//this._progressDialog = new ProgressDialog(this);
+	    	//this._progressDialog.setTitle("Loading");
+	    	String message = RecipesLoader.LoadRecipes(this.getApplicationContext(), null);
+	    	//this._progressDialog.dismiss();
+	    	//this._progressDialog.setMessage("foobarmgn");
+	    	//this._progressDialog.show();
+	    	
+	    	
+	    	//Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	    	
 	    	this.PopulateRecipes(null);  // Reload the recipe list from scratch
 	        return true;
+	    }
 	    case R.id.menu_reset_database:
 	    {
-	    	RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+	    	
 	    	/*
 	    	new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
@@ -166,7 +177,12 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	        .setNegativeButton(R.string.no, null)
 	        .show();
 	    	*/
-	    	dbHelper.onUpgrade(dbHelper.getWritableDatabase(), 1, 1);  // Triggers drop / recreate
+	    	RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+	    	SQLiteDatabase db = dbHelper.getWritableDatabase();
+	    	dbHelper.onUpgrade(db, 1, 1);  // Triggers drop / recreate
+	    	db.close();
+	    	dbHelper.close();
+	    	
 	    	Toast.makeText(this, "Database has been reset", Toast.LENGTH_SHORT).show();
 	    	this.PopulateRecipes(null); // Reload the recipe list from scratch
 	    	return true;
@@ -218,25 +234,33 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		*/
 		Cursor cursor = db.rawQuery(query + " ORDER BY Title", null);
 		
-		
-		if (!(cursor.moveToFirst()))
+		try
 		{
-			return new RecipeForList[0];
-		}
-		
-		ArrayList<RecipeForList> rfls = new ArrayList<RecipeForList>();
-		
-		do {
-			RecipeForList rfl = new RecipeForList();
-			rfls.add(rfl);
+			if (!(cursor.moveToFirst()))
+			{
+				return new RecipeForList[0];
+			}
 			
-			rfl.Id = cursor.getInt(cursor.getColumnIndexOrThrow("Id"));
-			rfl.Title = cursor.getString(cursor.getColumnIndexOrThrow("Title"));
-        } while (cursor.moveToNext());
-		
-		dbHelper.close();
-		
-		return (RecipeForList[]) rfls.toArray(new RecipeForList[0]); // http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
+			ArrayList<RecipeForList> rfls = new ArrayList<RecipeForList>();
+			
+			do {
+				RecipeForList rfl = new RecipeForList();
+				rfls.add(rfl);
+				
+				rfl.Id = cursor.getInt(cursor.getColumnIndexOrThrow("Id"));
+				rfl.Title = cursor.getString(cursor.getColumnIndexOrThrow("Title"));
+	        } while (cursor.moveToNext());
+			
+	
+			
+			return (RecipeForList[]) rfls.toArray(new RecipeForList[0]); // http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
+		}
+		finally
+		{
+			cursor.close();
+			db.close();
+			dbHelper.close();
+		}
 	}
 	
 	private int[] GetRecipeIds(RecipeForList[] rfls)

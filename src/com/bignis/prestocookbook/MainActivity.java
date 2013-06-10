@@ -120,7 +120,8 @@ public class MainActivity extends Activity {
     	{
     		TextView ingredient = new TextView(this);
     		ingredientsLayout.addView(ingredient);
-        	ingredient.setText(recipe.Ingredients.get(i));
+    		String ingredientText = recipe.Ingredients.get(i);
+        	ingredient.setText(ingredientText);
         	ingredient.setTextSize(ingredientsSize);
         	//ingredient.setTextAppearance(this, android.R.style.TextAppearance_Medium);
     	}

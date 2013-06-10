@@ -178,19 +178,21 @@ public class RecipeParser {
     		
     		if (quantityNodes.getLength() != 0)
     		{
-    			combined += quantityNodes.item(0).getTextContent();
+    			combined += quantityNodes.item(0).getTextContent().trim();
     		}
     		
 			NodeList unitNodes = amount.getElementsByTagName("unit");
     		
     		if (unitNodes.getLength() != 0)
     		{
-    			if (combined.length() != 0)
+    			String unitText = unitNodes.item(0).getTextContent().trim();
+    			
+    			if (combined.length() != 0 && unitText.length() != 0)
     			{
     				combined += " ";
     			}
     			
-    			combined += unitNodes.item(0).getTextContent();
+    			combined += unitText;
     		}
     		
     		// Assume item is non-null, otherwise the recipe is borked
@@ -201,12 +203,14 @@ public class RecipeParser {
     			throw new RuntimeException("Item was null, this cannot be");
     		}
     		
-    		if (combined.length() != 0)
+    		String itemText = itemNodes.item(0).getTextContent().trim();
+    		
+    		if (combined.length() != 0 && itemText.length() != 0)
 			{
 				combined += " ";
 			}
     		
-            combined += itemNodes.item(0).getTextContent();
+            combined += itemText;
             			
             recipe.Ingredients.add(combined);
         }
