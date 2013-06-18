@@ -10,9 +10,16 @@
         android:showAsAction="never"
         android:title="@string/menu_settings"/>
      -->
+     
 	<item android:id="@+id/action_search"
           android:title="Search"
           android:icon="@android:drawable/ic_menu_search"
-          android:showAsAction="always"
+          android:showAsAction="always|withText"
           android:actionViewClass="android.widget.SearchView" />
+	
+	
+   	<item android:id="@+id/action_category"
+        android:title="Category"
+        android:showAsAction="always|withText"          
+        android:actionViewClass="android.widget.Spinner" />
 </menu>

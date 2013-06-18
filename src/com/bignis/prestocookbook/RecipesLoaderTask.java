@@ -45,7 +45,7 @@ public class RecipesLoaderTask extends AsyncTask<Void, String, String> implement
     protected void onPostExecute(String result) {
     	this._progressDialog.dismiss();
     	Toast.makeText(this._context, result, Toast.LENGTH_SHORT).show();
-    	this._context.PopulateRecipes(null); // Reload the recipe list from scratch
+    	this._context.PopulateRecipes(); // Reload the recipe list from scratch
     }
     
     public void progressUpdate(String updateDescription) {

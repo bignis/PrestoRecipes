@@ -33,6 +33,10 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 
 	public final static String RECIPE_ID = "com.bignis.PrestoCookbook.RECIPE_ID";
 	public final static String RECIPE_XML_FILENAME = "com.bignis.PrestoCookbook.RECIPE_XML_FILENAME";
+	public final static String ALL_RECIPES_CATEGORY = "All Recipes";
+	
+	private String currentSearchQuery;
+	private String currentCategorySelection;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +46,15 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		//You can enable type-to-search in your activity by calling setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL) during your activity's onCreate() method.
 		//this.setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);		
 		
-		this.PopulateRecipes(null); // null = Get all recipes
+		this.PopulateRecipes(); //  Get all recipes
 	}
 	
-	public void PopulateRecipes(String searchQuery)
+	public void PopulateRecipes()
 	{
-		RecipeForList[] recipes = this.GetRecipesForList(searchQuery);  
+		String searchQuery = this.currentSearchQuery;
+		String categorySelection = this.currentCategorySelection;
+		
+		RecipeForList[] recipes = this.GetRecipesForList(searchQuery, categorySelection);  
 		
 		GridView gridView = (GridView)this.findViewById(R.id.gridView1);
 		View noRecipesInDatabaseMessage = this.findViewById(R.id.noRecipesInDatabaseMessage);
@@ -111,13 +118,19 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	
 	
 	public boolean onQueryTextChange(String newText) {
-		PopulateRecipes(newText);
+		
+		this.currentSearchQuery = newText;
+		
+		PopulateRecipes();
 		//Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
         return false;
     }
  
     public boolean onQueryTextSubmit(String query) {
-    	PopulateRecipes(query);
+    	
+    	this.currentSearchQuery = query;
+    	
+    	PopulateRecipes();
     	//Toast.makeText(this, "Submit: " + query, Toast.LENGTH_SHORT).show();
         return false;
     }
@@ -131,8 +144,49 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
-
+        
+        this.populateCategorySpinner(menu);
+             
 		return true;
+	}
+	
+	private void populateCategorySpinner(Menu menu)
+	{		
+        MenuItem spinnerMenuItem = menu.findItem(R.id.action_category);
+		
+		//String[] availableCategories = new String[] { "Main Dish", "Side Dish", "Dessert"};
+        String[] availableCategories = GetAvailableCategoriesFromRecipes();
+        
+        // Just "All Categories" item or nothing at all... for some reason... guard...
+        if (availableCategories.length <= 1)
+        {
+        	spinnerMenuItem.setVisible(false);
+        	return;
+        }
+        
+        Spinner spinner = (Spinner)spinnerMenuItem.getActionView();
+        
+        //int spinnerLayoutType = android.R.layout.simple_list_item_1;
+        int spinnerLayoutType = android.R.layout.simple_spinner_dropdown_item;
+        ArrayAdapter<CharSequence> categoriesAdapter = new ArrayAdapter<CharSequence>(this, spinnerLayoutType, availableCategories);
+        spinner.setAdapter(categoriesAdapter);
+        
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
+            	CharSequence selected = (String)adapterView.getItemAtPosition(i);
+            	
+            	RecipesListActivity.this.currentCategorySelection = selected.toString();
+            	
+            	RecipesListActivity.this.PopulateRecipes();
+            	
+            	//Context context = RecipesListActivity.this; // mgn, hmmmmm
+            	//Toast.makeText(context, selected, Toast.LENGTH_LONG).show();
+            } 
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            } 
+        }); 
 	}
 	
 	@Override
@@ -172,7 +226,12 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	    	dbHelper.close();
 	    	
 	    	Toast.makeText(this, "Database has been reset", Toast.LENGTH_SHORT).show();
-	    	this.PopulateRecipes(null); // Reload the recipe list from scratch
+	    	
+	    	// Reset selections
+	    	this.currentSearchQuery = null;
+	    	this.currentCategorySelection = null;
+	    	
+	    	this.PopulateRecipes();
 	    	return true;
 	    }
 	    	
@@ -182,7 +241,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	    }
 	}
 	
-	private RecipeForList[] GetRecipesForList(String searchQuery)
+	private String[] GetAvailableCategoriesFromRecipes()
 	{
 		Context context = this.getApplicationContext();
 		
@@ -190,36 +249,80 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		
-		String[] projection = {
-			    "Id",
-			    "Title"
-			    };
+		String query = "SELECT DISTINCT Category FROM Recipes ORDER BY Category";
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		try
+		{
+			if (!(cursor.moveToFirst()))
+			{
+				return new String[0];
+			}
+			
+			ArrayList<String> categories = new ArrayList<String>();
+			
+			categories.add(ALL_RECIPES_CATEGORY);
+			
+			do {
+				categories.add(cursor.getString(cursor.getColumnIndexOrThrow("Category")));
+	        } while (cursor.moveToNext());
+			
+			return (String[]) categories.toArray(new String[0]); // http://docs.oracle.com/javase/1.4.2/docs/api/java/util/Collection.html#toArray%28java.lang.Object%5B%5D%29
+		}
+		finally
+		{
+			cursor.close();
+			db.close();
+			dbHelper.close();
+		}
+	}
+	
+	private RecipeForList[] GetRecipesForList(String searchQuery, String categorySelection)
+	{
+		Context context = this.getApplicationContext();
+		
+		RecipeDBHelper dbHelper = new RecipeDBHelper(context);
+		
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		
 		// Should really use FTS3 to make searches faster
 		//http://blog.andresteingress.com/2011/09/30/android-quick-tip-using-sqlite-fts-tables/
 		
 		String query = "SELECT Id, Title FROM Recipes";
-		String whereClause = null;  // all rows
-		String[] whereArgs = null;
+		ArrayList<String> whereClauses = new ArrayList<String>();  // will build it up
 		
 		if (searchQuery != null && searchQuery.length() != 0)
 		{
-			whereClause = "Title LIKE '%?%'";
-			whereArgs = new String[] { searchQuery };
-			query += " WHERE Title LIKE '%" + searchQuery + "%'"; // Eh, ignoring sql injection because I can't figure out how to swap out param 
-					
+			whereClauses.add("Title LIKE '%" + searchQuery + "%'");  // sqlEscapeString includes the apostrophes around strings so I can't use that here.  SQL Injection vulnerability :)
+			
+			//query += " WHERE Title LIKE '%" + searchQuery + "%'";  			
 		}
-		/*
-		Cursor cursor = db.query(
-			    "Recipes",  // The table to query
-			    projection,                               // The columns to return
-			    whereClause,                                // The columns for the WHERE clause
-			    whereArgs,                            // The values for the WHERE clause
-			    null,                                     // don't group the rows
-			    null,                                     // don't filter by row groups
-			    "Title"                                 // The sort order
-			    );		
-		*/
+		
+		if (categorySelection != null && !(categorySelection.equals(ALL_RECIPES_CATEGORY)))
+		{
+			whereClauses.add("Category = " + DatabaseUtils.sqlEscapeString(categorySelection));  // sqlEscapeString includes the apostrophes around strings
+		}
+
+		if (!(whereClauses.isEmpty()))
+		{
+			query += " WHERE";
+			
+			boolean needAnd = false;
+			
+			for (String clause : whereClauses)
+			{
+				if (needAnd)
+				{
+					query += " AND";
+				}
+				
+				query += " " + clause;
+				
+				needAnd = true;
+			}
+		}
+		
 		Cursor cursor = db.rawQuery(query + " ORDER BY Title", null);
 		
 		try

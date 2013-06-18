@@ -129,13 +129,14 @@ public class RecipesLoader {
 					
 					SQLiteStatement update = db.compileStatement(
 							"UPDATE Recipes " + 
-							"SET Xml = '?', XmlHash = ?, LastUpdated = datetime('now')" +
+							"SET Xml = '?', XmlHash = ?, Category = ?, LastUpdated = datetime('now')" +
 							"WHERE Title = '?' and XmlFileName = '?'");
 					
 					update.bindString(1, xml);
 					update.bindLong(2, fileXmlHash);
-					update.bindString(3, recipe.Title);
-					update.bindString(4, file.getName());
+					update.bindString(3, recipe.Category);
+					update.bindString(4, recipe.Title);
+					update.bindString(5, file.getName());
 					String debug = update.toString();
 					update.execute();
 							
@@ -158,12 +159,13 @@ public class RecipesLoader {
 					
 					SQLiteStatement update = db.compileStatement(
 							"UPDATE Recipes " + 
-							"SET XmlFileName = '?', LastUpdated = datetime('now')" +
+							"SET XmlFileName = '?', Category = ?, LastUpdated = datetime('now')" +
 							"WHERE Title = '?' and XmlHash = '?'");
 					
 					update.bindString(1, file.getName());
-					update.bindString(2, recipe.Title);
-					update.bindLong(3, fileXmlHash);
+					update.bindString(2, recipe.Category);
+					update.bindString(3, recipe.Title);
+					update.bindLong(4, fileXmlHash);
 					String debug = update.toString();
 					update.execute();
 						
@@ -174,11 +176,12 @@ public class RecipesLoader {
 			
 			// Brand new, insert.
 			
-			SQLiteStatement insert = db.compileStatement("INSERT INTO Recipes (Title, Xml, XmlHash, XmlFileName, LastUpdated) VALUES (?, ?, ?, ?, datetime('now'))");
+			SQLiteStatement insert = db.compileStatement("INSERT INTO Recipes (Title, Category, Xml, XmlHash, XmlFileName, LastUpdated) VALUES (?, ?, ?, ?, ?, datetime('now'))");
 			insert.bindString(1, recipe.Title);
-			insert.bindString(2, xml);
-			insert.bindLong(3, fileXmlHash);
-			insert.bindString(4, file.getName());
+			insert.bindString(2, recipe.Category);
+			insert.bindString(3, xml);
+			insert.bindLong(4, fileXmlHash);
+			insert.bindString(5, file.getName());
 			String debug = insert.toString();
 			insert.execute();
 		}

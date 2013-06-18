@@ -165,6 +165,8 @@ public class RecipeParser {
     	{
     		throw new RuntimeException("Recipe title not found in xml content");
     	}
+    	
+    	recipe.Category = xpath.evaluate("/recipeml/recipe/head/categories/cat", document);
     		
     	NodeList ingredientNodes = (NodeList) xpath.evaluate("/recipeml/recipe/ingredients/ing", document, XPathConstants.NODESET);
     	

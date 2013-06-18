@@ -28,6 +28,7 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
+        public static final int action_category=0x7f09000d;
         public static final int action_search=0x7f09000c;
         public static final int gridView1=0x7f090008;
         public static final int ingredientsContentLayout=0x7f090003;
@@ -84,8 +85,14 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        /**  mgn http://stackoverflow.com/questions/12395381/android-actionbar-navigation-spinner-text-color 
+         */
+        public static final int YourCustomDropDownItemStyle=0x7f070002;
+        /**  mgn http://stackoverflow.com/questions/12395381/android-actionbar-navigation-spinner-text-color 
+ Here you can set the color and other text attributes 
+         */
+        public static final int YourCustomDropDownItemTextStyle=0x7f070003;
     }
 }

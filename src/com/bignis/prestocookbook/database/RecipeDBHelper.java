@@ -20,39 +20,28 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
 	    "Image BLOB," +
 	    "ImageHash TEXT," +
 	    "ImageFileName TEXT collate nocase," +
+	    "Category TEXT collate nocase," +
 	    "LastUpdated DATETIME NOT NULL," +
 	    "UNIQUE (Id)," +
 	    "UNIQUE (XmlFileName)" +  // XmlFileName is the identifier to figure out what Recipe an Image is associated with when loading data.
 	    ");";
-    
-    private static final String CREATE_CATEGORIES_TABLE =
-    	    "CREATE TABLE Categories" +
-    	    "(" +
-    	    "Id INTEGER NOT NULL PRIMARY KEY," +
-    	    "RecipeId INTEGER NOT NULL," +
-    	    "Text TEXT" +
-    	    ");";
+
     
     private static final String DROP_RECIPES_TABLE =
     "DROP TABLE IF EXISTS Recipes";
     
-    private static final String DROP_CATEGORIES_TABLE =
-    	    "DROP TABLE IF EXISTS Categories";
-
     public RecipeDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_RECIPES_TABLE);
-        db.execSQL(CREATE_CATEGORIES_TABLE);
     }
     
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         db.execSQL(DROP_RECIPES_TABLE);
-        db.execSQL(DROP_CATEGORIES_TABLE);
         onCreate(db);
     }
     
