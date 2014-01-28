@@ -2,13 +2,16 @@ package com.bignis.prestocookbook;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RecipesLoaderTask extends AsyncTask<Void, String, String> implements RecipeLoadProgressListener {
 	
 	private RecipesListActivity _context;
 	private ProgressDialog _progressDialog;
+	private boolean _exceptionOccurredDuringRecipeLoading;
 	
 	public RecipesLoaderTask(RecipesListActivity context) {
 		if (context == null) {
@@ -22,8 +25,19 @@ public class RecipesLoaderTask extends AsyncTask<Void, String, String> implement
 
 	@Override
     protected String doInBackground(Void... vd) {
-    	
-        return RecipesLoader.LoadRecipes(_context, this);
+		
+		_exceptionOccurredDuringRecipeLoading = false;
+		
+    	try
+    	{
+    		return RecipesLoader.LoadRecipes(_context, this);
+    	}
+    	catch (RecipeLoadException ex)
+    	{
+    		_exceptionOccurredDuringRecipeLoading = true;
+    		
+    		return ex.getMessage();
+    	}
     }
 
 	@Override
@@ -44,7 +58,19 @@ public class RecipesLoaderTask extends AsyncTask<Void, String, String> implement
     @Override
     protected void onPostExecute(String result) {
     	this._progressDialog.dismiss();
-    	Toast.makeText(this._context, result, Toast.LENGTH_SHORT).show();
+    	
+    	/*
+    	Toast toast = new Toast(this._context);
+    	toast.setDuration(_exceptionOccurredDuringRecipeLoading ? 60 * 1000 : 3 * 1000);
+    	TextView message = new TextView(this._context);
+    	message.setText(result);
+    	message.setBackgroundColor(Color.BLACK);
+    	message.setTextColor(Color.WHITE);
+    	toast.setView(message);
+    	toast.show();    
+    	*/
+    	Toast.makeText(this._context, result, _exceptionOccurredDuringRecipeLoading ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
+
     	this._context.PopulateRecipes(); // Reload the recipe list from scratch
     }
     

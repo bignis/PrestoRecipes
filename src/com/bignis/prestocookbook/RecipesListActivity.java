@@ -55,7 +55,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		String categorySelection = this.currentCategorySelection;
 		
 		RecipeForList[] recipes = this.GetRecipesForList(searchQuery, categorySelection);  
-		
+		 
 		GridView gridView = (GridView)this.findViewById(R.id.gridView1);
 		View noRecipesInDatabaseMessage = this.findViewById(R.id.noRecipesInDatabaseMessage);
 		View noRecipesFoundFromSearchMessage = this.findViewById(R.id.noRecipesFoundFromSearchMessage);

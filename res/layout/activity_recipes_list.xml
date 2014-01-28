@@ -10,7 +10,7 @@
 		android:layout_width="fill_parent"  
 		android:layout_height="fill_parent"
 		android:gravity="center"
-        android:text="No Recipes Have Been Loaded - Use the &quot;Load Recipes&quot; Menu Option"
+        android:text="No Recipes Have Been Loaded\n\nUse the &quot;Load Recipes&quot; Menu Option in the upper right corner of the screen"
         android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

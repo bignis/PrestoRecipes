@@ -1,0 +1,15 @@
+# incremental data. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1366991492313 1985 4b86fc47818b6fdf86e2681869d18075bec80754 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\RecipeExample.txt
+1372533600623 167 ca8430a147dc5dfa2fba8eb5fdac342a22faa38c D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\RecipeLoadException.java
+1367718810029 266 a08799864d82864b52085f4ef6bdfe1aec7b4f12 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\RecipeChecksumInfo.java
+1370828021243 137 06900434ea4ee89641143c005045d652d77d62cb D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\RecipeLoadProgressListener.java
+1372533402803 11580 58b656a787b261b06f0c7ac68a5b28c3fb45ef7b D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\RecipesListActivity.java
+1371520543947 7200 28e452a5197b5d191d6681de17ba9b72ee5d3752 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\RecipeParser.java
+1371520470406 299 03161b22911632e345036d8f260b468c0251fe96 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\Recipe.java
+1371520253582 1832 f3afa417080ad258c02b90ce3159fc76704ad8e4 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\database\RecipeDBHelper.java
+1372535036113 17632 f194b9f847e7eccc42cd2235c299c98f964ef451 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\RecipesLoader.java
+1369000974175 4923 da8e33b81414830326c25eefd2e396e385f60eb8 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\MainActivity.java
+1372534443801 2311 54a0f4806477bd6ac780b9a3bc6d4f481df4b446 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\RecipesLoaderTask.java
+1367718810011 5202 3cb0b1fe4f8cbcef1142a8a92a9a9ff914bed803 D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\ImageAdapter.java

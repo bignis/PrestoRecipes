@@ -21,12 +21,18 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 public class RecipesLoader {
-	public static String LoadRecipes(Context context, RecipeLoadProgressListener progressListener)
+	
+	private static final String DATA_FOLDER_LOCATION = "sdcard/Presto Recipes";  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
+	
+	public static String LoadRecipes(Context context, RecipeLoadProgressListener progressListener) throws RecipeLoadException
 	{
 		if (context == null)
 		{
 			throw new RuntimeException("context cannot be null");
 		}
+		
+		// Check that the folder exists and that there are recipes in it
+		VerifyDataPresence();  // Throws an exception if preconditions not met
 		
 		String message = "";
 		
@@ -81,11 +87,6 @@ public class RecipesLoader {
 			return;
 		}
 		
-		if (progressListener != null)
-		{
-			progressListener.progressUpdate("Loading " + xmlFilesThatNeedLoading.length + " recipes");
-		}
-		
 		RecipeDBHelper dbHelper = new RecipeDBHelper(context);
 		
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -107,11 +108,23 @@ public class RecipesLoader {
 	    ");";
 		 */
 		
+		int xmlFilesActuallyLoaded = 0;
+		
 		for (File file : xmlFilesThatNeedLoading)
 		{
+			if (progressListener != null)
+			{
+				progressListener.progressUpdate("Loading " + (xmlFilesActuallyLoaded + 1) + " of " + xmlFilesThatNeedLoading.length + " recipes");
+			}
+			
 			long fileXmlHash = GetChecksum(file);
 			
 			String xml = getStringFromFile(file);
+			
+			if (xml == null || xml.length() == 0)				
+			{
+				throw new RecipeLoadException("The file " + file.getName() + " was empty and cannot be loaded");
+			}
 			
 			Recipe recipe = RecipeParser.ParseFromXmlString(xml);
 			
@@ -235,6 +248,35 @@ public class RecipesLoader {
 		return imageFiles;
 	}
 	
+	private static void VerifyDataPresence() throws RecipeLoadException
+	{
+		File folder = new File(DATA_FOLDER_LOCATION);
+		
+		if (!(folder.exists()))
+		{
+			throw new RecipeLoadException("A folder named '" + DATA_FOLDER_LOCATION + "' was not found on this device.  (this folder is where recipes must be kept)");
+		}
+		
+		if (!(folder.isDirectory()))
+		{
+			throw new RecipeLoadException("A file named '" + DATA_FOLDER_LOCATION + "' was not found on this device, but it's not a folder.  (this folder is where recipes must be kept)");
+		}
+		
+		File[] xmlFiles = GetXmlFiles();
+		
+		if (xmlFiles.length == 0)
+		{
+			File[] anyFiles = GetDataFolder().listFiles();
+			
+			if (anyFiles.length == 0)
+			{
+				throw new RecipeLoadException("The folder '" + DATA_FOLDER_LOCATION + "' is completely empty, add .xml recipe files to it.");
+			}
+			
+			throw new RecipeLoadException("The folder '" + DATA_FOLDER_LOCATION + "' does not have any recipe files in it, add .xml recipe files to it.  (a file named '" + anyFiles[0].getName() + "' was found in this folder though)");
+		}
+	}
+	
 	private static File GetDataFolder()
 	{
 		/*  // SD card
@@ -249,7 +291,7 @@ public class RecipesLoader {
 		
 		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
 		*/
-		File folder = new File("sdcard/Presto Recipes");  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
+		File folder = new File(DATA_FOLDER_LOCATION);
 		
 		if (!(folder.exists()))
 		{
@@ -260,8 +302,6 @@ public class RecipesLoader {
 		{
 			throw new RuntimeException("Folder " + folder.toString() + " is not directory");
 		}
-	
-		
 		
 		return folder;
 	}
