@@ -4,7 +4,7 @@
     <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="17"/>
 
     <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme">
-        <activity android:label="@string/app_name" android:name="com.bignis.prestocookbook.MainActivity">
+        <activity android:label="@string/app_name" android:name="com.bignis.prestocookbook.MainActivity" android:parentActivityName="com.bignis.prestocookbook.RecipesListActivity">
 
         </activity>
         <activity android:label="@string/title_activity_recipes_list" android:name="com.bignis.prestocookbook.RecipesListActivity">

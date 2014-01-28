@@ -19,7 +19,7 @@
     <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/res/values/strings.xml -->
     <eat-comment />
 
-    <string name="app_name">Presto Cookbook</string>
+    <string name="app_name">Presto Recipes</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_load_recipes">Load Recipes</string>
     <string name="menu_settings">Settings</string>
