@@ -1,9 +1,5 @@
 package com.bignis.prestocookbook;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.ArrayList;
-
 import com.bignis.prestocookbook.database.RecipeDBHelper;
 import android.view.ViewGroup.LayoutParams;
 import android.os.Bundle;
@@ -13,15 +9,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
-import android.view.View;
 import android.widget.*;
 
-public class MainActivity extends Activity {
+public class DisplayRecipeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_display_recipe);
         
         
         

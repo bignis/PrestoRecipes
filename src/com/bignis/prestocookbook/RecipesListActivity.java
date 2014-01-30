@@ -108,7 +108,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 			
 			int recipeId = (Integer)tag;
 			
-			Intent intent = new Intent(this._activity, MainActivity.class);
+			Intent intent = new Intent(this._activity, DisplayRecipeActivity.class);
 			intent.putExtra(RECIPE_ID, recipeId);
 			this._activity.startActivity(intent);
 			

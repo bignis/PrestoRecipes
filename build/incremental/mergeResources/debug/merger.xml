@@ -4,6 +4,16 @@
     <dataSet config="main" >
         <source path="D:\Code\Presto Recipes\PrestoCookbook\res" >
             <file
+                name="curry"
+                path="D:\Code\Presto Recipes\PrestoCookbook\res\drawable-hdpi\curry.jpg"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="fruit"
+                path="D:\Code\Presto Recipes\PrestoCookbook\res\drawable-hdpi\fruit.jpg"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
                 name="ic_action_search"
                 path="D:\Code\Presto Recipes\PrestoCookbook\res\drawable-hdpi\ic_action_search.png"
                 qualifiers="hdpi"
@@ -11,6 +21,21 @@
             <file
                 name="ic_launcher"
                 path="D:\Code\Presto Recipes\PrestoCookbook\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="salmon"
+                path="D:\Code\Presto Recipes\PrestoCookbook\res\drawable-hdpi\salmon.jpg"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="soulfood"
+                path="D:\Code\Presto Recipes\PrestoCookbook\res\drawable-hdpi\soulfood.jpg"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="spagetti"
+                path="D:\Code\Presto Recipes\PrestoCookbook\res\drawable-hdpi\spagetti.jpg"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
@@ -29,8 +54,8 @@
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
-                name="activity_main"
-                path="D:\Code\Presto Recipes\PrestoCookbook\res\layout\activity_main.xml"
+                name="activity_display_recipe"
+                path="D:\Code\Presto Recipes\PrestoCookbook\res\layout\activity_display_recipe.xml"
                 qualifiers=""
                 type="layout" />
             <file
@@ -51,11 +76,11 @@
             <file
                 path="D:\Code\Presto Recipes\PrestoCookbook\res\values\colors.xml"
                 qualifiers="" >
-                <color name="green" >#ff00ff00
+                <color name="recipeListRowDivider" >#FF333333
                 </color>
                 <color name="blue" >#ff0000ff
                 </color>
-                <color name="recipeListRowDivider" >#FF333333
+                <color name="green" >#ff00ff00
                 </color>
                 <color name="recipeListRowOdd" >#FFD5D4FF
                 </color>
@@ -67,9 +92,9 @@
             <file
                 path="D:\Code\Presto Recipes\PrestoCookbook\res\values\dimens.xml"
                 qualifiers="" >
-                <dimen name="TitleSize" >40dp
-                </dimen>
                 <dimen name="IngredientsSize" >35dp
+                </dimen>
+                <dimen name="TitleSize" >40dp
                 </dimen>
                 <dimen name="StepsSize" >30dp
                 </dimen>
@@ -109,8 +134,6 @@ Nullam quis diam odio, quis egestas nunc. Etiam semper pharetra velit, vehicula 
                 </string>
                 <string name="menu_load_recipes" >Load Recipes
                 </string>
-                <string name="app_name" >Presto Recipes
-                </string>
                 <string name="recipe_cake" >	    Chocolate Cake\n\n
 	    2 cups white sugar\n
  1 3/4 cups all-purpose flour\n
@@ -129,6 +152,8 @@ Directions\n
 Preheat oven to 350 degrees F (175 degrees C). Grease and flour two 9 inch round pans.\n\n
 In a large bowl, combine sugar, flour, cocoa, baking powder, baking soda and salt. Make a well in the center and add eggs, milk, oil and vanilla. Beat for 2 minutes at medium speed. Stir in boiling water.\n\n
 Pour into two 9 inch pans. Bake at 350 degrees F (175 degrees C) for 30 to 35 minutes, or until a toothpick inserted into the cake comes out clean. Cool for 10 minutes in the pan, then turn out onto a wire rack and continue cooling.	    
+                </string>
+                <string name="app_name" >Presto Recipes
                 </string>
                 <string name="recipe_penne" >Penne Pasta with Spinach and Bacon\n
 \n
@@ -155,9 +180,9 @@ Transfer to a large serving bowl, and toss with the remaining olive oil, and the
                 </string>
                 <string name="hello_world" >Hello world!
                 </string>
-                <string name="menu_settings" >Settings
-                </string>
                 <string name="title_activity_recipes_list" >Recipes List
+                </string>
+                <string name="menu_settings" >Settings
                 </string>
             </file>
             <file

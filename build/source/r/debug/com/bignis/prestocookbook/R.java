@@ -24,8 +24,13 @@ public final class R {
         public static final int TitleSize=0x7f050002;
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int curry=0x7f020000;
+        public static final int fruit=0x7f020001;
+        public static final int ic_action_search=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int salmon=0x7f020004;
+        public static final int soulfood=0x7f020005;
+        public static final int spagetti=0x7f020006;
     }
     public static final class id {
         public static final int action_category=0x7f09000d;
@@ -44,7 +49,7 @@ public final class R {
         public static final int titleTextView=0x7f090002;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
+        public static final int activity_display_recipe=0x7f030000;
         public static final int activity_recipes_list=0x7f030001;
     }
     public static final class menu {
