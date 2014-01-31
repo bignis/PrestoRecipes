@@ -106,7 +106,7 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 		textView.setWidth(textWidth);
 		textView.setHeight(textHeight);
 		textView.setPadding(20, 20, 20, 20);
-		textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
 		textView.setBackgroundColor(0x66000000);  // FF at the beginning means fully opaque
 		
 

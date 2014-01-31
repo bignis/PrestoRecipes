@@ -42,7 +42,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recipes_list);
-		
+
 		//You can enable type-to-search in your activity by calling setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL) during your activity's onCreate() method.
 		//this.setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);		
 		

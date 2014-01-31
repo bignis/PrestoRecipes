@@ -114,7 +114,7 @@ public class RecipeParser {
     	{
     		throw new RuntimeException("ParseFromXmlFile called with null parameter");
     	}
-    	
+    	/* old, fails on UTF stuff mgn
     	DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
     	builderFactory.setNamespaceAware(true);
     	DocumentBuilder builder = builderFactory.newDocumentBuilder();
@@ -124,9 +124,14 @@ public class RecipeParser {
     	
     	//Document document = builder.parse(new File(xmlFilePath));
     	Document document = builder.parse(new InputSource(new InputStreamReader(
-                new FileInputStream(xmlFilePath), "UTF8")));
-    	
-    	return Parse(document);
+                new FileInputStream(xmlFilePath), "UTF-8")));
+    	*/
+
+        String xml = RecipesLoader.getStringFromFile(new File(xmlFilePath));
+
+        return ParseFromXmlString(xml);
+
+//    	return Parse(document);
 	}
 	
 	public static Recipe ParseFromXmlString(String xml) throws Exception

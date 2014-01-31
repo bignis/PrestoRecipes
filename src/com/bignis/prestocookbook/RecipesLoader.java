@@ -22,7 +22,8 @@ import android.os.Environment;
 
 public class RecipesLoader {
 	
-	private static final String DATA_FOLDER_LOCATION = "sdcard/Presto Recipes";  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
+	public static final String DATA_FOLDER_LOCATION = "sdcard/Presto Recipes";  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
+    public static final String STAGING_FOLDER_LOCATION = "sdcard/Presto Recipes/Staging";  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
 	
 	public static String LoadRecipes(Context context, RecipeLoadProgressListener progressListener) throws RecipeLoadException
 	{
@@ -208,45 +209,70 @@ public class RecipesLoader {
 		File folder = GetDataFolder();
 		
 		//File folder = new File("/Presto Recipes");
-		
-		FilenameFilter filter = new FilenameFilter() {
-		    public boolean accept(File directory, String fileName) {
-		        return RecipesLoader.endsWith(fileName, ".xml", true);
-		    }
-		};
-		
-		File[] xmlFiles = folder.listFiles(filter);
-		
-		if (xmlFiles == null)
-		{
-			return new File[0];
-		}
-		
-		return xmlFiles;
+
+        return GetXmlFiles(folder);
 	}
-	
-	public static File[] GetImageFiles()
+
+    public static File[] GetXmlFilesFromStagingFolder()
+    {
+        File folder = GetStagingFolder();
+
+        return GetXmlFiles(folder);
+    }
+
+    private static File[] GetXmlFiles(File folder) {
+        FilenameFilter filter = new FilenameFilter() {
+            public boolean accept(File directory, String fileName) {
+                return RecipesLoader.endsWith(fileName, ".xml", true);
+            }
+        };
+
+        File[] xmlFiles = folder.listFiles(filter);
+
+        if (xmlFiles == null)
+        {
+            return new File[0];
+        }
+
+        return xmlFiles;
+    }
+
+    public static File[] GetImageFiles()
 	{
 		File folder = GetDataFolder();
-		
-		//File folder = new File("/Presto Recipes");
-		
-		FilenameFilter filter = new FilenameFilter() {
-		    public boolean accept(File directory, String fileName) {
-		    	return RecipesLoader.endsWith(fileName, ".jpg", true)
-		    			|| RecipesLoader.endsWith(fileName, ".png", true);
-		    }
-		};
-		
-		File[] imageFiles = folder.listFiles(filter);
-		
-		if (imageFiles == null)
-		{
-			return new File[0];
-		}
-		
-		return imageFiles;
+
+        return GetImageFiles(folder);
 	}
+
+    public static File[] GetImageFilesFromStagingFolder()
+    {
+        File folder = GetStagingFolder();
+
+        return GetImageFiles(folder);
+    }
+
+    private static File[] GetImageFiles(File folder) {
+        FilenameFilter filter = new FilenameFilter() {
+            public boolean accept(File directory, String fileName) {
+                return RecipesLoader.IsImageFile(fileName);
+            }
+        };
+
+        File[] imageFiles = folder.listFiles(filter);
+
+        if (imageFiles == null)
+        {
+            return new File[0];
+        }
+
+        return imageFiles;
+    }
+
+    public static boolean IsImageFile(String fileName)
+    {
+        return RecipesLoader.endsWith(fileName, ".jpg", true)
+                || RecipesLoader.endsWith(fileName, ".png", true);
+    }
 	
 	private static void VerifyDataPresence() throws RecipeLoadException
 	{
@@ -277,7 +303,7 @@ public class RecipesLoader {
 		}
 	}
 	
-	private static File GetDataFolder()
+	public static File GetDataFolder()
 	{
 		/*  // SD card
 		String state = Environment.getExternalStorageState();
@@ -295,7 +321,8 @@ public class RecipesLoader {
 		
 		if (!(folder.exists()))
 		{
-			throw new RuntimeException("Folder " + folder.toString() + " does not exist");
+			folder.mkdirs();
+			// throw new RuntimeException("Folder " + folder.toString() + " does not exist");
 		}
 		
 		if (!(folder.isDirectory()))
@@ -305,6 +332,36 @@ public class RecipesLoader {
 		
 		return folder;
 	}
+
+    public static File GetStagingFolder()
+    {
+		/*  // SD card
+		String state = Environment.getExternalStorageState();
+
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+			String foo = "";
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		    String foo = "";
+		}
+
+		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
+		*/
+        File folder = new File(STAGING_FOLDER_LOCATION);
+
+        if (!(folder.exists()))
+        {
+            boolean success = folder.mkdirs();
+            //throw new RuntimeException("Folder " + folder.toString() + " does not exist");
+        }
+
+        if (!(folder.isDirectory()))
+        {
+            throw new RuntimeException("Folder " + folder.toString() + " is not directory");
+        }
+
+        return folder;
+    }
 	
 	public static File[] GetImageFilesThatNeedLoading(File[] imageFiles, Context context) throws FileNotFoundException, IOException
 	{
@@ -562,7 +619,7 @@ public class RecipesLoader {
 	    return ret;
 	}
 	
-	  private static boolean endsWith(String str, String suffix, boolean ignoreCase) {
+	  public static boolean endsWith(String str, String suffix, boolean ignoreCase) {
 	      if (str == null || suffix == null) {
 	          return (str == null && suffix == null);
 	      }

@@ -4,4 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bignis.prestocookbook.LoadRecipesActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame">
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="Load These Recipes" android:onClick="loadRecipesClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="Cancel" android:onClick="cancelClick" />
+</FrameLayout>
