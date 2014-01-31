@@ -34,6 +34,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.bignis.prestocookbook.LoadRecipesActivity">
+
+            <!-- "file" and "content" are crucial for Gmail to recognize it -->
+            <!-- http://stackoverflow.com/questions/13431479/android-opening-gmail-attachment-with-my-app -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file" android:pathPattern=".*\\.zip" android:mimeType="application/zip"/>
+                <data android:scheme="content" android:pathPattern=".*\\.zip" android:mimeType="application/zip"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

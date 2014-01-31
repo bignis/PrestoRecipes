@@ -12,19 +12,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80d4afad-cbbd-4307-a194-24f5e84293fe" name="Default" comment="Update to Android Studio + Gradle - things are working">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bignis/prestocookbook/LoadRecipesActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_load_recipes.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/fragment_load_recipes.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/menu/load_recipes.xml" />
       <change type="DELETED" beforePath="D:\Code\Presto Recipes\PrestoCookbook\build\javaResources\release\com\bignis\prestocookbook\RecipeExample.txt" afterPath="" />
       <change type="DELETED" beforePath="D:\Code\Presto Recipes\PrestoCookbook\build\pre-dexed\debug\android-support-v4-82fbe0b9bac87332d23c19a0f3c80626f31a3628.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\Code\Presto Recipes\PrestoCookbook\build\pre-dexed\debug\support-v4-18.0.0-5fe51c4ff39f65ae08ee2952f22670d94d185756.jar" afterPath="" />
       <change type="DELETED" beforePath="D:\Code\Presto Recipes\PrestoCookbook\build\source\buildConfig\release\com\bignis\prestocookbook\BuildConfig.java" afterPath="" />
       <change type="DELETED" beforePath="D:\Code\Presto Recipes\PrestoCookbook\build\source\r\release\com\bignis\prestocookbook\R.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes\PrestoCookbook\libs\android-support-v4.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/source/buildConfig/debug/com/bignis/prestocookbook/BuildConfig.java" afterPath="$PROJECT_DIR$/build/source/buildConfig/debug/com/bignis/prestocookbook/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PrestoCookbook.iml" afterPath="$PROJECT_DIR$/PrestoCookbook.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/source/r/debug/com/bignis/prestocookbook/R.java" afterPath="$PROJECT_DIR$/build/source/r/debug/com/bignis/prestocookbook/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipesListActivity.java" afterPath="$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipesListActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MOVED" beforePath="D:\Code\Presto Recipes\PrestoCookbook\res\layout\activity_main.xml" afterPath="$PROJECT_DIR$/res/layout/activity_display_recipe.xml" />
-      <change type="MOVED" beforePath="D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook\MainActivity.java" afterPath="$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
     </list>
     <ignored path="PrestoCookbook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -88,54 +89,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="1" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="850">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoadRecipesActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/LoadRecipesActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="45" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="DisplayRecipeActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="35" selection-start="833" selection-end="833" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2465">
+            <state line="16" column="0" selection-start="456" selection-end="614" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_display_recipe.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="39" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="969">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="73" selection-start="601" selection-end="601" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+            <state line="40" column="109" selection-start="1753" selection-end="1753" vertical-scroll-proportion="0.5466667" vertical-offset="352" max-vertical-offset="969">
               <folding>
                 <element signature="e#449#467#0" expanded="true" />
                 <element signature="e#629#647#0" expanded="true" />
                 <element signature="e#1208#1245#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecipesListActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipesListActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="76" selection-start="3366" selection-end="3366" vertical-scroll-proportion="0.67333335" vertical-offset="1007" max-vertical-offset="6188">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="51" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="833">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -437,6 +426,11 @@
                 <option name="name" value="preReleaseBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:appcompat-v7:19.0.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportAppcompatV71900Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareDebugDependencies" />
               </ExternalTaskPojo>
@@ -522,11 +516,13 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipesListActivity.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/res/layout/fragment_load_recipes.xml" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/src/com/bignis/prestocookbook/LoadRecipesActivity.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -562,8 +558,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -646,12 +640,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PrestoCookbook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PrestoCookbook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -672,6 +686,13 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="FullScreen" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Code\Presto Recipes\PrestoCookbook\res\menu" />
+      <recent name="D:\Code\Presto Recipes\PrestoCookbook\res\layout" />
+      <recent name="D:\Code\Presto Recipes\PrestoCookbook\src\com\bignis\prestocookbook" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.MGN Nexus 7">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -854,7 +875,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -864,10 +885,10 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290461" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30546623" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290461" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290461" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290461" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -900,9 +921,34 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="1" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/LoadRecipesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="40" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.0" vertical-offset="89" max-vertical-offset="1207">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="71" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
+          <folding>
+            <element signature="e#449#467#0" expanded="true" />
+            <element signature="e#629#647#0" expanded="true" />
+            <element signature="e#1208#1245#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2703">
+        <state line="27" column="35" selection-start="833" selection-end="833" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2618">
           <folding />
         </state>
       </provider>
@@ -919,7 +965,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="61" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="663">
+        <state line="17" column="73" selection-start="601" selection-end="601" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="748">
           <folding>
             <element signature="e#449#467#0" expanded="true" />
             <element signature="e#629#647#0" expanded="true" />
@@ -928,75 +974,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipesListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2703">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="39" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="969">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="61" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="663">
-          <folding>
-            <element signature="e#449#467#0" expanded="true" />
-            <element signature="e#629#647#0" expanded="true" />
-            <element signature="e#1208#1245#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2703">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="39" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="969">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="61" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="663">
-          <folding>
-            <element signature="e#449#467#0" expanded="true" />
-            <element signature="e#629#647#0" expanded="true" />
-            <element signature="e#1208#1245#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="39" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="969">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="42" selection-start="94" selection-end="94" vertical-scroll-proportion="-0.5402685" vertical-offset="534" max-vertical-offset="1428">
+        <state line="110" column="76" selection-start="3366" selection-end="3366" vertical-scroll-proportion="0.0" vertical-offset="1870" max-vertical-offset="6188">
           <folding />
         </state>
       </provider>
@@ -1010,14 +990,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="35" selection-start="833" selection-end="833" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2465">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2703">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="39" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="969">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="73" selection-start="601" selection-end="601" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+        <state line="19" column="61" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="663">
           <folding>
             <element signature="e#449#467#0" expanded="true" />
             <element signature="e#629#647#0" expanded="true" />
@@ -1026,10 +1016,142 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2703">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="39" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="61" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="663">
+          <folding>
+            <element signature="e#449#467#0" expanded="true" />
+            <element signature="e#629#647#0" expanded="true" />
+            <element signature="e#1208#1245#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2703">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="39" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="61" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="663">
+          <folding>
+            <element signature="e#449#467#0" expanded="true" />
+            <element signature="e#629#647#0" expanded="true" />
+            <element signature="e#1208#1245#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="39" selection-start="933" selection-end="933" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipesListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="76" selection-start="3366" selection-end="3366" vertical-scroll-proportion="0.67333335" vertical-offset="1007" max-vertical-offset="6188">
+        <state line="164" column="9" selection-start="4990" selection-end="4990" vertical-scroll-proportion="0.0" vertical-offset="1870" max-vertical-offset="6188">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="1" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_load_recipes.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/fragment_load_recipes.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="31" selection-start="331" selection-end="331" vertical-scroll-proportion="-4.76" vertical-offset="0" max-vertical-offset="374">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="29" selection-start="10394" selection-end="10394" vertical-scroll-proportion="1.274276" vertical-offset="0" max-vertical-offset="1479">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/load_recipes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="419" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="907">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="456" selection-end="614" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/LoadRecipesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="45" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="109" selection-start="1753" selection-end="1753" vertical-scroll-proportion="0.5466667" vertical-offset="352" max-vertical-offset="969">
+          <folding>
+            <element signature="e#449#467#0" expanded="true" />
+            <element signature="e#629#647#0" expanded="true" />
+            <element signature="e#1208#1245#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

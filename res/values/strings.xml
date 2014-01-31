@@ -5,6 +5,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_load_recipes">Load Recipes</string>
     <string name="menu_settings">Settings</string>
+    <string name="title_activity_load_recipes">Loading Recipes</string>
+
+    <string name="action_settings">Settings</string>
     <string name="mgn_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt purus id magna egestas eu elementum lacus fermentum. Duis orci ante, dapibus vitae blandit at, consectetur eu nulla. Integer nisi sem, faucibus in pretium nec, scelerisque sit amet ante. Vestibulum aliquet ultricies tortor ut ultricies. Vestibulum ac viverra arcu. Mauris in risus ipsum. Fusce sagittis, sapien at varius gravida, risus leo accumsan lacus, et accumsan augue tellus vitae leo. Donec convallis posuere arcu. Morbi ipsum massa, vestibulum ultrices condimentum in, auctor nec risus. Sed pretium libero convallis est ornare non egestas augue hendrerit. Suspendisse potenti. Aliquam eros sapien, malesuada eu suscipit sed, rutrum eget tortor.
 
 Pellentesque eget neque eu dolor pretium tempus. Nulla vitae erat a tellus sodales tempus ut quis diam. Vestibulum gravida, leo vitae dignissim facilisis, ante lacus auctor justo, eget condimentum leo orci at libero. Donec id tempus turpis. Pellentesque enim urna, scelerisque a consequat eget, faucibus sed eros. Etiam et elementum nulla. Sed leo ligula, interdum in suscipit in, auctor non lectus.

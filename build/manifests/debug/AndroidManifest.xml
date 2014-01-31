@@ -16,6 +16,45 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="com.bignis.prestocookbook.LoadRecipesActivity">
+            <!-- not working
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.zip" />
+                <data android:host="*" />
+            </intent-filter>
+            -->
+            <!-- also not working
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/*" android:host="*" android:pathPattern=".*.zip" android:scheme="content" />
+            </intent-filter>
+            -->
+
+            <!-- works for local copy only, not GMail
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/zip" />
+                <data android:pathPattern=".*\\.zip" />
+                <data android:host="*" />
+            </intent-filter>
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/zip" android:pathPattern=".*\\.zip" android:scheme="file"/>
+                <data android:mimeType="application/zip" android:pathPattern=".*\\.zip" android:scheme="content"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
