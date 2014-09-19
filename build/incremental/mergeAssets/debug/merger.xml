@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merger>
 
-    <dataSet config="ComAndroidSupportAppcompatV71900.aar" >
-        <source path="D:\Code\Presto Recipes\PrestoCookbook\build\exploded-bundles\ComAndroidSupportAppcompatV71900.aar\assets" />
+    <dataSet config="19.0.0" >
+        <source path="D:\Code\Presto Recipes\PrestoCookbook\build\exploded-aar\com.android.support\appcompat-v7\19.0.0\assets" />
     </dataSet>
     <dataSet config="main" >
         <source path="D:\Code\Presto Recipes\PrestoCookbook\assets" />

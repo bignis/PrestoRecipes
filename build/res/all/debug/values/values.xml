@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/build/exploded-bundles/ComAndroidSupportAppcompatV71900.aar/res/values/values.xml -->
+    <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/build/exploded-aar/com.android.support/appcompat-v7/19.0.0/res/values/values.xml -->
     <eat-comment />
 
     <attr name="actionBarDivider" format="reference" />
@@ -87,7 +87,7 @@
     <color name="recipeListRowEven">#FFA6A3FF</color>
     <color name="recipeListRowOdd">#FFD5D4FF</color>
     <color name="red">#ffff0000</color>
-    <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/build/exploded-bundles/ComAndroidSupportAppcompatV71900.aar/res/values/values.xml -->
+    <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/build/exploded-aar/com.android.support/appcompat-v7/19.0.0/res/values/values.xml -->
     <eat-comment />
 
     <declare-styleable name="ActionBar">
@@ -481,7 +481,7 @@
     <dimen name="IngredientsSize">35dp</dimen>
     <dimen name="StepsSize">30dp</dimen>
     <dimen name="TitleSize">40dp</dimen>
-    <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/build/exploded-bundles/ComAndroidSupportAppcompatV71900.aar/res/values/values.xml -->
+    <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/build/exploded-aar/com.android.support/appcompat-v7/19.0.0/res/values/values.xml -->
     <eat-comment />
 
     <dimen name="abc_action_bar_default_height">48dip</dimen>
@@ -620,7 +620,7 @@ Transfer to a large serving bowl, and toss with the remaining olive oil, and the
         <!-- mgn http://stackoverflow.com/questions/12395381/android-actionbar-navigation-spinner-text-color -->
         <item name="android:spinnerDropDownItemStyle">@style/YourCustomDropDownItemStyle</item>
     </style>
-    <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/build/exploded-bundles/ComAndroidSupportAppcompatV71900.aar/res/values/values.xml -->
+    <!-- From: file:/D:/Code/Presto%20Recipes/PrestoCookbook/build/exploded-aar/com.android.support/appcompat-v7/19.0.0/res/values/values.xml -->
     <eat-comment />
 
     <style name="TextAppearance.AppCompat.Base.CompactMenu.Dialog" parent="android:TextAppearance.Medium">

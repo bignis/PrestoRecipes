@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -42,7 +43,10 @@ public class LoadRecipesActivity extends Activity {
         setContentView(R.layout.activity_load_recipes);
 
         //showFakeData();
-        promptToLoadStagedRecipes(getStagedRecipes());
+
+        StagedRecipe[] stagedRecipes = getStagedRecipes();
+        Arrays.sort(stagedRecipes);
+        promptToLoadStagedRecipes(stagedRecipes);
         //showStuff();
     }
 
@@ -117,8 +121,6 @@ public class LoadRecipesActivity extends Activity {
                 item.AlreadyExists = new File(RecipesLoader.GetDataFolder() + "/" + file.getName()).exists();
 
                 list.add(item);
-
-                it.remove(); // avoids a ConcurrentModificationException
             }
         }
 
@@ -141,8 +143,6 @@ public class LoadRecipesActivity extends Activity {
                 item.AlreadyExists = new File(RecipesLoader.GetDataFolder() + "/" + file.getName()).exists();
 
                 list.add(item);
-
-                it.remove(); // avoids a ConcurrentModificationException
             }
         }
 
@@ -264,7 +264,7 @@ public class LoadRecipesActivity extends Activity {
 
         File stagingFolder = RecipesLoader.GetStagingFolder();
 
-        //LoadRecipesActivity.deleteFilesFromFolder(stagingFolder);
+        LoadRecipesActivity.deleteFilesFromFolder(stagingFolder);
 
         // Extract zip file
 
@@ -319,11 +319,12 @@ public class LoadRecipesActivity extends Activity {
     public void loadRecipesClick(View v) {
         // does something very interesting
         String x= ";";
+        //java.nio.
     }
 
     public void cancelClick(View v) {
-        // does something very interesting
-        String x= ";";
+        Intent intent = new Intent(this, RecipesListActivity.class);
+        this.startActivity(intent);
     }
 
 
@@ -363,11 +364,18 @@ public class LoadRecipesActivity extends Activity {
         }
     }
 
-    public class StagedRecipe
+    public class StagedRecipe implements Comparable<StagedRecipe>
     {
         public String RecipeTitle;
         public String ImageFileName; // Null if no image.
         public Boolean AlreadyExists;
+
+        @Override
+        public int compareTo(StagedRecipe stagedRecipe) {
+            String my = this.RecipeTitle != null ? this.RecipeTitle : this.ImageFileName;
+            String other = stagedRecipe.RecipeTitle != null ? stagedRecipe.RecipeTitle : stagedRecipe.ImageFileName;
+            return my.compareTo(other);
+        }
     }
 
     //public class StagedRecipesArrayAdapter extends ArrayAdapter<StagedRecipe> {
