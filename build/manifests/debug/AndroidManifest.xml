@@ -26,8 +26,12 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="application/zip" android:pathPattern=".*\\.zip" android:scheme="file"/>
-                <data android:mimeType="application/zip" android:pathPattern=".*\\.zip" android:scheme="content"/>
+                <!-- worked once upon a time???
+                <data android:scheme="file" android:pathPattern=".*\\.zip" android:mimeType="application/zip"/>
+                <data android:scheme="content" android:pathPattern=".*\\.zip" android:mimeType="application/zip"/>
+                -->
+                <data android:mimeType="*/*" android:pathPattern=".*\\.presto" android:scheme="file"/>
+                <data android:mimeType="*/*" android:pathPattern=".*\\.presto" android:scheme="content"/>
             </intent-filter>
         </activity>
     </application>

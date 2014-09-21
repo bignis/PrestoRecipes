@@ -45,7 +45,14 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 
 		//You can enable type-to-search in your activity by calling setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL) during your activity's onCreate() method.
 		//this.setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);		
-		
+
+        Intent intent = getIntent();
+        String intentExtra = intent.getStringExtra("MGNExtra");
+        if (intentExtra != null && intentExtra.equals("LoadRecipesWhenStarted")) {
+            new RecipesLoaderTask(this).execute(); // Load recipes
+        }
+
+
 		this.PopulateRecipes(); //  Get all recipes
 	}
 	

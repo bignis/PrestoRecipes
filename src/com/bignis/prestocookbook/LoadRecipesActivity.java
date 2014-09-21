@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -14,10 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,7 +26,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -44,12 +39,20 @@ public class LoadRecipesActivity extends Activity {
 
         //showFakeData();
 
+        extractZipFromIntentIntoStagingFolder();
+
         StagedRecipe[] stagedRecipes = getStagedRecipes();
         Arrays.sort(stagedRecipes);
-        promptToLoadStagedRecipes(stagedRecipes);
-        //showStuff();
-    }
 
+        displayListOfStagedRecipes(stagedRecipes);
+
+
+        final Intent intent = getIntent();
+        final String action = intent.getAction();
+
+        //if(Intent.ACTION_VIEW.equals(action)){
+    }
+/*
     private void showFakeData()
     {
         StagedRecipe[] data = new StagedRecipe[3];
@@ -68,9 +71,9 @@ public class LoadRecipesActivity extends Activity {
         data[2].ImageFileName = "foo.jpg";
         data[2].RecipeTitle = "Big Mac3";
 
-        promptToLoadStagedRecipes(data);
+        displayListOfStagedRecipes(data);
     }
-
+*/
     private StagedRecipe[] getStagedRecipes()
     {
         File[] xmlFiles = RecipesLoader.GetXmlFilesFromStagingFolder();
@@ -115,6 +118,7 @@ public class LoadRecipesActivity extends Activity {
                 catch (Exception e)
                 {
                     e.printStackTrace();
+                    this.showMessage("Error: " + e.toString());
                     continue;
                 }
 
@@ -149,7 +153,7 @@ public class LoadRecipesActivity extends Activity {
         return (StagedRecipe[])list.toArray(new StagedRecipe[0]);
     }
 
-    private void promptToLoadStagedRecipes(StagedRecipe[] recipes)
+    private void displayListOfStagedRecipes(StagedRecipe[] recipes)
     {
         final ListView listView = (ListView) findViewById(R.id.listview);
 
@@ -157,10 +161,22 @@ public class LoadRecipesActivity extends Activity {
         final StagedRecipesArrayAdapter adapter = new StagedRecipesArrayAdapter(this, recipes);
 
         listView.setAdapter(adapter);
+
+        if (recipes.length == 0) {
+            this.showMessage("No recipes are ready to load.");
+        }
     }
 
+    private void showMessage(String textToDisplay)
+    {
+        LinearLayout view = (LinearLayout)this.findViewById(R.id.container);
 
-    private void showStuff()
+        TextView text = new TextView(this);
+        text.setText(textToDisplay);
+        view.addView(text);
+    }
+
+    private void extractZipFromIntentIntoStagingFolder()
     {
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -171,107 +187,60 @@ public class LoadRecipesActivity extends Activity {
             throw new RuntimeException("Action " + action + " doesn't match expected VIEW action");
         }
 
-        if (!("application/zip".equals(type)))
+        if (!(intent.getScheme().equals("content")))  //https://code.google.com/p/codenameone/issues/detail?id=772
         {
-            throw new RuntimeException("File type " + type + " doesn't match expected Zip file");
+            this.showMessage("Intent scheme didn't match - " + intent.getScheme());
+            return;
         }
 
-        Uri str = intent.getData();
-
-        File zip = new File(intent.getData().getPath());
-
-        /*
-        String[] fileNamesInZip;
+        Uri uri = intent.getData();
 
         try
         {
-            fileNamesInZip = readFileNames(zip);
+
+            InputStream attachment = this.getContentResolver().openInputStream(uri);
+
+            ZipInputStream zipStream = new ZipInputStream(new BufferedInputStream(attachment));
+
+            extractRecipeFilesToStagingFolder(zipStream);
         }
         catch (IOException e)
         {
             e.printStackTrace();
+            this.showMessage("Error: " + e.toString());
             return;
         }
-*/
-
-        try
-        {
-            writeRecipeFilesToStagingFolder(zip);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            return;
-        }
-
+    }
 /*
-        String names = "";
-
-        for (int i = 0; i < fileNamesInZip.length; ++i)
-        {
-            names += fileNamesInZip[i] + ", ";
+    static boolean isValid(final File file) {
+        ZipFile zipfile = null;
+        try {
+            zipfile = new ZipFile(file);
+            return true;
+        } catch (ZipException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        } finally {
+            try {
+                if (zipfile != null) {
+                    zipfile.close();
+                    zipfile = null;
+                }
+            } catch (IOException e) {
+            }
         }
+    }
 */
-        FrameLayout view = (FrameLayout)this.findViewById(R.id.container);
-
-        TextView text = new TextView(this);
-        text.setText("Mike: " + "done");
-        view.addView(text);
-
-
-        /*
-        if (Intent.ACTION_VIEW.equals(action) && type != null) {
-            if ("text/plain".equals(type)) {
-                handleSendText(intent); // Handle text being sent
-            } else if (type.startsWith("image/")) {
-                handleSendImage(intent); // Handle single image being sent
-            }
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(action) && type != null) {
-            if (type.startsWith("image/")) {
-                handleSendMultipleImages(intent); // Handle multiple images being sent
-            }
-        } else {
-            // Handle other intents, such as being started from the home screen
-        }
-        */
-    }
-
-    private String[] readFileNames(File zipFile) throws IOException
+    private void extractRecipeFilesToStagingFolder(ZipInputStream zipStream) throws IOException
     {
-        InputStream inputStream = new FileInputStream(zipFile);
-
-        ZipInputStream zipStream = new ZipInputStream(new BufferedInputStream(inputStream));
-
-        ZipEntry zipEntry;
-
-        ArrayList<String> fileNames = new ArrayList<String>();
-
-        while ((zipEntry = zipStream.getNextEntry()) != null)
-        {
-            fileNames.add(zipEntry.getName());
-
-            zipStream.closeEntry();
-        }
-
-        zipStream.close();
-
-        return (String[])fileNames.toArray(new String[0]);
-    }
-
-    private void writeRecipeFilesToStagingFolder(File zipFile) throws IOException
-    {
-        // Clear out other stuff
+        // Delete the existing (if any) contents of the staging folder
 
         File stagingFolder = RecipesLoader.GetStagingFolder();
 
         LoadRecipesActivity.deleteFilesFromFolder(stagingFolder);
 
         // Extract zip file
-
-        InputStream inputStream = new FileInputStream(zipFile);
-
-        ZipInputStream zipStream = new ZipInputStream(new BufferedInputStream(inputStream));
-
         ZipEntry zipEntry;
 
         while ((zipEntry = zipStream.getNextEntry()) != null)
@@ -303,8 +272,35 @@ public class LoadRecipesActivity extends Activity {
         }
 
         zipStream.close();
-
     }
+
+    private void moveRecipeFilesFromStagingIntoDataFolder()
+    {
+        File[] files;
+
+        for (File file : RecipesLoader.GetXmlFilesFromStagingFolder()) {
+            moveFileToDataFolder(file);
+        }
+
+        for (File file : RecipesLoader.GetImageFilesFromStagingFolder()) {
+            moveFileToDataFolder(file);
+        }
+    }
+
+    private void moveFileToDataFolder(File file)
+    {
+        File dataFolder = RecipesLoader.GetDataFolder();
+
+        File destinationPath = new File(dataFolder.getPath(), file.getName());
+
+        if (destinationPath.exists())
+        {
+            destinationPath.delete();
+        }
+
+        file.renameTo(destinationPath);
+    }
+
 
     private static void deleteFilesFromFolder(File folder) {
         File[] Files = folder.listFiles();
@@ -317,9 +313,11 @@ public class LoadRecipesActivity extends Activity {
     }
 
     public void loadRecipesClick(View v) {
-        // does something very interesting
-        String x= ";";
-        //java.nio.
+        moveRecipeFilesFromStagingIntoDataFolder();
+
+        Intent intent = new Intent(this, RecipesListActivity.class);
+        intent.putExtra("MGNExtra", "LoadRecipesWhenStarted");
+        this.startActivity(intent);
     }
 
     public void cancelClick(View v) {

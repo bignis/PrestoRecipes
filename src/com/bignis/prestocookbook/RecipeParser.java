@@ -180,34 +180,33 @@ public class RecipeParser {
     		Element amount = (Element) element.getElementsByTagName("amt").item(0);
     		
     		String combined = "";
-    		
-    		NodeList quantityNodes = amount.getElementsByTagName("qty");
-    		
-    		if (quantityNodes.getLength() != 0)
-    		{
-    			combined += quantityNodes.item(0).getTextContent().trim();
-    		}
-    		
-			NodeList unitNodes = amount.getElementsByTagName("unit");
-    		
-    		if (unitNodes.getLength() != 0)
-    		{
-    			String unitText = unitNodes.item(0).getTextContent().trim();
-    			
-    			if (combined.length() != 0 && unitText.length() != 0)
-    			{
-    				combined += " ";
-    			}
-    			
-    			combined += unitText;
-    		}
+
+            if (amount != null) {
+                NodeList quantityNodes = amount.getElementsByTagName("qty");
+
+                if (quantityNodes.getLength() != 0) {
+                    combined += quantityNodes.item(0).getTextContent().trim();
+                }
+
+                NodeList unitNodes = amount.getElementsByTagName("unit");
+
+                if (unitNodes.getLength() != 0) {
+                    String unitText = unitNodes.item(0).getTextContent().trim();
+
+                    if (combined.length() != 0 && unitText.length() != 0) {
+                        combined += " ";
+                    }
+
+                    combined += unitText;
+                }
+            }
     		
     		// Assume item is non-null, otherwise the recipe is borked
     		NodeList itemNodes = element.getElementsByTagName("item");
     		
     		if (itemNodes.getLength() == 0)
     		{
-    			throw new RuntimeException("Item was null, this cannot be");
+    			throw new RuntimeException("An ingredient Item was null, the RecipeML spec does not allow this");
     		}
     		
     		String itemText = itemNodes.item(0).getTextContent().trim();
