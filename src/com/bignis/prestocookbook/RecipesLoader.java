@@ -143,8 +143,8 @@ public class RecipesLoader {
 					
 					SQLiteStatement update = db.compileStatement(
 							"UPDATE Recipes " + 
-							"SET Xml = '?', XmlHash = ?, Category = ?, LastUpdated = datetime('now')" +
-							"WHERE Title = '?' and XmlFileName = '?'");
+							"SET Xml = ?, XmlHash = ?, Category = ?, LastUpdated = datetime('now')" +
+							"WHERE Title = ? and XmlFileName = ?");
 					
 					update.bindString(1, xml);
 					update.bindLong(2, fileXmlHash);
@@ -173,8 +173,8 @@ public class RecipesLoader {
 					
 					SQLiteStatement update = db.compileStatement(
 							"UPDATE Recipes " + 
-							"SET XmlFileName = '?', Category = ?, LastUpdated = datetime('now')" +
-							"WHERE Title = '?' and XmlHash = '?'");
+							"SET XmlFileName = ?, Category = ?, LastUpdated = datetime('now')" +
+							"WHERE Title = ? and XmlHash = ?");
 					
 					update.bindString(1, file.getName());
 					update.bindString(2, recipe.Category);
