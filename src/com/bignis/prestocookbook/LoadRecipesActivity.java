@@ -187,7 +187,8 @@ public class LoadRecipesActivity extends Activity {
             throw new RuntimeException("Action " + action + " doesn't match expected VIEW action");
         }
 
-        if (!(intent.getScheme().equals("content")))  //https://code.google.com/p/codenameone/issues/detail?id=772
+        if (!(intent.getScheme().equals("content")) &&// gmail open file link - https://code.google.com/p/codenameone/issues/detail?id=772
+            !(intent.getScheme().equals("file")))  // Outlook.com email opens it as "file"
         {
             this.showMessage("Intent scheme didn't match - " + intent.getScheme());
             return;

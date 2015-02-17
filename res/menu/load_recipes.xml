@@ -6,5 +6,6 @@
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        />
+    <!-- mike removed this upon updating Android Studio to 1.02  app:showAsAction="never"  -->
 </menu>
