@@ -1,0 +1,5 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/menu_email_recipe" android:title="Email Recipe" android:showAsAction="never" />
+
+</menu>

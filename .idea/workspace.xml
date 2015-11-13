@@ -5,7 +5,12 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/res/menu/activity_main.xml">
+      <layout url="file://$PROJECT_DIR$/res/menu/activity_display_recipe.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.Light.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/menu/activity_recipes_list.xml">
         <config>
           <theme>@android:style/Theme.Holo.Light.DarkActionBar</theme>
         </config>
@@ -17,468 +22,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6c6dd87-a8a5-43a2-b0ff-dda637f527e8" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\.idea\libraries\Gradle__android_support_v4.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\.idea\libraries\Gradle__support_v4_18_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\.idea\libraries\android_support_v4.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\.idea\scopes\scope_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\generated\source\r\debug\android\support\v7\appcompat\R.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\aidl\debug\inputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\aidl\debug\outputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\aidl\release\dependency.store" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\aidl\release\inputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\aidl\release\outputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\dex\debug\inputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\dex\debug\outputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\dex\release\inputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\dex\release\outputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeAssets\debug\inputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeAssets\debug\outputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeAssets\release\inputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeAssets\release\merger.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeAssets\release\outputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeResources\debug\inputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeResources\debug\outputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeResources\release\inputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeResources\release\merger.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\incremental\mergeResources\release\outputs.data" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\pre-dexed\debug\classes-8981495eea41057dc3eae07d85b090028c5701df.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\pre-dexed\debug\classes-93e17bef0df6f6eda0c39080693aec00df3cb3e2.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-32fc208122b798f563a93e9a55ce6993fe4a3aff.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-b355c5c12c770cb14d11d789a5f51931f89f84a1.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\anim\abc_fade_in.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\anim\abc_fade_out.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\anim\abc_slide_in_bottom.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\anim\abc_slide_in_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\anim\abc_slide_out_bottom.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\anim\abc_slide_out_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\color\abc_search_url_text_holo.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_bottom_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_bottom_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_bottom_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_bottom_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_share_pack_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_share_pack_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_stacked_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_stacked_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_stacked_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_stacked_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ab_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_cab_background_bottom_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_cab_background_bottom_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_cab_background_top_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_cab_background_top_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_ab_back_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_ab_back_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_cab_done_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_cab_done_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_clear_disabled.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_clear_normal.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_clear_search_api_disabled_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_clear_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_commit_search_api_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_commit_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_go.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_go_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_moreoverflow_normal_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_moreoverflow_normal_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_share_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_menu_share_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_voice_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_ic_voice_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_divider_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_divider_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_longpressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_menu_dropdown_panel_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_menu_dropdown_panel_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_menu_hardkey_panel_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_menu_hardkey_panel_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_ab_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_ab_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_ab_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_ab_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_ab_focused_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_ab_focused_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_ab_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_spinner_ab_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_tab_selected_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_tab_selected_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_tab_selected_pressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_tab_unselected_pressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_right_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_right_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_right_selected_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_right_selected_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_selected_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-hdpi-v4\abc_textfield_search_selected_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_bottom_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_bottom_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_bottom_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_bottom_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_share_pack_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_share_pack_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_stacked_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_stacked_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_stacked_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_stacked_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ab_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_cab_background_bottom_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_cab_background_bottom_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_cab_background_top_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_cab_background_top_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_ab_back_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_ab_back_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_cab_done_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_cab_done_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_clear_disabled.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_clear_normal.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_clear_search_api_disabled_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_clear_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_commit_search_api_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_commit_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_go.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_go_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_moreoverflow_normal_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_moreoverflow_normal_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_share_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_menu_share_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_voice_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_ic_voice_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_divider_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_divider_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_longpressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_menu_dropdown_panel_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_menu_dropdown_panel_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_menu_hardkey_panel_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_menu_hardkey_panel_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_ab_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_ab_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_ab_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_ab_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_ab_focused_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_ab_focused_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_ab_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_spinner_ab_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_tab_selected_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_tab_selected_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_tab_selected_pressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_tab_unselected_pressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_right_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_right_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_right_selected_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_right_selected_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_selected_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-mdpi-v4\abc_textfield_search_selected_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_bottom_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_bottom_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_bottom_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_bottom_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_share_pack_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_share_pack_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_stacked_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_stacked_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_stacked_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_stacked_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ab_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_cab_background_bottom_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_cab_background_bottom_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_cab_background_top_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_cab_background_top_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_ab_back_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_ab_back_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_cab_done_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_cab_done_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_clear_disabled.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_clear_normal.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_clear_search_api_disabled_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_clear_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_commit_search_api_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_commit_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_go.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_go_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_moreoverflow_normal_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_moreoverflow_normal_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_share_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_menu_share_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_voice_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_ic_voice_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_divider_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_divider_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_longpressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_menu_dropdown_panel_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_menu_dropdown_panel_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_menu_hardkey_panel_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_menu_hardkey_panel_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_ab_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_ab_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_ab_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_ab_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_ab_focused_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_ab_focused_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_ab_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_spinner_ab_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_tab_selected_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_tab_selected_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_tab_selected_pressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_tab_unselected_pressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_right_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_right_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_right_selected_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_right_selected_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_selected_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xhdpi-v4\abc_textfield_search_selected_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_bottom_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_bottom_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_bottom_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_bottom_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_share_pack_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_share_pack_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_stacked_solid_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_stacked_solid_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_stacked_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_stacked_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_transparent_dark_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ab_transparent_light_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_cab_background_bottom_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_cab_background_bottom_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_cab_background_top_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_cab_background_top_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_ab_back_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_ab_back_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_cab_done_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_cab_done_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_clear_disabled.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_clear_normal.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_clear_search_api_disabled_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_clear_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_commit_search_api_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_commit_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_go.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_go_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_moreoverflow_normal_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_moreoverflow_normal_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_share_holo_dark.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_menu_share_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_voice_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_ic_voice_search_api_holo_light.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_divider_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_divider_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_longpressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_menu_dropdown_panel_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_menu_dropdown_panel_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_menu_hardkey_panel_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_menu_hardkey_panel_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_ab_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_ab_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_ab_disabled_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_ab_disabled_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_ab_focused_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_ab_focused_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_ab_pressed_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_spinner_ab_pressed_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_tab_selected_focused_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_tab_selected_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_tab_selected_pressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_tab_unselected_pressed_holo.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_right_default_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_right_default_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_right_selected_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_right_selected_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_selected_holo_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable-xxhdpi-v4\abc_textfield_search_selected_holo_light.9.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_ic_clear.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_ic_clear_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_item_background_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_item_background_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_list_selector_background_transition_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_list_selector_background_transition_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_list_selector_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_list_selector_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_search_dropdown_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_search_dropdown_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_spinner_ab_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_spinner_ab_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_tab_indicator_ab_holo.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_textfield_searchview_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_textfield_searchview_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_textfield_searchview_right_holo_dark.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\drawable\abc_textfield_searchview_right_holo_light.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout-v11\abc_action_bar_decor.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout-v11\abc_simple_decor.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout-v14\abc_activity_chooser_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_bar_decor.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_bar_decor_include.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_bar_decor_overlay.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_bar_home.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_bar_tab.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_bar_tabbar.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_bar_title_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_bar_view_list_nav_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_menu_item_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_menu_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_mode_bar.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_action_mode_close_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_activity_chooser_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_activity_chooser_view_include.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_activity_chooser_view_list_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_expanded_menu_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_list_menu_item_checkbox.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_list_menu_item_icon.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_list_menu_item_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_list_menu_item_radio.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_popup_menu_item_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_search_dropdown_item_icons_2line.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_search_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\abc_simple_decor.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\layout\support_simple_spinner_dropdown_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-af\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-am\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-ar\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-bg\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-ca\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-cs\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-da\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-de\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-el\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-en-rGB\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-en-rIN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-es-rUS\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-es\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-et-rEE\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-fa\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-fi\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-fr-rCA\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-fr\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-hi\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-hr\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-hu\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-hy-rAM\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-in\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-it\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-iw\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-ja\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-ka-rGE\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-km-rKH\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-ko\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-land\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-large-v14\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-large-v4\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-lo-rLA\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-lt\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-lv\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-mn-rMN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-ms-rMY\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-nb\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-nl\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-pl\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-pt-rPT\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-pt\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-ro\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-ru\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-sk\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-sl\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-sr\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-sv\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-sw600dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-sw\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-th\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-tl\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-tr\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-uk\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-vi\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-w360dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-w480dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-w500dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-w600dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-w720dp-v13\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-xlarge-v4\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-zh-rCN\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-zh-rHK\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-zh-rTW\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\intermediates\res\debug\values-zu\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\javaResources\release\com\bignis\prestocookbook\RecipeExample.txt" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\manifests\release\AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\pre-dexed\debug\android-support-v4-82fbe0b9bac87332d23c19a0f3c80626f31a3628.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\pre-dexed\debug\support-v4-18.0.0-5fe51c4ff39f65ae08ee2952f22670d94d185756.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\debug\layout\activity_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\drawable-hdpi\ic_action_search.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\drawable-hdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\drawable-ldpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\drawable-mdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\drawable-xhdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\layout\activity_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\layout\activity_recipes_list.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\menu\activity_main.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\menu\activity_recipes_list.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\values-v11\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\values-v14\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\res\all\release\values\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\source\buildConfig\release\com\bignis\prestocookbook\BuildConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\build\source\r\release\com\bignis\prestocookbook\R.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/pre-dexed/debug/support-v4-18.0.0-35d98a6fc02599dfc6461d70ba4eb98e62e8f5f9.jar" afterPath="$PROJECT_DIR$/build/intermediates/pre-dexed/debug/support-v4-18.0.0-35d98a6fc02599dfc6461d70ba4eb98e62e8f5f9.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PrestoCookbook.iml" afterPath="$PROJECT_DIR$/PrestoCookbook.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java" afterPath="$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/source/r/debug/com/bignis/prestocookbook/R.java" afterPath="$PROJECT_DIR$/build/generated/source/r/debug/com/bignis/prestocookbook/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/incremental/mergeAssets/debug/merger.xml" afterPath="$PROJECT_DIR$/build/intermediates/incremental/mergeAssets/debug/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bignis/prestocookbook/Recipe.java" afterPath="$PROJECT_DIR$/src/com/bignis/prestocookbook/Recipe.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/activity_recipes_list.xml" afterPath="$PROJECT_DIR$/res/menu/activity_recipes_list.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\Code\Presto Recipes Android\PrestoCookbook\res\menu\activity_main.xml" afterPath="$PROJECT_DIR$/res/menu/activity_display_recipe.xml" />
     </list>
     <ignored path="PrestoCookbook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -507,42 +57,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/menu/activity_main.xml">
+      <file leaf-file-name="DisplayRecipeActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47304347">
-              <caret line="34" column="61" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.6474227">
+              <caret line="172" column="28" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
               <folding>
-                <element signature="e#738#756#0" expanded="true" />
+                <element signature="e#3624#3681#0" expanded="true" />
+                <element signature="e#3706#3757#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <file leaf-file-name="Recipe.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/Recipe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-27.222221">
-              <caret line="79" column="61" selection-start-line="79" selection-start-column="61" selection-end-line="79" selection-end-column="61" />
+            <state vertical-scroll-proportion="-6.9259257">
+              <caret line="11" column="12" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ic_launcher.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
+      <file leaf-file-name="LoadRecipesActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/LoadRecipesActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="245" column="0" selection-start-line="245" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecipeDBHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/database/RecipeDBHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="22" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecipesListActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipesListActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="367" column="26" selection-start-line="367" selection-start-column="13" selection-end-line="367" selection-end-column="26" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -1345,6 +911,10 @@
       <list>
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/res/menu/activity_recipes_list.xml" />
+        <option value="$PROJECT_DIR$/res/menu/activity_display_recipe.xml" />
+        <option value="$PROJECT_DIR$/src/com/bignis/prestocookbook/Recipe.java" />
+        <option value="$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java" />
       </list>
     </option>
   </component>
@@ -1766,16 +1336,17 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32925472" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39933258" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1785,7 +1356,6 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1796,37 +1366,129 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java</url>
+          <line>209</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java</url>
+          <line>324</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="6" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PrestoCookbook">
+        <watch expression="xmlFileUri.getLastPathSegment()" language="JAVA" custom="" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/menu/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-27.222221">
-          <caret line="79" column="61" selection-start-line="79" selection-start-column="61" selection-end-line="79" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_display_recipe.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5862069">
+          <caret line="1" column="3" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47304347">
-          <caret line="34" column="61" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="79" selection-start-line="42" selection-start-column="79" selection-end-line="42" selection-end-column="79" />
           <folding>
             <element signature="e#738#756#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8214285">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/activity_display_recipe.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/activity_recipes_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/database/RecipeDBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipeParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3321739">
+          <caret line="162" column="28" selection-start-line="162" selection-start-column="28" selection-end-line="162" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/RecipesListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="367" column="26" selection-start-line="367" selection-start-column="13" selection-end-line="367" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/Recipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.9259257">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/LoadRecipesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="245" column="0" selection-start-line="245" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bignis/prestocookbook/DisplayRecipeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6474227">
+          <caret line="172" column="28" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
+          <folding>
+            <element signature="e#3624#3681#0" expanded="true" />
+            <element signature="e#3706#3757#0" expanded="true" />
           </folding>
         </state>
       </provider>

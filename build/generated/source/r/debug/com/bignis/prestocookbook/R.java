@@ -41,9 +41,9 @@ public final class R {
         public static final int ingredientsContentLayout=0x7f090003;
         public static final int linearLayoutMgn=0x7f090007;
         public static final int listview=0x7f090006;
+        public static final int menu_email_recipe=0x7f09000b;
         public static final int menu_load_recipes=0x7f09000c;
         public static final int menu_reset_database=0x7f09000d;
-        public static final int menu_settings=0x7f09000b;
         public static final int noRecipesFoundFromSearchMessage=0x7f090009;
         public static final int noRecipesInDatabaseMessage=0x7f090008;
         public static final int recipeContentLayout=0x7f090001;
@@ -58,7 +58,7 @@ public final class R {
         public static final int fragment_load_recipes=0x7f030003;
     }
     public static final class menu {
-        public static final int activity_main=0x7f080000;
+        public static final int activity_display_recipe=0x7f080000;
         public static final int activity_recipes_list=0x7f080001;
         public static final int load_recipes=0x7f080002;
     }
