@@ -31,8 +31,10 @@
         </activity>
         <activity
             android:name="com.bignis.prestocookbook.RecipesListActivity"
-            android:label="@string/title_activity_recipes_list" >
-            <intent-filter>
+            android:label="Presto Recipes - Recipes List" >
+            <intent-filter android:label="Presto Recipes" >
+
+                <!-- above label is the Android App title -->
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
