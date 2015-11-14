@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.DatabaseUtils;
 import android.net.Uri;
+import android.support.v4.content.FileProvider;
 import android.text.InputType;
 import android.view.MenuItem;
 import android.view.ViewGroup.LayoutParams;
@@ -211,7 +212,8 @@ public class DisplayRecipeActivity extends Activity {
 				}
 
 				if (zipFile != null) {
-					Uri uri = Uri.parse("file://" + zipFile);
+
+					Uri uri = Uri.fromFile(zipFile);
 					intent.putExtra(Intent.EXTRA_STREAM, uri);
 				}
 
@@ -272,8 +274,8 @@ public class DisplayRecipeActivity extends Activity {
 		String zipFileName = xmlFileUri.getLastPathSegment();
 		zipFileName = zipFileName.substring(0, zipFileName.length() - 4);  // Remove .xml (probably unsafe to assume this, but meh)
 
-		File zipFile = File.createTempFile(zipFileName, "presto", this.getApplicationContext().getCacheDir());
-
+		File zipFile = new File(folder.getPath() + "/" + zipFileName + ".presto");
+		zipFile.setReadable(true, false);  // mimic world_readable
 
 
 		FileOutputStream fos = new FileOutputStream(zipFile);
@@ -321,6 +323,8 @@ public class DisplayRecipeActivity extends Activity {
 		} finally {
 			zos.close();
 		}
+
+		long length = zipFile.length();
 
 		return zipFile;
 	}
