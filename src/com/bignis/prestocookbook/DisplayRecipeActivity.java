@@ -8,6 +8,7 @@ import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.support.v4.content.FileProvider;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.ViewGroup.LayoutParams;
 import android.os.Bundle;
@@ -121,9 +122,10 @@ public class DisplayRecipeActivity extends Activity {
     	LinearLayout ingredientsLayout = (LinearLayout)this.findViewById(R.id.ingredientsContentLayout);
     	LinearLayout stepsLayout = (LinearLayout)this.findViewById(R.id.stepsContentLayout);
     	//style="@android:style/TextAppearance.Medium"
-    	
-    	
-    	
+
+
+
+		float titleSize = this.getResources().getDimension(R.dimen.TitleSize);
     	float ingredientsSize = this.getResources().getDimension(R.dimen.IngredientsSize);
     	float stepsSize = this.getResources().getDimension(R.dimen.StepsSize);
     	
@@ -131,6 +133,8 @@ public class DisplayRecipeActivity extends Activity {
     	
     	TextView titleTextView = (TextView)this.findViewById(R.id.titleTextView);
     	titleTextView.setText(recipe.Title);
+		titleTextView.setTextSize(titleSize);
+
     	
     	for (int i = 0; i < recipe.Ingredients.size(); ++i)
     	{
@@ -165,6 +169,18 @@ public class DisplayRecipeActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_display_recipe, menu);
         return true;
     }
+
+	private static Uri getUriForRecipe(Recipe recipe) {
+		android.net.Uri.Builder builder = new android.net.Uri.Builder();
+		builder.scheme("http");
+		builder.authority("presto.bignis.com");
+
+		builder.appendQueryParameter("title", recipe.Title);
+		builder.appendQueryParameter("ingredients", TextUtils.join("||", recipe.Ingredients));
+		builder.appendQueryParameter("steps", TextUtils.join("||", recipe.Steps));
+
+		return builder.build();
+	}
 
 	private static String getEmailBodyForRecipe(Recipe recipe) {
 
@@ -217,9 +233,36 @@ public class DisplayRecipeActivity extends Activity {
 					intent.putExtra(Intent.EXTRA_STREAM, uri);
 				}
 
-				startActivity(Intent.createChooser(intent, ""));
+				startActivity(Intent.createChooser(intent, "Choose email program"));
 			}
+			case R.id.menu_edit_recipe:
+			{
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(getUriForRecipe(_recipe));
+				startActivity(Intent.createChooser(intent, "Choose Web Browser"));
+			}
+			case R.id.menu_delete_recipe:
+			{
 
+				new AlertDialog.Builder(this)
+						.setMessage("Are you sure you want to delete this recipe?")
+						.setCancelable(true)
+						.setPositiveButton("Delete This Recipe", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// http://stackoverflow.com/a/5447120/5198
+								Context context = DisplayRecipeActivity.this.getApplicationContext();
+
+								RecipeDBHelper dbHelper = new RecipeDBHelper(context);
+
+								SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+								implenment this mike
+							}
+						})
+						.setNegativeButton("Cancel", null)
+						.show();
+			}
 
 			default:
 				return super.onOptionsItemSelected(item);

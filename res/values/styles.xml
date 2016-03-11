@@ -28,6 +28,7 @@
     <!-- mgn http://stackoverflow.com/questions/12395381/android-actionbar-navigation-spinner-text-color -->
     <style name="YourCustomDropDownItemTextStyle" parent="@android:style/Widget">
     	<item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">20sp</item> <!-- mgn this affects the size of the thing you tap on, not the part that drops down -->
     	<!-- Here you can set the color and other text attributes -->
 	</style>
     

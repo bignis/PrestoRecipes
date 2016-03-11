@@ -15,6 +15,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -64,12 +65,15 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 		
 		if (convertView != null)
 		{
-			// Never reuse, but this might kill performance
+			// Never reuse, but this might kill performance...
 			//return convertView;
 		}
 		
 		final int textWidth = 300;
-		final int textHeight = 70;
+		final int textHeightPixels = 70;
+
+		//http://stackoverflow.com/questions/5255184/android-and-setting-width-and-height-programmatically-in-dp-units
+		final int textHeightSP = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, textHeightPixels, arg2.getResources().getDisplayMetrics());
 		
 		RelativeLayout layout = new RelativeLayout(_context);
 
@@ -83,30 +87,31 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 		
 		// Not every recipe has an image
 		if (recipeImage.drawable != null)
-		{	
+		{
 			//layout.setBackgroundDrawable(recipeImage.drawable);
 	//		layout.setLayoutParams(new RelativeLayout.LayoutParams(recipeImage.drawable.getIntrinsicWidth(), recipeImage.drawable.getIntrinsicHeight()));
-			
-			
+
+
 			ImageView imageView = new ImageView(this._context);
 			imageView.setId(1);  // just picked a number
 			Drawable drawable = recipeImage.drawable;
 			LayoutParams params = new LayoutParams(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 			imageView.setLayoutParams(params);
-			
+
 			imageView.setImageDrawable(drawable);
-			
+
 			layout.addView(imageView);
-			
+
 		}
-		
+
 		TextView textView = new TextView(this._context);
 		textView.setText(recipeImage.title);
 		textView.setTextColor(0xFFFFFFFF);
 		textView.setWidth(textWidth);
-		textView.setHeight(textHeight);
+		textView.setHeight(textHeightSP);
 		textView.setPadding(20, 20, 20, 20);
 		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+		textView.setGravity(Gravity.CENTER_VERTICAL);
 		textView.setBackgroundColor(0x66000000);  // FF at the beginning means fully opaque
 		
 
