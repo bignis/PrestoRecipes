@@ -8,6 +8,7 @@ import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.support.v4.content.FileProvider;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.ViewGroup.LayoutParams;
 import android.os.Bundle;
@@ -169,6 +170,18 @@ public class DisplayRecipeActivity extends Activity {
         return true;
     }
 
+	private static Uri getUriForRecipe(Recipe recipe) {
+		android.net.Uri.Builder builder = new android.net.Uri.Builder();
+		builder.scheme("http");
+		builder.authority("presto.bignis.com");
+
+		builder.appendQueryParameter("title", recipe.Title);
+		builder.appendQueryParameter("ingredients", TextUtils.join("||", recipe.Ingredients));
+		builder.appendQueryParameter("steps", TextUtils.join("||", recipe.Steps));
+
+		return builder.build();
+	}
+
 	private static String getEmailBodyForRecipe(Recipe recipe) {
 
 		StringBuilder builder = new StringBuilder();
@@ -220,7 +233,13 @@ public class DisplayRecipeActivity extends Activity {
 					intent.putExtra(Intent.EXTRA_STREAM, uri);
 				}
 
-				startActivity(Intent.createChooser(intent, ""));
+				startActivity(Intent.createChooser(intent, "Choose email program"));
+			}
+			case R.id.menu_edit_recipe:
+			{
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(getUriForRecipe(_recipe));
+				startActivity(Intent.createChooser(intent, "Choose Web Browser"));
 			}
 
 
