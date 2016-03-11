@@ -121,9 +121,10 @@ public class DisplayRecipeActivity extends Activity {
     	LinearLayout ingredientsLayout = (LinearLayout)this.findViewById(R.id.ingredientsContentLayout);
     	LinearLayout stepsLayout = (LinearLayout)this.findViewById(R.id.stepsContentLayout);
     	//style="@android:style/TextAppearance.Medium"
-    	
-    	
-    	
+
+
+
+		float titleSize = this.getResources().getDimension(R.dimen.TitleSize);
     	float ingredientsSize = this.getResources().getDimension(R.dimen.IngredientsSize);
     	float stepsSize = this.getResources().getDimension(R.dimen.StepsSize);
     	
@@ -131,6 +132,8 @@ public class DisplayRecipeActivity extends Activity {
     	
     	TextView titleTextView = (TextView)this.findViewById(R.id.titleTextView);
     	titleTextView.setText(recipe.Title);
+		titleTextView.setTextSize(titleSize);
+
     	
     	for (int i = 0; i < recipe.Ingredients.size(); ++i)
     	{

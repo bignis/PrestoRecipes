@@ -172,7 +172,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
         }
         
         Spinner spinner = (Spinner)spinnerMenuItem.getActionView();
-        
+
         //int spinnerLayoutType = android.R.layout.simple_list_item_1;
         int spinnerLayoutType = android.R.layout.simple_spinner_dropdown_item;
         ArrayAdapter<CharSequence> categoriesAdapter = new ArrayAdapter<CharSequence>(this, spinnerLayoutType, availableCategories);

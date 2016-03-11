@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="TitleSize">40dp</dimen>
-    <dimen name="IngredientsSize">35dp</dimen>
-    <dimen name="StepsSize">30dp</dimen>
+    <!-- These values look good on a Nexus 7 -->
+    <dimen name="TitleSize">20sp</dimen>
+    <dimen name="IngredientsSize">17sp</dimen>
+    <dimen name="StepsSize">14sp</dimen>
 </resources>
