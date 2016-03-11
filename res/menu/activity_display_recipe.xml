@@ -2,5 +2,6 @@
 
     <item android:id="@+id/menu_edit_recipe" android:title="Edit this Recipe" android:icon="@drawable/ic_menu_edit" android:showAsAction="never" />
     <item android:id="@+id/menu_email_recipe" android:title="Email Recipe" android:showAsAction="never" />
+    <item android:id="@+id/menu_delete_recipe" android:title="Delete Recipe" android:showAsAction="never" />
 
 </menu>

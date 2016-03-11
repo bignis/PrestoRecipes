@@ -241,7 +241,28 @@ public class DisplayRecipeActivity extends Activity {
 				intent.setData(getUriForRecipe(_recipe));
 				startActivity(Intent.createChooser(intent, "Choose Web Browser"));
 			}
+			case R.id.menu_delete_recipe:
+			{
 
+				new AlertDialog.Builder(this)
+						.setMessage("Are you sure you want to delete this recipe?")
+						.setCancelable(true)
+						.setPositiveButton("Delete This Recipe", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// http://stackoverflow.com/a/5447120/5198
+								Context context = DisplayRecipeActivity.this.getApplicationContext();
+
+								RecipeDBHelper dbHelper = new RecipeDBHelper(context);
+
+								SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+								implenment this mike
+							}
+						})
+						.setNegativeButton("Cancel", null)
+						.show();
+			}
 
 			default:
 				return super.onOptionsItemSelected(item);
