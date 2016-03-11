@@ -53,7 +53,8 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
         }
 
 
-		this.PopulateRecipes(); //  Get all recipes
+		// Spinner.OnItemSelected will call PopulateRecipes, so this one can be removed
+		//this.PopulateRecipes(); //  Get all recipes
 	}
 	
 	public void PopulateRecipes()
@@ -114,7 +115,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 			}
 			
 			int recipeId = (Integer)tag;
-			
+
 			Intent intent = new Intent(this._activity, DisplayRecipeActivity.class);
 			intent.putExtra(RECIPE_ID, recipeId);
 			this._activity.startActivity(intent);
@@ -207,7 +208,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	    }
 	    case R.id.menu_reset_database:
 	    {
-	    	
+
 	    	/*
 	    	new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)

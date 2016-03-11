@@ -5,6 +5,7 @@ import com.bignis.prestocookbook.database.RecipeDBHelper;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
 import android.support.v4.content.FileProvider;
 import android.text.InputType;
@@ -100,7 +101,7 @@ public class DisplayRecipeActivity extends Activity {
 		
 		dbHelper.close();
 		
-		return RecipeParser.ParseFromXmlString(xml);	
+		return RecipeParser.ParseFromXmlString(xml);
     }
     
     private void displayRecipe(Recipe recipe)
@@ -257,7 +258,20 @@ public class DisplayRecipeActivity extends Activity {
 
 								SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-								implenment this mike
+								SQLiteStatement delete = db.compileStatement("DELETE FROM Recipes WHERE ID = ?");
+								delete.bindLong(1, DisplayRecipeActivity.this._recipeId);
+
+								int rowsAffected = delete.executeUpdateDelete();
+
+								db.close();
+								dbHelper.close();
+
+								Toast.makeText(DisplayRecipeActivity.this, "Recipe Deleted", Toast.LENGTH_SHORT).show();
+
+								// Go back to the recipes list
+								Intent intent = new Intent(DisplayRecipeActivity.this, RecipesListActivity.class);
+								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								startActivity(intent);
 							}
 						})
 						.setNegativeButton("Cancel", null)
