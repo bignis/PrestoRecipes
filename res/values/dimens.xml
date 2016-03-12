@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- These values look good on a Nexus 7 -->
+<!--
     <dimen name="TitleSize">20sp</dimen>
     <dimen name="IngredientsSize">17sp</dimen>
     <dimen name="StepsSize">14sp</dimen>
+-->
+    <!-- These values look good on Asus -->
+    <!--
+    <dimen name="TitleSize">40sp</dimen>
+    <dimen name="IngredientsSize">34sp</dimen>
+    <dimen name="StepsSize">28sp</dimen>
+    -->
+
+    <!-- For some crazy reason, setting the unit to PX (I know I know) is the only way to get it to look decent across devices I have  -->
+    <dimen name="TitleSize">40px</dimen>
+    <dimen name="IngredientsSize">34px</dimen>
+    <dimen name="StepsSize">28px</dimen>
+    <dimen name="DescriptionSize">20px</dimen>
+    <dimen name="YieldSize">20px</dimen>
+    <dimen name="SourceSize">16px</dimen>
+
 </resources>

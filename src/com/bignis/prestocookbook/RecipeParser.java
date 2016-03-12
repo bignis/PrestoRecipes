@@ -33,6 +33,8 @@ public class RecipeParser {
       </categories>
       <yield>8</yield>
     </head>
+    <description>Mgn <!ELEMENT recipe (head, description*, equipment?, ingredients, directions,
+  nutrition?, diet-exchanges?)></description>
     <ingredients>
       <ing>
         <amt>
@@ -170,6 +172,10 @@ public class RecipeParser {
     	{
     		throw new RuntimeException("Recipe title not found in xml content");
     	}
+
+        recipe.Description = xpath.evaluate("/recipeml/recipe/head/description", document);
+        recipe.Source = xpath.evaluate("/recipeml/recipe/head/source", document);
+        recipe.Yield = xpath.evaluate("/recipeml/recipe/head/yield", document);
     	
     	recipe.Category = xpath.evaluate("/recipeml/recipe/head/categories/cat", document);
     		

@@ -24,8 +24,24 @@
        		    android:layout_width="wrap_content"
        		    android:layout_height="wrap_content"
        		    android:text="Title Placeholder"
-       		    android:textSize="40sp"
+       		    android:textSize="@dimen/TitleSize"
        		     />
+
+			<TextView
+				android:id="@+id/descriptionTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Description Placeholder"
+				android:textSize="@dimen/DescriptionSize"
+				/>
+
+			<TextView
+				android:id="@+id/yieldTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Yield Placeholder"
+				android:textSize="@dimen/YieldSize"
+				/>
 
        	    <LinearLayout
        	    android:id="@+id/ingredientsContentLayout"
@@ -43,7 +59,15 @@
 	        android:layout_margin="20dp">
 
 	        </LinearLayout>
-       	    
+
+			<TextView
+				android:id="@+id/sourceTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Source Placeholder"
+				android:textSize="@dimen/SourceSize"
+				/>
+
        	</LinearLayout>
        
        

@@ -10,7 +10,10 @@ import android.net.Uri;
 import android.support.v4.content.FileProvider;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.transition.Visibility;
+import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.os.Bundle;
 import android.app.Activity;
@@ -129,14 +132,31 @@ public class DisplayRecipeActivity extends Activity {
 		float titleSize = this.getResources().getDimension(R.dimen.TitleSize);
     	float ingredientsSize = this.getResources().getDimension(R.dimen.IngredientsSize);
     	float stepsSize = this.getResources().getDimension(R.dimen.StepsSize);
-    	
+
     	// Body
     	
     	TextView titleTextView = (TextView)this.findViewById(R.id.titleTextView);
     	titleTextView.setText(recipe.Title);
 		titleTextView.setTextSize(titleSize);
 
-    	
+		//http://www.formatdata.com/recipeml/spec/recipeml-spec.html
+		//In the rendition of a RecipeML document, a description traditionaly appears following the title and before the body.
+		if (recipe.Description != null && recipe.Description.trim().length() != 0) {
+			((TextView)this.findViewById(R.id.descriptionTextView)).setText(recipe.Description);
+		}
+		else
+		{
+			this.findViewById(R.id.descriptionTextView).setVisibility(View.GONE);
+		}
+
+		if (recipe.Yield != null && recipe.Yield.trim().length() != 0) {
+			((TextView)this.findViewById(R.id.yieldTextView)).setText(recipe.Yield);
+		}
+		else
+		{
+			this.findViewById(R.id.yieldTextView).setVisibility(View.GONE);
+		}
+
     	for (int i = 0; i < recipe.Ingredients.size(); ++i)
     	{
     		TextView ingredient = new TextView(this);
@@ -162,6 +182,17 @@ public class DisplayRecipeActivity extends Activity {
         	step.setTextSize(stepsSize);
         	//step.setTextAppearance(this, android.R.style.TextAppearance_Medium);
     	}
+
+		//http://www.formatdata.com/recipeml/spec/recipeml-spec.html
+		//The source element contains credit or source information for the recipe. If displayed as part of the rendered output of the RecipeML document (see rendering), the content normally appears as a footnote.
+
+		if (recipe.Source != null && recipe.Source.trim().length() != 0) {
+			((TextView)this.findViewById(R.id.sourceTextView)).setText("Source: " + recipe.Source);
+		}
+		else
+		{
+			this.findViewById(R.id.sourceTextView).setVisibility(View.GONE);
+		}
     }
 
     @Override
@@ -177,6 +208,9 @@ public class DisplayRecipeActivity extends Activity {
 		builder.authority("presto.bignis.com");
 
 		builder.appendQueryParameter("title", recipe.Title);
+		builder.appendQueryParameter("category", recipe.Category);
+		builder.appendQueryParameter("source", recipe.Source);
+		builder.appendQueryParameter("yield", recipe.Yield);
 		builder.appendQueryParameter("ingredients", TextUtils.join("||", recipe.Ingredients));
 		builder.appendQueryParameter("steps", TextUtils.join("||", recipe.Steps));
 
