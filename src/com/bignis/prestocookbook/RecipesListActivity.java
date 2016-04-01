@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -126,7 +127,42 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	
 	
 	public boolean onQueryTextChange(String newText) {
-		
+
+		if ("version".equalsIgnoreCase(newText)) {
+			new AlertDialog.Builder(this)
+					.setTitle("Version of Presto Recipes")
+					.setMessage("Version " + this.getString(R.string.current_version))
+					.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							// Nothing to do, alert will just close.
+						}
+					})
+					.setIcon(android.R.drawable.ic_dialog_info)
+					.show();
+
+			return false;
+		}
+
+		if ("reset".equalsIgnoreCase(newText)) {
+			new AlertDialog.Builder(this)
+					.setTitle("Reset All Recipes")
+					.setMessage("Are you sure you want to delete all recipes?")
+					.setPositiveButton("Delete Everything", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							resetDatabase();
+						}
+					})
+					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							// do nothing
+						}
+					})
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.show();
+
+			return false;
+		}
+
 		this.currentSearchQuery = newText;
 		
 		PopulateRecipes();
@@ -201,52 +237,46 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
-	    case R.id.menu_load_recipes:
-	    {
-	    	new RecipesLoaderTask(this).execute();	    	
-	        return true;
-	    }
-	    case R.id.menu_reset_database:
-	    {
+			case R.id.menu_load_recipes:
+			{
+				/* Old behavior
+				new RecipesLoaderTask(this).execute();
+				return true;
+				*/
+				android.net.Uri.Builder builder = new android.net.Uri.Builder();
+				builder.scheme("http");
+				builder.authority("presto.bignis.com");
 
-	    	/*
-	    	new AlertDialog.Builder(this)
-	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("All your data will be lost")
-	        .setMessage("Are you sure you want to reset?")
-	        .setPositiveButton("Delete it all!", new DialogInterface.OnClickListener() {
+				builder.appendQueryParameter("fromApp", "true");
 
-	            @Override
-	            public void onClick(DialogInterface dialog, int which) {
-
-	                //Stop the activity
-	                YourClass.this.finish();    
-	            }
-
-	        })
-	        .setNegativeButton(R.string.no, null)
-	        .show();
-	    	*/
-	    	RecipeDBHelper dbHelper = new RecipeDBHelper(this);
-	    	SQLiteDatabase db = dbHelper.getWritableDatabase();
-	    	dbHelper.onUpgrade(db, 1, 1);  // Triggers drop / recreate
-	    	db.close();
-	    	dbHelper.close();
-	    	
-	    	Toast.makeText(this, "Database has been reset", Toast.LENGTH_SHORT).show();
-	    	
-	    	// Reset selections
-	    	this.currentSearchQuery = null;
-	    	this.currentCategorySelection = null;
-	    	
-	    	this.PopulateRecipes();
-	    	return true;
-	    }
-	    	
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(builder.build());
+				startActivity(Intent.createChooser(intent, "Choose Web Browser"));
+				return true;
+			}
 	    
-	    default:
-	        return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
 	    }
+	}
+
+	private void resetDatabase() {
+		RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		dbHelper.onUpgrade(db, 1, 1);  // Triggers drop / recreate
+		db.close();
+		dbHelper.close();
+
+		Toast.makeText(this, "Database has been reset", Toast.LENGTH_SHORT).show();
+
+		// This seems like a good thing to do
+		new RecipesLoaderTask(this).execute();
+
+		// Reset selections
+		this.currentSearchQuery = null;
+		this.currentCategorySelection = null;
+
+		this.PopulateRecipes();
 	}
 	
 	private String[] GetAvailableCategoriesFromRecipes()
@@ -257,7 +287,7 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		
-		String query = "SELECT DISTINCT Category FROM Recipes ORDER BY Category";
+		String query = "SELECT DISTINCT Category FROM Recipes WHERE length(Category) > 0 ORDER BY Category";
 		
 		Cursor cursor = db.rawQuery(query, null);
 		

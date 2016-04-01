@@ -1,0 +1,30 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context="com.bignis.prestocookbook.LoadRecipesActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="Load These Recipes" android:onClick="loadRecipesClick" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="Cancel" android:onClick="cancelClick" />
+    </LinearLayout>
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+<!-- From: file:/D:/Dropbox/Code/Presto%20Recipes%20Android/PrestoCookbook/res/layout/activity_load_recipes.xml -->

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayoutMgn"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal" >
 
     <TextView
@@ -10,8 +10,9 @@
 		android:layout_width="fill_parent"  
 		android:layout_height="fill_parent"
 		android:gravity="center"
-        android:text="No Recipes Have Been Loaded\n\nUse the &quot;Load Recipes&quot; Menu Option in the upper right corner of the screen"
-        android:visibility="gone"
+        android:text="@string/no_recipes_message"
+        android:padding="50px"
+        android:visibility="visible"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -20,7 +21,7 @@
 		android:layout_height="fill_parent"
 		android:gravity="center"
         android:text="No Recipes Found Matching Your Search"
-        android:visibility="visible"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceLarge" />
      
          <GridView android:id="@+id/gridView1" 

@@ -3,9 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.bignis.prestocookbook.LoadRecipesActivity" >
     
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        />
-    <!-- mike removed this upon updating Android Studio to 1.02  app:showAsAction="never"  -->
+    <!-- no menu needed -->
 </menu>

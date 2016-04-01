@@ -1,0 +1,76 @@
+
+   <ScrollView
+       android:id="@+id/scrollView1"
+       android:layout_width="fill_parent"
+       android:layout_height="match_parent"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true"
+       android:keepScreenOn="true"
+       xmlns:android="http://schemas.android.com/apk/res/android"
+   	xmlns:tools="http://schemas.android.com/tools"
+       tools:context=".MainActivity" 
+       >
+       
+       	<LinearLayout
+       	    android:id="@+id/recipeContentLayout"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:layout_margin="20dp"
+	        >
+
+       		<TextView
+       		    android:id="@+id/titleTextView"
+       		    android:layout_width="wrap_content"
+       		    android:layout_height="wrap_content"
+       		    android:text="Title Placeholder"
+       		    android:textSize="@dimen/TitleSize"
+       		     />
+
+			<TextView
+				android:id="@+id/descriptionTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Description Placeholder"
+				android:textSize="@dimen/DescriptionSize"
+				/>
+
+			<TextView
+				android:id="@+id/yieldTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Yield Placeholder"
+				android:textSize="@dimen/YieldSize"
+				/>
+
+       	    <LinearLayout
+       	    android:id="@+id/ingredientsContentLayout"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:layout_margin="20dp"
+	        />
+	        
+     	    <LinearLayout
+       	    android:id="@+id/stepsContentLayout"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:layout_margin="20dp">
+
+	        </LinearLayout>
+
+			<TextView
+				android:id="@+id/sourceTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Source Placeholder"
+				android:textSize="@dimen/SourceSize"
+				/>
+
+       	</LinearLayout>
+       
+       
+
+
+   </ScrollView><!-- From: file:/D:/Dropbox/Code/Presto%20Recipes%20Android/PrestoCookbook/res/layout/activity_display_recipe.xml -->

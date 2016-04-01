@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <!--
+    <item android:id="@+id/menu_reset_database" android:title="Reset Database" android:showAsAction="never" />
+     -->
+
+    <item android:id="@+id/menu_load_recipes"
+        android:title="@string/menu_load_recipes"
+        android:icon="@android:drawable/ic_menu_set_as"
+
+        android:showAsAction="ifRoom|withText" />
+
+
+    <item android:id="@+id/action_category"
+        android:title="Category"
+        android:showAsAction="always|withText"
+        android:actionViewClass="android.widget.Spinner" />
+
+	<item android:id="@+id/action_search"
+          android:title="Search"
+          android:icon="@android:drawable/ic_menu_search"
+          android:showAsAction="always|withText"
+          android:actionViewClass="android.widget.SearchView" />
+
+</menu><!-- From: file:/D:/Dropbox/Code/Presto%20Recipes%20Android/PrestoCookbook/res/menu/activity_recipes_list.xml -->

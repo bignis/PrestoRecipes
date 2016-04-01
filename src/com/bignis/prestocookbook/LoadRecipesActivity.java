@@ -3,7 +3,12 @@ package com.bignis.prestocookbook;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
+import android.provider.OpenableColumns;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -17,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bignis.prestocookbook.database.RecipeDBHelper;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,10 +34,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class LoadRecipesActivity extends Activity {
+
+    private Uri uriFromIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +56,6 @@ public class LoadRecipesActivity extends Activity {
         Arrays.sort(stagedRecipes);
 
         displayListOfStagedRecipes(stagedRecipes);
-
-
-        final Intent intent = getIntent();
-        final String action = intent.getAction();
-
-        //if(Intent.ACTION_VIEW.equals(action)){
     }
 /*
     private void showFakeData()
@@ -76,6 +81,8 @@ public class LoadRecipesActivity extends Activity {
 */
     private StagedRecipe[] getStagedRecipes()
     {
+        int singleRecipeIdBeingReplacedOrZero = getSingleRecipeBeingReplacedIdOrZero();
+
         File[] xmlFiles = RecipesLoader.GetXmlFilesFromStagingFolder();
         File[] imageFiles = RecipesLoader.GetImageFilesFromStagingFolder();
 
@@ -110,9 +117,11 @@ public class LoadRecipesActivity extends Activity {
 
                 StagedRecipe item = new StagedRecipe();
 
+                Recipe recipe;
+
                 try
                 {
-                    Recipe recipe = RecipeParser.ParseFromXmlFile(file.getPath());
+                    recipe = RecipeParser.ParseFromXmlFile(file.getPath());
                     item.RecipeTitle = recipe.Title;
                 }
                 catch (Exception e)
@@ -122,7 +131,13 @@ public class LoadRecipesActivity extends Activity {
                     continue;
                 }
 
-                item.AlreadyExists = new File(RecipesLoader.GetDataFolder() + "/" + file.getName()).exists();
+                if (singleRecipeIdBeingReplacedOrZero != 0) {
+                    item.ReplacesRecipeWithId = singleRecipeIdBeingReplacedOrZero;
+                    item.ReplacesRecipeWithTitle = getRecipeTitleFromDatabase(singleRecipeIdBeingReplacedOrZero);
+                }
+                else if (new File(RecipesLoader.GetDataFolder() + "/" + file.getName()).exists()) {
+                    item.ReplacesRecipeWithTitle = recipe.Title;
+                }
 
                 list.add(item);
             }
@@ -144,13 +159,54 @@ public class LoadRecipesActivity extends Activity {
                 StagedRecipe item = new StagedRecipe();
 
                 item.ImageFileName = file.getName();
-                item.AlreadyExists = new File(RecipesLoader.GetDataFolder() + "/" + file.getName()).exists();
 
                 list.add(item);
             }
         }
 
         return (StagedRecipe[])list.toArray(new StagedRecipe[0]);
+    }
+
+    // Don't think I'm using this method, I've never even tested it
+    private boolean recipeAlreadyExistsInDatabase(int recipeId, SQLiteDatabase db) {
+        // SELECT EXISTS(SELECT 1 FROM myTbl WHERE u_tag="tag" LIMIT 1);
+        String countSql = String.format("SELECT COUNT(*) FROM Recipes WHERE Id = %d",
+                recipeId);
+
+        SQLiteStatement statement = db.compileStatement(countSql);
+        long existingRowCount = statement.simpleQueryForLong();
+
+        return existingRowCount == 1;
+    }
+
+    // Don't think I'm using this method, I've never even tested it
+    private boolean recipeAlreadyExistsInDatabase(String recipeTitle, SQLiteDatabase db) {
+        String countSql = String.format("SELECT COUNT(*) FROM Recipes WHERE Title = %s",
+                DatabaseUtils.sqlEscapeString(recipeTitle));
+
+        SQLiteStatement statement = db.compileStatement(countSql);
+        long existingRowCount = statement.simpleQueryForLong();
+
+        return existingRowCount == 1;
+    }
+
+    private String getRecipeTitleFromDatabase(int recipeId) {
+
+        RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sql = String.format("SELECT Title FROM Recipes WHERE Id = %d",
+                recipeId);
+
+        SQLiteStatement statement = db.compileStatement(sql);
+
+        String recipeTitle = statement.simpleQueryForString();
+
+        db.close();
+        dbHelper.close();
+
+        return recipeTitle;
     }
 
     private void displayListOfStagedRecipes(StagedRecipe[] recipes)
@@ -194,12 +250,15 @@ public class LoadRecipesActivity extends Activity {
             return;
         }
 
-        Uri uri = intent.getData();
+        // First clear the staging folder, don't want other junk from "before" polluting it if we want to just load the from the Presto .zip given to us
+        deleteFilesFromFolder(RecipesLoader.GetStagingFolder());
+
+        this.uriFromIntent = intent.getData();
 
         try
         {
 
-            InputStream attachment = this.getContentResolver().openInputStream(uri);
+            InputStream attachment = this.getContentResolver().openInputStream(this.uriFromIntent);
 
             ZipInputStream zipStream = new ZipInputStream(new BufferedInputStream(attachment));
 
@@ -314,11 +373,65 @@ public class LoadRecipesActivity extends Activity {
     }
 
     public void loadRecipesClick(View v) {
+
         moveRecipeFilesFromStagingIntoDataFolder();
 
         Intent intent = new Intent(this, RecipesListActivity.class);
         intent.putExtra("MGNExtra", "LoadRecipesWhenStarted");
         this.startActivity(intent);
+    }
+
+
+
+    private int getSingleRecipeBeingReplacedIdOrZero() {
+
+        // UriFromIntent will be something like - content://downloads/all_downloads/1564
+
+        String filename = getFileNameFromUri(this.uriFromIntent);
+
+        // filename will be something like 3-edited-Beef stroganoff test mhn.presto
+
+        Pattern pattern = Pattern.compile("(\\d+)-edited");
+        Matcher matcher = pattern.matcher(filename);
+
+        if (!(matcher.find())) {
+            return 0;  // Not found
+        }
+
+        try {
+            String recipeIdString = matcher.group(1);
+
+            return Integer.parseInt(recipeIdString);
+        }
+        catch (Exception ex) {
+            // Do nothing
+        }
+
+        return 0;
+    }
+
+    public String getFileNameFromUri(Uri uri) {
+
+        // http://stackoverflow.com/a/25005243
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
     }
 
     public void cancelClick(View v) {
@@ -333,18 +446,6 @@ public class LoadRecipesActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.load_recipes, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -367,7 +468,10 @@ public class LoadRecipesActivity extends Activity {
     {
         public String RecipeTitle;
         public String ImageFileName; // Null if no image.
-        public Boolean AlreadyExists;
+//@Deprecated
+//public boolean AlreadyExists;
+        public String ReplacesRecipeWithTitle;
+        public int ReplacesRecipeWithId;
 
         @Override
         public int compareTo(StagedRecipe stagedRecipe) {
@@ -427,9 +531,14 @@ public class LoadRecipesActivity extends Activity {
                 displayText += data.ImageFileName;
             }
 
-            if (data.AlreadyExists)
+            if (data.ReplacesRecipeWithTitle != null)
             {
-                displayText += " (will overwrite)";
+                if (data.ReplacesRecipeWithId != 0) {
+                    displayText += " (will replace the existing recipe named '" + data.ReplacesRecipeWithTitle + "')";
+                }
+                else {
+                    displayText += " (will replace existing recipe)";
+                }
             }
 
             textView.setText(displayText);
@@ -439,3 +548,4 @@ public class LoadRecipesActivity extends Activity {
         }
     }
 }
+

@@ -42,9 +42,9 @@ public class DisplayRecipeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_recipe);
-        
-        
-        
+
+
+
         Intent intent = this.getIntent();
         int recipeId = intent.getIntExtra(RecipesListActivity.RECIPE_ID, -69);
 
@@ -52,14 +52,14 @@ public class DisplayRecipeActivity extends Activity {
         {
         	throw new RuntimeException("RecipeId not found on the intent");
         }
-        
+
         try
         {
 	        this._recipe = getRecipe(recipeId);
 			this._recipeId = recipeId;
-	        
+
 	        this.setTitle(this._recipe.Title);
-	        
+
 	        displayRecipe(this._recipe);
         }
         catch (Exception e)
@@ -67,19 +67,19 @@ public class DisplayRecipeActivity extends Activity {
         	e.printStackTrace();
         }
     }
-    
+
     private Recipe getRecipe(int recipeId) throws Exception
     {
     	Context context = this.getApplicationContext();
-    	
+
     	RecipeDBHelper dbHelper = new RecipeDBHelper(context);
-		
+
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		
+
 		String[] projection = {
 			    "Xml"
 			    };
-		
+
 		Cursor cursor = db.query(
 				"Recipes",  // The table to query
 				projection,                               // The columns to return
@@ -89,40 +89,44 @@ public class DisplayRecipeActivity extends Activity {
 				null,                                     // don't filter by row groups
 				null                                 // The sort order
 		);
-		
+
 		if (!(cursor.moveToFirst()))
 		{
 			throw new RuntimeException("Recipe id " + Integer.toString(recipeId) + " not found in database");
 		}
-		
+
 		String xml = cursor.getString(cursor.getColumnIndexOrThrow("Xml"));
-		
+
 		if (cursor.moveToNext())
 		{
 			throw new RuntimeException("got multiple recipes in database query?!?");
 		}
-		
+
 		dbHelper.close();
-		
-		return RecipeParser.ParseFromXmlString(xml);
+
+		Recipe recipe = RecipeParser.ParseFromXmlString(xml);
+
+		recipe.Id = recipeId;  // The only field that's not contained in the XML
+
+		return recipe;
     }
-    
+
     private void displayRecipe(Recipe recipe)
-    {   
+    {
     	if (recipe == null)
     	{
     		throw new RuntimeException("recipe cannot be null");
     	}
 
     	/*TextView recipeTextView = (TextView)this.findViewById(R.id.textView1);
-    	
+
     	if (recipeTextView == null)
     	{
     		//throw new RuntimeException("Couldn't find recipeTextView mgn");
     	}*/
-    	
+
     	//recipeTextView.setText(recipe.Title);
-    	
+
     	LinearLayout ingredientsLayout = (LinearLayout)this.findViewById(R.id.ingredientsContentLayout);
     	LinearLayout stepsLayout = (LinearLayout)this.findViewById(R.id.stepsContentLayout);
     	//style="@android:style/TextAppearance.Medium"
@@ -134,7 +138,7 @@ public class DisplayRecipeActivity extends Activity {
     	float stepsSize = this.getResources().getDimension(R.dimen.StepsSize);
 
     	// Body
-    	
+
     	TextView titleTextView = (TextView)this.findViewById(R.id.titleTextView);
     	titleTextView.setText(recipe.Title);
 		titleTextView.setTextSize(titleSize);
@@ -166,19 +170,19 @@ public class DisplayRecipeActivity extends Activity {
         	ingredient.setTextSize(ingredientsSize);
         	//ingredient.setTextAppearance(this, android.R.style.TextAppearance_Medium);
     	}
-    	
+
     	LinearLayout.LayoutParams stepLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
     	stepLayoutParams.bottomMargin = 10;  // Space between steps
-    	
-    	
+
+
     	for (int i = 0; i < recipe.Steps.size(); ++i)
     	{
     		TextView step = new TextView(this);
     		stepsLayout.addView(step);
         	step.setText(Integer.valueOf(i+1).toString() + ") " + recipe.Steps.get(i));
-        	
+
         	step.setLayoutParams(stepLayoutParams);
-        	
+
         	step.setTextSize(stepsSize);
         	//step.setTextAppearance(this, android.R.style.TextAppearance_Medium);
     	}
@@ -207,6 +211,12 @@ public class DisplayRecipeActivity extends Activity {
 		builder.scheme("http");
 		builder.authority("presto.bignis.com");
 
+		if (recipe.Id <= 0) {
+			throw new RuntimeException("Recipe id can't be " + recipe.Id);
+		}
+
+		builder.appendQueryParameter("fromApp", "true");
+		builder.appendQueryParameter("recipeId", Integer.toString(recipe.Id));
 		builder.appendQueryParameter("title", recipe.Title);
 		builder.appendQueryParameter("category", recipe.Category);
 		builder.appendQueryParameter("source", recipe.Source);
@@ -269,12 +279,14 @@ public class DisplayRecipeActivity extends Activity {
 				}
 
 				startActivity(Intent.createChooser(intent, "Choose email program"));
+				return true;
 			}
 			case R.id.menu_edit_recipe:
 			{
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(getUriForRecipe(_recipe));
 				startActivity(Intent.createChooser(intent, "Choose Web Browser"));
+				return true;
 			}
 			case R.id.menu_delete_recipe:
 			{
@@ -310,6 +322,7 @@ public class DisplayRecipeActivity extends Activity {
 						})
 						.setNegativeButton("Cancel", null)
 						.show();
+				return true;
 			}
 
 			default:

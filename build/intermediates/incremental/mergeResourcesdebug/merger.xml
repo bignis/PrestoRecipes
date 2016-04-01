@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res"><file name="ic_launcher" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\drawable-hdpi\ic_launcher.png" qualifiers="hdpi-v4" type="drawable"/><file name="ic_launcher" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\drawable-mdpi\ic_launcher.png" qualifiers="mdpi-v4" type="drawable"/><file name="ic_launcher" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\drawable-xhdpi\ic_launcher.png" qualifiers="xhdpi-v4" type="drawable"/><file name="activity_display_recipe" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\layout\activity_display_recipe.xml" qualifiers="" type="layout"/><file name="activity_load_recipes" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\layout\activity_load_recipes.xml" qualifiers="" type="layout"/><file name="activity_recipes_list" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\layout\activity_recipes_list.xml" qualifiers="" type="layout"/><file name="fragment_load_recipes" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\layout\fragment_load_recipes.xml" qualifiers="" type="layout"/><file name="activity_display_recipe" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\menu\activity_display_recipe.xml" qualifiers="" type="menu"/><file name="activity_recipes_list" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\menu\activity_recipes_list.xml" qualifiers="" type="menu"/><file name="load_recipes" path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\menu\load_recipes.xml" qualifiers="" type="menu"/><file path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\values\colors.xml" qualifiers=""><color name="recipeListRowDivider">#FF333333</color><color name="blue">#ff0000ff</color><color name="green">#ff00ff00</color><color name="recipeListRowOdd">#FFD5D4FF</color><color name="red">#ffff0000</color><color name="recipeListRowEven">#FFA6A3FF</color></file><file path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\values\dimens.xml" qualifiers=""><dimen name="DescriptionSize">20px</dimen><dimen name="IngredientsSize">34px</dimen><dimen name="TitleSize">40px</dimen><dimen name="SourceSize">16px</dimen><dimen name="StepsSize">28px</dimen><dimen name="YieldSize">20px</dimen></file><file path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\values\strings.xml" qualifiers=""><string name="mgn_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt purus id magna egestas eu elementum lacus fermentum. Duis orci ante, dapibus vitae blandit at, consectetur eu nulla. Integer nisi sem, faucibus in pretium nec, scelerisque sit amet ante. Vestibulum aliquet ultricies tortor ut ultricies. Vestibulum ac viverra arcu. Mauris in risus ipsum. Fusce sagittis, sapien at varius gravida, risus leo accumsan lacus, et accumsan augue tellus vitae leo. Donec convallis posuere arcu. Morbi ipsum massa, vestibulum ultrices condimentum in, auctor nec risus. Sed pretium libero convallis est ornare non egestas augue hendrerit. Suspendisse potenti. Aliquam eros sapien, malesuada eu suscipit sed, rutrum eget tortor.
+
+Pellentesque eget neque eu dolor pretium tempus. Nulla vitae erat a tellus sodales tempus ut quis diam. Vestibulum gravida, leo vitae dignissim facilisis, ante lacus auctor justo, eget condimentum leo orci at libero. Donec id tempus turpis. Pellentesque enim urna, scelerisque a consequat eget, faucibus sed eros. Etiam et elementum nulla. Sed leo ligula, interdum in suscipit in, auctor non lectus.
+
+Nulla at erat ligula. Phasellus ligula erat, sollicitudin quis rutrum vitae, porta at purus. Nunc interdum felis id leo semper eget adipiscing urna auctor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi tempus ultrices massa, id aliquet quam dictum et. Morbi lacinia consectetur ante vitae commodo. Sed turpis diam, lobortis vel ultrices eget, condimentum nec nunc. Integer non metus ligula. Suspendisse potenti. Mauris a porttitor arcu. Ut aliquam neque quis turpis tristique vestibulum. Aenean aliquet tempus pharetra. Proin bibendum nunc id leo elementum ultrices. Quisque ligula lectus, ultrices ut pretium ac, iaculis vitae turpis. Pellentesque pulvinar adipiscing arcu ut pellentesque.
+
+Proin id nisl eget ante aliquet varius. Donec vel diam orci, non vehicula metus. Pellentesque id nulla eu tortor scelerisque sagittis sed vulputate nisi. Proin ante tellus, tincidunt vel auctor at, ornare nec lectus. Donec iaculis aliquet tortor, eget convallis urna commodo sit amet. Nulla eu tellus eu metus feugiat luctus. Donec leo velit, feugiat nec imperdiet sit amet, rutrum et nisl. In ligula neque, gravida quis cursus in, sollicitudin eu augue. Nam pharetra neque nec enim eleifend laoreet. Ut urna enim, malesuada ut tincidunt pellentesque, iaculis non felis. Mauris scelerisque luctus lobortis. Pellentesque nec enim massa. Mauris id venenatis quam. Nullam molestie, turpis in egestas lacinia, purus erat vulputate mi, ac ornare ante quam at orci.
+
+Mauris ultrices turpis eget neque tempor at fermentum mauris vestibulum. Ut accumsan placerat ultricies. Mauris aliquet risus ut neque placerat sed luctus tellus vehicula. Proin blandit massa sit amet velit iaculis rhoncus. Sed vitae volutpat est. Phasellus enim mi, tincidunt sed aliquet ac, auctor sit amet augue. Morbi fermentum, nisi id laoreet tincidunt, justo velit lobortis massa, ut cursus magna risus quis nibh. Sed tortor urna, tristique nec congue aliquet, vehicula eu odio. Aliquam et dui in lectus pretium cursus. Integer facilisis accumsan ligula, et tristique lorem laoreet non. Maecenas sit amet massa tellus. Nam felis lacus, ullamcorper at blandit non, tempor eu nisl. Nulla a sapien id nisi rutrum sodales. Ut eget mattis diam. Cras aliquam massa sit amet libero sagittis sed laoreet eros vehicula.
+
+Nunc congue sodales porta. Ut feugiat pulvinar velit ut gravida. Cras quis dignissim mauris. Morbi a neque vel orci mattis imperdiet. Nulla sed nulla eget lacus suscipit interdum id sed enim. Phasellus eu turpis magna, eu euismod mi. Fusce ut nibh non sapien fermentum tristique. Pellentesque id dui justo. Duis tempor aliquam ligula, sed egestas sem posuere ac. Vivamus ornare lorem a massa semper mollis. Nunc vel magna id leo pharetra ultricies sed sed magna. In hac habitasse platea dictumst. Aliquam erat volutpat. Proin tempor viverra turpis ullamcorper ultricies. Proin sit amet nunc tellus. Curabitur ornare imperdiet arcu vel auctor.
+
+Fusce vitae quam eu velit imperdiet ullamcorper. Sed dui risus, elementum quis pulvinar sit amet, hendrerit eu mi. Aliquam eu massa et ipsum molestie viverra vitae vitae sem. Suspendisse libero dolor, molestie eu mollis nec, imperdiet eget ligula. Praesent porttitor mauris id mauris euismod consequat. Nunc imperdiet commodo mi, nec posuere massa adipiscing quis. Fusce et erat neque. In volutpat congue sollicitudin. Aliquam nulla nibh, adipiscing eu auctor a, tincidunt vitae enim. Aliquam leo odio, sollicitudin congue suscipit interdum, feugiat ut urna. Curabitur volutpat tellus tristique orci fermentum in posuere ante vestibulum.
+
+Pellentesque elementum orci id sapien ultrices condimentum. Maecenas odio magna, hendrerit vel dapibus id, fermentum et velit. Suspendisse tortor nibh, feugiat et luctus et, egestas a quam. Maecenas ornare lectus nisi, eu faucibus tellus. Nam gravida eros eget quam suscipit cursus. Sed tempus placerat tempor. Maecenas ante lacus, bibendum nec luctus vel, varius in eros. Aenean lobortis purus eros. In dictum iaculis dui, a suscipit erat suscipit in. Nam tempus blandit vestibulum. Nulla facilisi. Nullam consectetur nulla quis quam molestie a laoreet elit fermentum. Pellentesque consequat erat nec tellus dapibus pharetra. Praesent at enim lacinia sem pellentesque volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec in tristique metus.
+
+Duis nec nulla justo, id venenatis justo. Fusce neque libero, mattis nec tincidunt non, lobortis sed neque. Phasellus ornare laoreet pellentesque. Maecenas ut arcu est, non blandit mi. Vivamus in metus lacinia mi tincidunt luctus vitae eget sem. Quisque dignissim ante ac arcu iaculis porta. Morbi iaculis lobortis ante, vitae ullamcorper ipsum varius ac. Nam ullamcorper blandit placerat. Vestibulum lacinia, eros in tempus scelerisque, lacus neque auctor lorem, quis pretium sapien enim a sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+Nulla facilisi. Duis tempor condimentum dui eu sagittis. Donec quis velit id risus tempor volutpat ac a turpis. Curabitur fermentum libero at nisl vulputate nec placerat leo adipiscing. Donec lacus lacus, rutrum in interdum eget, iaculis sit amet odio. Nulla dignissim nisi facilisis erat euismod cursus. Sed id volutpat odio.
+
+Pellentesque erat ipsum, rhoncus at placerat in, congue vitae ante. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum iaculis tincidunt quam, nec pretium velit dignissim eu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec at pretium sem. Integer a felis sed ipsum dictum venenatis. Praesent mattis, purus a bibendum ultricies, lacus eros porta justo, non vestibulum quam arcu non nulla. Donec id dui non est pharetra lacinia at eu magna. Sed aliquam, est non porttitor posuere, velit elit condimentum ante, eget suscipit dolor nisi in dui. Maecenas at nisl nec ligula suscipit molestie eget ac dolor. Phasellus ultricies odio vitae lectus dapibus luctus semper justo porttitor.
+
+Vestibulum placerat arcu at turpis suscipit consectetur. Integer pulvinar vestibulum aliquet. Morbi ultrices, mauris ac venenatis accumsan, diam lacus vehicula arcu, eget interdum leo elit a nisl. Nunc vitae dui vel magna lacinia viverra. Aliquam porta ornare ultrices. Donec et arcu erat. Phasellus nisi justo, consectetur non elementum sed, viverra eu nulla. Maecenas eleifend dignissim sapien quis imperdiet.
+
+Phasellus lobortis sagittis malesuada. Nam in felis sem, nec ornare sapien. Nunc interdum dignissim vehicula. Phasellus eu ipsum at lacus lacinia bibendum. Sed mattis nulla quis lectus sollicitudin elementum. Maecenas in ante id arcu pellentesque vulputate eu nec metus. Maecenas rhoncus pretium quam mattis interdum. Mauris viverra laoreet ipsum ac elementum. Donec facilisis hendrerit neque, in pulvinar nisi euismod in.
+
+In mollis, tortor non lobortis consequat, ipsum nibh tristique felis, sed tempus nisi magna cursus velit. Nullam dignissim, orci scelerisque commodo fringilla, enim ipsum laoreet dui, sed lacinia nulla orci cursus nisl. Nam molestie adipiscing dolor. Nunc suscipit eros et elit pretium non tristique ipsum venenatis. Integer hendrerit tristique mauris vitae pharetra. Mauris consectetur, dui eu adipiscing mattis, lacus urna adipiscing justo, quis dapibus lorem justo sed ipsum. Cras et ante vitae ligula mattis ornare. Vestibulum accumsan dui vitae velit volutpat eu adipiscing velit volutpat. Vivamus vel lorem at elit imperdiet laoreet. Suspendisse cursus nisl nec nunc lobortis quis adipiscing nisl fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur euismod euismod dui, tristique tempus enim accumsan nec. Proin nec volutpat nibh. Donec fermentum neque et neque viverra sed bibendum sapien condimentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent id ornare ipsum.
+
+Nullam quis diam odio, quis egestas nunc. Etiam semper pharetra velit, vehicula ultrices urna dapibus vel. Curabitur sagittis justo sapien, ut euismod est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum aliquet dui in purus rhoncus rhoncus. Aliquam semper sapien ut felis laoreet in egestas turpis volutpat. Morbi dapibus est nec neque semper ut facilisis nulla venenatis. Nulla a pretium tortor. Nullam sit amet massa mauris. Nam aliquam facilisis porttitor. Nulla lacinia, nisi sit amet faucibus congue, felis eros tempus libero, a viverra ligula enim quis lectus. Proin a nibh a nibh volutpat condimentum a eget sem.</string><string name="action_settings">Settings</string><string name="no_recipes_message">Welcome to Presto Recipes!\n\nThere are no recipes currently loaded.\n\nBegin by loading some of your recipes into Presto - use the Load Recipes button in the upper right corner.</string><string name="current_version">1.0</string><string name="menu_load_recipes">Load Recipes</string><string name="recipe_cake">	    Chocolate Cake\n\n
+	    2 cups white sugar\n
+ 1 3/4 cups all-purpose flour\n
+ 3/4 cup unsweetened cocoa powder\n
+ 1 1/2 teaspoons baking powder\n
+ 1 1/2 teaspoons baking soda\n
+ 1 teaspoon salt\n
+ 2 eggs\n
+ 1 cup milk\n
+ 1/2 cup vegetable oil\n
+ 2 teaspoons vanilla extract\n
+ 1 cup boiling water\n
+\n
+Directions\n
+\n
+Preheat oven to 350 degrees F (175 degrees C). Grease and flour two 9 inch round pans.\n\n
+In a large bowl, combine sugar, flour, cocoa, baking powder, baking soda and salt. Make a well in the center and add eggs, milk, oil and vanilla. Beat for 2 minutes at medium speed. Stir in boiling water.\n\n
+Pour into two 9 inch pans. Bake at 350 degrees F (175 degrees C) for 30 to 35 minutes, or until a toothpick inserted into the cake comes out clean. Cool for 10 minutes in the pan, then turn out onto a wire rack and continue cooling.	    </string><string name="app_name">Presto Recipes</string><string name="recipe_penne">Penne Pasta with Spinach and Bacon\n
+\n
+1 (12 ounce) package penne pasta\n
+2 tablespoons olive oil, divided\n
+6 slices bacon, chopped\n
+2 tablespoons minced garlic\n
+1 (14.5 ounce) can diced tomatoes\n
+1 bunch fresh spinach, rinsed and torn into bite-size pieces\n
+\n
+Directions\n
+\n
+Bring a large pot of lightly salted water to a boil.\n 
+\n
+Add the penne pasta, and cook until tender, 8 to 10 minutes.\n
+\n
+Meanwhile, heat 1 tablespoon of olive oil in a skillet over medium heat. Place bacon in the skillet, and cook until browned and crisp. Add garlic, and cook for about 1 minute.\n 
+\n
+Stir in the tomatoes, and cook until heated through.\n
+\n
+Place the spinach into a colander, and drain the hot pasta over it so it is wilted.\n 
+\n
+Transfer to a large serving bowl, and toss with the remaining olive oil, and the bacon and tomato mixture.</string><string name="hello_world">Hello world!</string><string name="title_activity_recipes_list">Presto Recipes</string><string name="menu_settings">Settings</string><string name="title_activity_load_recipes">Loading Recipes</string></file><file path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\values\styles.xml" qualifiers=""><style name="YourCustomDropDownItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+    	<item name="android:textAppearance">@style/YourCustomDropDownItemTextStyle</item>
+	</style><style name="YourCustomDropDownItemTextStyle" parent="@android:style/Widget">
+    	<item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">20sp</item> <!-- mgn this affects the size of the thing you tap on, not the part that drops down -->
+    	<!-- Here you can set the color and other text attributes -->
+	</style><style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style><style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <!-- mgn http://stackoverflow.com/questions/12395381/android-actionbar-navigation-spinner-text-color -->
+        <item name="android:spinnerDropDownItemStyle">@style/YourCustomDropDownItemStyle</item>
+        
+    </style></file><file path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\values-v11\styles.xml" qualifiers="v11"><style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+        <!-- API 11 theme customizations can go here. -->
+    </style></file><file path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\res\values-v14\styles.xml" qualifiers="v14"><style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- API 14 theme customizations can go here. -->
+    </style></file></source><source path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\build\generated\res\rs\debug"/><source path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\build\generated\res\resValues\debug"/></dataSet><dataSet config="debug"><source path="D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\build-types\debug\res"/></dataSet><mergedItems/></merger>
