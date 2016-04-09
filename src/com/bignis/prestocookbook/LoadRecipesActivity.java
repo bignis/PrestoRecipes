@@ -8,9 +8,12 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.OpenableColumns;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -57,50 +61,18 @@ public class LoadRecipesActivity extends Activity {
 
         displayListOfStagedRecipes(stagedRecipes);
     }
-/*
-    private void showFakeData()
-    {
-        StagedRecipe[] data = new StagedRecipe[3];
-        data[0] = new StagedRecipe();
-        data[0].AlreadyExists = true;
-        data[0].ImageFileName = "foo.jpg";
-        data[0].RecipeTitle = "Big Mac";
 
-        data[1] = new StagedRecipe();
-        data[1].AlreadyExists = true;
-        data[1].ImageFileName = "foo.jpg";
-        data[1].RecipeTitle = "Big Mac2";
-
-        data[2] = new StagedRecipe();
-        data[2].AlreadyExists = true;
-        data[2].ImageFileName = "foo.jpg";
-        data[2].RecipeTitle = "Big Mac3";
-
-        displayListOfStagedRecipes(data);
-    }
-*/
     private StagedRecipe[] getStagedRecipes()
     {
-        int singleRecipeIdBeingReplacedOrZero = getSingleRecipeBeingReplacedIdOrZero();
-
-        File[] xmlFiles = RecipesLoader.GetXmlFilesFromStagingFolder();
-        File[] imageFiles = RecipesLoader.GetImageFilesFromStagingFolder();
+        File[] xmlFiles = RecipesLoader.GetXmlFiles(RecipesLoader.GetStagingFolder());
 
         HashMap<String, File> xmlFileSet = new HashMap<String, File>();
-        HashMap<String, File> imageFileSet = new HashMap<String, File>();
 
         for (File file : xmlFiles)
         {
-            String shortName = file.getName().substring(0, file.getName().length() - 4);
+            String shortName = RecipesLoader.getFileNameWithoutExtension(file.getName());
 
             xmlFileSet.put(shortName, file);
-        }
-
-        for (File file : imageFiles)
-        {
-            String shortName = file.getName().substring(0, file.getName().length() - 4);
-
-            imageFileSet.put(shortName, file);
         }
 
         // Now create the data
@@ -131,82 +103,28 @@ public class LoadRecipesActivity extends Activity {
                     continue;
                 }
 
-                if (singleRecipeIdBeingReplacedOrZero != 0) {
-                    item.ReplacesRecipeWithId = singleRecipeIdBeingReplacedOrZero;
-                    item.ReplacesRecipeWithTitle = getRecipeTitleFromDatabase(singleRecipeIdBeingReplacedOrZero);
+                Pair<Integer,Long> recipeReplacementInfo = RecipesLoader.getRecipeReplacementInfoFromStagingFolder();
+
+                if (recipeReplacementInfo != null) {
+
+                    if (list.size() != 0) {
+                        throw new RuntimeException("Unexpected, multiple recipes present when there is a 'replacement' file in the folder");
+                    }
+
+                    Recipe recipeInDatabase = Recipe.getFromDatabase(recipeReplacementInfo.first, this);
+
+                    if (recipeInDatabase != null &&
+                            recipeInDatabase.XmlHash == recipeReplacementInfo.second) {
+                        item.ReplacesRecipeWithId = recipeReplacementInfo.first;
+                        item.ReplacesRecipeWithTitle = recipeInDatabase.Title;
+                    }
                 }
-                else if (new File(RecipesLoader.GetDataFolder() + "/" + file.getName()).exists()) {
-                    item.ReplacesRecipeWithTitle = recipe.Title;
-                }
-
-                list.add(item);
-            }
-        }
-
-        // Any "orphan" image files?
-        {
-            Iterator it = imageFileSet.entrySet().iterator();
-            while (it.hasNext()) {
-                HashMap.Entry pair = (HashMap.Entry)it.next();
-
-                if (xmlFileSet.containsKey(pair.getKey())) // Already covered
-                {
-                    continue;
-                }
-
-                File file = (File)pair.getValue();
-
-                StagedRecipe item = new StagedRecipe();
-
-                item.ImageFileName = file.getName();
 
                 list.add(item);
             }
         }
 
         return (StagedRecipe[])list.toArray(new StagedRecipe[0]);
-    }
-
-    // Don't think I'm using this method, I've never even tested it
-    private boolean recipeAlreadyExistsInDatabase(int recipeId, SQLiteDatabase db) {
-        // SELECT EXISTS(SELECT 1 FROM myTbl WHERE u_tag="tag" LIMIT 1);
-        String countSql = String.format("SELECT COUNT(*) FROM Recipes WHERE Id = %d",
-                recipeId);
-
-        SQLiteStatement statement = db.compileStatement(countSql);
-        long existingRowCount = statement.simpleQueryForLong();
-
-        return existingRowCount == 1;
-    }
-
-    // Don't think I'm using this method, I've never even tested it
-    private boolean recipeAlreadyExistsInDatabase(String recipeTitle, SQLiteDatabase db) {
-        String countSql = String.format("SELECT COUNT(*) FROM Recipes WHERE Title = %s",
-                DatabaseUtils.sqlEscapeString(recipeTitle));
-
-        SQLiteStatement statement = db.compileStatement(countSql);
-        long existingRowCount = statement.simpleQueryForLong();
-
-        return existingRowCount == 1;
-    }
-
-    private String getRecipeTitleFromDatabase(int recipeId) {
-
-        RecipeDBHelper dbHelper = new RecipeDBHelper(this);
-
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        String sql = String.format("SELECT Title FROM Recipes WHERE Id = %d",
-                recipeId);
-
-        SQLiteStatement statement = db.compileStatement(sql);
-
-        String recipeTitle = statement.simpleQueryForString();
-
-        db.close();
-        dbHelper.close();
-
-        return recipeTitle;
     }
 
     private void displayListOfStagedRecipes(StagedRecipe[] recipes)
@@ -307,13 +225,6 @@ public class LoadRecipesActivity extends Activity {
         {
             String fileName = zipEntry.getName();
 
-            // Skip non-recipe related files
-            if (!(RecipesLoader.IsImageFile(fileName) ||
-                RecipesLoader.endsWith(fileName, ".xml", true)))
-            {
-                continue;
-            }
-
             String outputFilePath = stagingFolder.getPath() + "/" + fileName;
 
             FileOutputStream fout = new FileOutputStream(outputFilePath);
@@ -334,34 +245,6 @@ public class LoadRecipesActivity extends Activity {
         zipStream.close();
     }
 
-    private void moveRecipeFilesFromStagingIntoDataFolder()
-    {
-        File[] files;
-
-        for (File file : RecipesLoader.GetXmlFilesFromStagingFolder()) {
-            moveFileToDataFolder(file);
-        }
-
-        for (File file : RecipesLoader.GetImageFilesFromStagingFolder()) {
-            moveFileToDataFolder(file);
-        }
-    }
-
-    private void moveFileToDataFolder(File file)
-    {
-        File dataFolder = RecipesLoader.GetDataFolder();
-
-        File destinationPath = new File(dataFolder.getPath(), file.getName());
-
-        if (destinationPath.exists())
-        {
-            destinationPath.delete();
-        }
-
-        file.renameTo(destinationPath);
-    }
-
-
     private static void deleteFilesFromFolder(File folder) {
         File[] Files = folder.listFiles();
         if(Files != null) {
@@ -374,48 +257,35 @@ public class LoadRecipesActivity extends Activity {
 
     public void loadRecipesClick(View v) {
 
-        moveRecipeFilesFromStagingIntoDataFolder();
+        Handler.Callback postExecuteCallback = new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message message) {
 
-        Intent intent = new Intent(this, RecipesListActivity.class);
-        intent.putExtra("MGNExtra", "LoadRecipesWhenStarted");
-        this.startActivity(intent);
-    }
+                Intent intent = new Intent(LoadRecipesActivity.this, RecipesListActivity.class);
+                intent.putExtra("RepopulateRecipesWhenShown", true);
+                LoadRecipesActivity.this.startActivity(intent);
 
+                return true;
+            }
+        };
 
-
-    private int getSingleRecipeBeingReplacedIdOrZero() {
-
-        // UriFromIntent will be something like - content://downloads/all_downloads/1564
-
-        String filename = getFileNameFromUri(this.uriFromIntent);
-
-        // filename will be something like 3-edited-Beef stroganoff test mhn.presto
-
-        Pattern pattern = Pattern.compile("(\\d+)-edited");
-        Matcher matcher = pattern.matcher(filename);
-
-        if (!(matcher.find())) {
-            return 0;  // Not found
-        }
-
-        try {
-            String recipeIdString = matcher.group(1);
-
-            return Integer.parseInt(recipeIdString);
-        }
-        catch (Exception ex) {
-            // Do nothing
-        }
-
-        return 0;
+        new RecipesLoaderTask(this, RecipeLoadType.StagingFolderOnly, new Handler(postExecuteCallback)).execute(); // Load recipes
     }
 
     public String getFileNameFromUri(Uri uri) {
 
+        // If I open the file from Chrome, it give me a URI of content://downloads/my_downloads/1586 and doesn't find a name
+        // If I open the same downloaded file from Downloads, it gives me a URI of content://downloads/all_downloads/1586 (same id) and it works
+        // HACK
+        //uri = Uri.parse(uri.toString().replace("my_downloads", "all_downloads"));
+        // Caused by: java.lang.SecurityException: Permission Denial: reading com.android.providers.downloads.DownloadProvider uri content://downloads/all_downloads/1587 from pid=29247, uid=10137 requires android.permission.ACCESS_ALL_DOWNLOADS, or grantUriPermission()
+
+        String[] projection = {OpenableColumns.DISPLAY_NAME};
+
         // http://stackoverflow.com/a/25005243
         String result = null;
         if (uri.getScheme().equals("content")) {
-            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
             try {
                 if (cursor != null && cursor.moveToFirst()) {
                     result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
@@ -435,6 +305,10 @@ public class LoadRecipesActivity extends Activity {
     }
 
     public void cancelClick(View v) {
+
+        // Delete things since we didn't choose to load
+        deleteFilesFromFolder(RecipesLoader.GetStagingFolder());
+
         Intent intent = new Intent(this, RecipesListActivity.class);
         this.startActivity(intent);
     }

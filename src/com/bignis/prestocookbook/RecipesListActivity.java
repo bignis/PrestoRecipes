@@ -21,6 +21,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +35,6 @@ import android.widget.SearchView.OnQueryTextListener;
 public class RecipesListActivity extends Activity implements OnQueryTextListener {
 
 	public final static String RECIPE_ID = "com.bignis.PrestoCookbook.RECIPE_ID";
-	public final static String RECIPE_XML_FILENAME = "com.bignis.PrestoCookbook.RECIPE_XML_FILENAME";
 	public final static String ALL_RECIPES_CATEGORY = "All Recipes";
 	
 	private String currentSearchQuery;
@@ -44,15 +45,9 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recipes_list);
 
-		//You can enable type-to-search in your activity by calling setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL) during your activity's onCreate() method.
-		//this.setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);		
-
-        Intent intent = getIntent();
-        String intentExtra = intent.getStringExtra("MGNExtra");
-        if (intentExtra != null && intentExtra.equals("LoadRecipesWhenStarted")) {
-            new RecipesLoaderTask(this).execute(); // Load recipes
-        }
-
+		if (this.getIntent().hasExtra("RepopulateRecipesWhenShown")) {
+			this.PopulateRecipes();  // After new recipes are loaded
+		}
 
 		// Spinner.OnItemSelected will call PopulateRecipes, so this one can be removed
 		//this.PopulateRecipes(); //  Get all recipes
@@ -204,6 +199,11 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
         // Just "All Categories" item or nothing at all... for some reason... guard...
         if (availableCategories.length <= 1)
         {
+			// If items *were* to be shown, this activity relies on teh OnItemSelected() method (on initial population) to call
+			// PopulateRecipes().  If the spinner isn't showing up, we need to call PopulateRecipes anyway to have consistent behavior
+			// Use case: 2 recipes are loaded but neither have a category.
+			this.PopulateRecipes();
+
         	spinnerMenuItem.setVisible(false);
         	return;
         }
@@ -261,22 +261,25 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	}
 
 	private void resetDatabase() {
-		RecipeDBHelper dbHelper = new RecipeDBHelper(this);
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		dbHelper.onUpgrade(db, 1, 1);  // Triggers drop / recreate
-		db.close();
-		dbHelper.close();
 
-		Toast.makeText(this, "Database has been reset", Toast.LENGTH_SHORT).show();
+		Handler.Callback postExecuteCallback = new Handler.Callback() {
+			@Override
+			public boolean handleMessage(Message message) {
 
-		// This seems like a good thing to do
-		new RecipesLoaderTask(this).execute();
 
-		// Reset selections
-		this.currentSearchQuery = null;
-		this.currentCategorySelection = null;
+				Toast.makeText(RecipesListActivity.this, "Database has been reset", Toast.LENGTH_SHORT).show();  // Must do this from the main thread
 
-		this.PopulateRecipes();
+				// Reset selections
+				RecipesListActivity.this.currentSearchQuery = null;
+				RecipesListActivity.this.currentCategorySelection = null;
+
+				RecipesListActivity.this.PopulateRecipes();
+
+				return true;
+			}
+		};
+
+		new RecipesLoaderTask(this, RecipeLoadType.DataFolderOnlyAndResetDatabase, new Handler(postExecuteCallback)).execute();
 	}
 	
 	private String[] GetAvailableCategoriesFromRecipes()

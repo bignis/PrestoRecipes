@@ -3,11 +3,13 @@ package com.bignis.prestocookbook;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.zip.Adler32;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -132,8 +134,6 @@ public class RecipeParser {
         String xml = RecipesLoader.getStringFromFile(new File(xmlFilePath));
 
         return ParseFromXmlString(xml);
-
-//    	return Parse(document);
 	}
 	
 	public static Recipe ParseFromXmlString(String xml) throws Exception
@@ -151,8 +151,12 @@ public class RecipeParser {
     	// error, make sure the "UTF-8" in the header of the XML file is uppercase!
     	//Document document = builder.parse(new InputSource(new StringReader(xml)));
     	Document document = builder.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
-    	
-    	return Parse(document);
+
+        Recipe recipe = Parse(document);
+
+        recipe.XmlHash = GetHash(xml); // Needs the actual string for this
+
+    	return recipe;
 	}
 	
 	private static Recipe Parse(Document document) throws XPathExpressionException
@@ -163,7 +167,7 @@ public class RecipeParser {
 		}
 		
 		Recipe recipe = new Recipe();
-		
+
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		
 		recipe.Title = xpath.evaluate("/recipeml/recipe/head/title", document);
@@ -239,6 +243,17 @@ public class RecipeParser {
     
     	return recipe;
 	}
+
+    private static long GetHash(String input)
+    {
+        input = input.trim();
+
+        Adler32 adler = new Adler32();
+
+        adler.update(input.getBytes());
+
+        return adler.getValue();
+    }
 	
 	static String join(Collection<?> s, String delimiter) {
 	     StringBuilder builder = new StringBuilder();

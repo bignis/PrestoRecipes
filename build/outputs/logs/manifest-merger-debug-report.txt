@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:2:1-59:12
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:2:1-60:12
 	xmlns:android
 		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:2:11-69
 	package
@@ -21,71 +21,75 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:12:5-80
 	android:name
 		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:12:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:13:5-79
+	android:name
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:13:22-77
 application
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:14:5-57:19
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:15:5-58:19
 	android:label
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:17:9-41
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:18:9-41
 	android:allowBackup
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:15:9-35
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:16:9-35
 	android:icon
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:16:9-45
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:17:9-45
 	android:theme
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:18:9-40
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:19:9-40
 activity#com.bignis.prestocookbook.DisplayRecipeActivity
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:19:9-30:20
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:20:9-31:20
 	android:label
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:21:13-45
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:22:13-45
 	android:parentActivityName
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:22:13-62
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:23:13-62
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:20:13-75
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:21:13-75
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:27:13-29:81
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:28:13-30:81
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:28:17-63
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:29:17-63
 	android:value
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:29:17-78
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:30:17-78
 activity#com.bignis.prestocookbook.RecipesListActivity
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:31:9-39:20
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:32:9-40:20
 	android:label
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:33:13-58
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:34:13-58
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:32:13-73
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:33:13-73
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:34:13-38:29
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:35:13-39:29
 	android:label
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:34:28-58
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:35:28-58
 action#android.intent.action.MAIN
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:36:17-69
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:37:17-69
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:36:25-66
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:37:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:37:17-77
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:38:17-77
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:37:27-74
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:38:27-74
 activity#com.bignis.prestocookbook.LoadRecipesActivity
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:40:9-56:20
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:41:9-57:20
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:41:13-73
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:42:13-73
 intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:45:13-55:29
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:46:13-56:29
 action#android.intent.action.VIEW
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:46:17-68
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:47:17-68
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:46:25-66
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:47:25-66
 category#android.intent.category.BROWSABLE
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:47:17-77
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:48:17-77
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:47:27-75
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:48:27-75
 category#android.intent.category.DEFAULT
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:48:17-75
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:49:17-75
 	android:name
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:48:27-73
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:49:27-73
 data
-ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:53:17-103
+ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:54:17-103
 	android:mimeType
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:53:79-101
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:54:79-101
 	android:pathPattern
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:53:45-78
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:54:45-78
 	android:scheme
-		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:53:23-44
+		ADDED from D:\Dropbox\Code\Presto Recipes Android\PrestoCookbook\AndroidManifest.xml:54:23-44

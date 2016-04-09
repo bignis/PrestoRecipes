@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
-import android.support.v4.content.FileProvider;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.transition.Visibility;
@@ -55,7 +54,7 @@ public class DisplayRecipeActivity extends Activity {
 
         try
         {
-	        this._recipe = getRecipe(recipeId);
+	        this._recipe = Recipe.getFromDatabase(recipeId, this);
 			this._recipeId = recipeId;
 
 	        this.setTitle(this._recipe.Title);
@@ -66,49 +65,6 @@ public class DisplayRecipeActivity extends Activity {
         {
         	e.printStackTrace();
         }
-    }
-
-    private Recipe getRecipe(int recipeId) throws Exception
-    {
-    	Context context = this.getApplicationContext();
-
-    	RecipeDBHelper dbHelper = new RecipeDBHelper(context);
-
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-		String[] projection = {
-			    "Xml"
-			    };
-
-		Cursor cursor = db.query(
-				"Recipes",  // The table to query
-				projection,                               // The columns to return
-				"ID = " + recipeId,                                // The columns for the WHERE clause
-				null,                            // The values for the WHERE clause
-				null,                                     // don't group the rows
-				null,                                     // don't filter by row groups
-				null                                 // The sort order
-		);
-
-		if (!(cursor.moveToFirst()))
-		{
-			throw new RuntimeException("Recipe id " + Integer.toString(recipeId) + " not found in database");
-		}
-
-		String xml = cursor.getString(cursor.getColumnIndexOrThrow("Xml"));
-
-		if (cursor.moveToNext())
-		{
-			throw new RuntimeException("got multiple recipes in database query?!?");
-		}
-
-		dbHelper.close();
-
-		Recipe recipe = RecipeParser.ParseFromXmlString(xml);
-
-		recipe.Id = recipeId;  // The only field that's not contained in the XML
-
-		return recipe;
     }
 
     private void displayRecipe(Recipe recipe)
@@ -217,6 +173,7 @@ public class DisplayRecipeActivity extends Activity {
 
 		builder.appendQueryParameter("fromApp", "true");
 		builder.appendQueryParameter("recipeId", Integer.toString(recipe.Id));
+		builder.appendQueryParameter("hash", Long.toString(recipe.XmlHash));
 		builder.appendQueryParameter("title", recipe.Title);
 		builder.appendQueryParameter("category", recipe.Category);
 		builder.appendQueryParameter("source", recipe.Source);
@@ -266,7 +223,7 @@ public class DisplayRecipeActivity extends Activity {
 				File zipFile = null;
 
 				try {
-					zipFile = createZipForRecipeFiles(this._recipe);
+					zipFile = createZipForRecipeFiles(this._recipeId);
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -316,6 +273,7 @@ public class DisplayRecipeActivity extends Activity {
 
 								// Go back to the recipes list
 								Intent intent = new Intent(DisplayRecipeActivity.this, RecipesListActivity.class);
+								intent.putExtra("RepopulateRecipesWhenShown", true);
 								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 								startActivity(intent);
 							}
@@ -330,7 +288,68 @@ public class DisplayRecipeActivity extends Activity {
 		}
 	}
 
-	private File createZipForRecipeFiles(Recipe recipe)  throws Exception {
+	private File createZipForRecipeFiles(int recipeId) throws Exception {
+
+		RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+		String query = "SELECT Title, Xml, ImageOriginal FROM Recipes WHERE Id = " + new Integer(recipeId).toString();
+
+		Cursor cursor = db.rawQuery(query, null);
+
+		try {
+			if (!(cursor.moveToFirst())) {
+				return null;
+			}
+
+			String title = cursor.getString(cursor.getColumnIndexOrThrow("Title"));
+
+			String sanitizedTitle = title.replaceAll("[^a-zA-Z0-9\\._]+", "_");
+
+			String xml = cursor.getString(cursor.getColumnIndexOrThrow("Xml"));
+
+			byte[] image = cursor.getBlob(cursor.getColumnIndexOrThrow("ImageOriginal"));
+
+			File tempFolder = this.getCacheDir();
+
+			File zipFile = new File(tempFolder.getPath() + "/" + sanitizedTitle + ".presto");
+			zipFile.setReadable(true, false);  // mimic world_readable
+
+			FileOutputStream fos = new FileOutputStream(zipFile);
+
+			ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(fos));
+
+			try {
+				ZipEntry xmlEntry = new ZipEntry(sanitizedTitle + ".xml");
+				zos.putNextEntry(xmlEntry);
+				zos.write(xml.getBytes());
+				zos.closeEntry();
+
+				////////
+				if (image != null && image.length != 0) {
+
+					ZipEntry imageEntry = new ZipEntry(sanitizedTitle + ".jpg");  // Unsafe to assume .jpg, so someday inspect the byte stream for the proper extension
+					zos.putNextEntry(imageEntry);
+					zos.write(image);
+					zos.closeEntry();
+				}
+
+			} finally {
+				zos.close();
+			}
+
+			return zipFile;
+		}
+		finally
+		{
+			cursor.close();
+			db.close();
+			dbHelper.close();
+		}
+	}
+
+	private File createZipForRecipeFilesDontUseThisNoFilesExist(Recipe recipe)  throws Exception {
 
 		Context context = this.getApplicationContext();
 
@@ -362,10 +381,10 @@ public class DisplayRecipeActivity extends Activity {
 			dbHelper.close();
 		}
 
-		return createZipForRecipeFiles(xmlFileName, imageFileName);
+		return createZipForRecipeFilesDoNotUseThisFilesDontExist(xmlFileName, imageFileName);
 	}
 
-	private File createZipForRecipeFiles(String xmlFileName, String imageFileName) throws Exception {
+	private File createZipForRecipeFilesDoNotUseThisFilesDontExist(String xmlFileName, String imageFileName) throws Exception {
 
 		File folder = RecipesLoader.GetDataFolder();
 

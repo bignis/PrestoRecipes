@@ -15,15 +15,11 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
 	    "Title TEXT NOT NULL collate nocase," +
 	    "Notes TEXT collate nocase," +
 	    "Xml TEXT NOT NULL," +
-	    "XmlHash TEXT NOT NULL," +
-	    "XmlFileName TEXT collate nocase," +
-	    "Image BLOB," +
-	    "ImageHash TEXT," +
-	    "ImageFileName TEXT collate nocase," +
+	    "Image BLOB," +   // Resized for optimal display
+        "ImageOriginal BLOB," +  // As loaded, not resized in any way
 	    "Category TEXT collate nocase," +
 	    "LastUpdated DATETIME NOT NULL," +
-	    "UNIQUE (Id)," +
-	    "UNIQUE (XmlFileName)" +  // XmlFileName is the identifier to figure out what Recipe an Image is associated with when loading data.
+	    "UNIQUE (Id)" +
 	    ");";
 
     

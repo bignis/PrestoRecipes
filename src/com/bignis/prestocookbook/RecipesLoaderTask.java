@@ -1,26 +1,30 @@
 package com.bignis.prestocookbook;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class RecipesLoaderTask extends AsyncTask<Void, String, String> implements RecipeLoadProgressListener {
 	
-	private RecipesListActivity _context;
+	private Activity _context;
 	private ProgressDialog _progressDialog;
 	private boolean _exceptionOccurredDuringRecipeLoading;
+	private RecipeLoadType _loadType;
+	private Handler _onPostExecuteCallback;
 	
-	public RecipesLoaderTask(RecipesListActivity context) {
+	public RecipesLoaderTask(Activity context, RecipeLoadType loadType, Handler onPostExecuteCallback) {
 		if (context == null) {
 			throw new NullPointerException("context");
 		}
 		
 		this._context = context;
-		
-
+		this._loadType = loadType;
+		this._onPostExecuteCallback = onPostExecuteCallback;
 	}	
 
 	@Override
@@ -30,7 +34,7 @@ public class RecipesLoaderTask extends AsyncTask<Void, String, String> implement
 		
     	try
     	{
-    		return RecipesLoader.LoadRecipes(_context, this);
+    		return RecipesLoader.LoadRecipes(_context, _loadType, this);
     	}
     	catch (RecipeLoadException ex)
     	{
@@ -71,7 +75,11 @@ public class RecipesLoaderTask extends AsyncTask<Void, String, String> implement
     	*/
     	Toast.makeText(this._context, result, _exceptionOccurredDuringRecipeLoading ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
 
-    	this._context.PopulateRecipes(); // Reload the recipe list from scratch
+		if (_onPostExecuteCallback != null) {
+			_onPostExecuteCallback.sendEmptyMessage(0);
+		}
+
+    	//this._context.PopulateRecipes(); // Reload the recipe list from scratch
     }
     
     public void progressUpdate(String updateDescription) {
