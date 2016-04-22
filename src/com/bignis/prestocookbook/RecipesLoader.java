@@ -120,10 +120,12 @@ public class RecipesLoader {
 			if (typeOfLoad == RecipeLoadType.StagingFolderOnly) {
 				recipeReplacementInfo = RecipesLoader.getRecipeReplacementInfoFromStagingFolder();
 
-				Recipe recipeInDatabase = Recipe.getFromDatabase(recipeReplacementInfo.first, context);
+				if (recipeReplacementInfo != null) {
+					Recipe recipeInDatabase = Recipe.getFromDatabase(recipeReplacementInfo.first, context);
 
-				if (recipeInDatabase == null || recipeInDatabase.XmlHash != recipeReplacementInfo.second) {
-					recipeReplacementInfo = null;  // Can't find the recipe in db or it's changed from the one we want to modify - insert this as new
+					if (recipeInDatabase == null || recipeInDatabase.XmlHash != recipeReplacementInfo.second) {
+						recipeReplacementInfo = null;  // Can't find the recipe in db or it's changed from the one we want to modify - insert this as new
+					}
 				}
 			}
 

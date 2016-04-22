@@ -2,13 +2,18 @@ package com.bignis.prestocookbook;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import com.bignis.prestocookbook.database.RecipeDBHelper;
 
+import android.app.DownloadManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
@@ -158,6 +163,26 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 			return false;
 		}
 
+		if ("backup".equalsIgnoreCase(newText)) {
+			new AlertDialog.Builder(this)
+					.setTitle("Download a Backup Of All Recipes")
+					.setMessage("Are you sure you want to download a backup copy of all your recipes?")
+					.setPositiveButton("Download a Backup", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							downloadBackupOfAllRecipes();
+						}
+					})
+					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							// do nothing
+						}
+					})
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.show();
+
+			return false;
+		}
+
 		this.currentSearchQuery = newText;
 		
 		PopulateRecipes();
@@ -280,6 +305,28 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		};
 
 		new RecipesLoaderTask(this, RecipeLoadType.DataFolderOnlyAndResetDatabase, new Handler(postExecuteCallback)).execute();
+	}
+
+	private void downloadBackupOfAllRecipes() {
+		try {
+			File zipFile = ZipCreator.createZipBackupForAllRecipeFiles(this);
+
+			if (zipFile != null) {
+				AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+				alertDialog.setTitle("Download Complete");
+				alertDialog.setMessage("Your recipes have been saved to " + zipFile.getName() + " under the '/Presto Recipes/backups' folder on your device.\n\nYou must connect your device to a computer and browse for this file to retrieve it, using Android's 'Downloads' app won't show it.");
+				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+							}
+						});
+				alertDialog.show();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private String[] GetAvailableCategoriesFromRecipes()

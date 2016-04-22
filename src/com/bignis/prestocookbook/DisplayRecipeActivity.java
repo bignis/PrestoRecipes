@@ -4,9 +4,13 @@ import com.bignis.prestocookbook.database.RecipeDBHelper;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.transition.Visibility;
@@ -29,6 +33,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -214,28 +219,42 @@ public class DisplayRecipeActivity extends Activity {
 		switch (item.getItemId()) {
 			case R.id.menu_email_recipe:
 			{
-				Intent intent = new Intent(Intent.ACTION_SEND);
-				intent.setType("plain/text");
-				//intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"some@email.address"});
-				intent.putExtra(Intent.EXTRA_SUBJECT, this._recipe.Title + " from Presto Recipes");
-				intent.putExtra(Intent.EXTRA_TEXT, getEmailBodyForRecipe(this._recipe));
+				Intent shareIntent = new Intent();
+				shareIntent.setAction(Intent.ACTION_SEND);
+				shareIntent.setType("plain/text");
+				shareIntent.putExtra(Intent.EXTRA_SUBJECT, this._recipe.Title + " from Presto Recipes");
+				shareIntent.putExtra(Intent.EXTRA_TEXT, getEmailBodyForRecipe(this._recipe));
 
 				File zipFile = null;
 
 				try {
-					zipFile = createZipForRecipeFiles(this._recipeId);
+					zipFile = ZipCreator.createZipForRecipeFiles(this, this._recipeId);
 				}
 				catch (Exception e) {
 					e.printStackTrace();
 				}
 
 				if (zipFile != null) {
+					Uri uri = FileProvider.getUriForFile(this, "com.my.apps.package.files", zipFile);
+					shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
-					Uri uri = Uri.fromFile(zipFile);
-					intent.putExtra(Intent.EXTRA_STREAM, uri);
+					// MGN: prevents "Could not open Attachment bug"
+
+					// Workaround for Android bug.
+					// grantUriPermission also needed for KITKAT,
+					// see https://code.google.com/p/android/issues/detail?id=76683
+					if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+						List<ResolveInfo> resInfoList = this.getPackageManager().queryIntentActivities(shareIntent, PackageManager.MATCH_DEFAULT_ONLY);
+						for (ResolveInfo resolveInfo : resInfoList) {
+							String packageName = resolveInfo.activityInfo.packageName;
+							this.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						}
+					}
 				}
 
-				startActivity(Intent.createChooser(intent, "Choose email program"));
+
+				startActivity(Intent.createChooser(shareIntent, "Choose email program"));
+
 				return true;
 			}
 			case R.id.menu_edit_recipe:
@@ -288,168 +307,5 @@ public class DisplayRecipeActivity extends Activity {
 		}
 	}
 
-	private File createZipForRecipeFiles(int recipeId) throws Exception {
-
-		RecipeDBHelper dbHelper = new RecipeDBHelper(this);
-
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-		String query = "SELECT Title, Xml, ImageOriginal FROM Recipes WHERE Id = " + new Integer(recipeId).toString();
-
-		Cursor cursor = db.rawQuery(query, null);
-
-		try {
-			if (!(cursor.moveToFirst())) {
-				return null;
-			}
-
-			String title = cursor.getString(cursor.getColumnIndexOrThrow("Title"));
-
-			String sanitizedTitle = title.replaceAll("[^a-zA-Z0-9\\._]+", "_");
-
-			String xml = cursor.getString(cursor.getColumnIndexOrThrow("Xml"));
-
-			byte[] image = cursor.getBlob(cursor.getColumnIndexOrThrow("ImageOriginal"));
-
-			File tempFolder = this.getCacheDir();
-
-			File zipFile = new File(tempFolder.getPath() + "/" + sanitizedTitle + ".presto");
-			zipFile.setReadable(true, false);  // mimic world_readable
-
-			FileOutputStream fos = new FileOutputStream(zipFile);
-
-			ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(fos));
-
-			try {
-				ZipEntry xmlEntry = new ZipEntry(sanitizedTitle + ".xml");
-				zos.putNextEntry(xmlEntry);
-				zos.write(xml.getBytes());
-				zos.closeEntry();
-
-				////////
-				if (image != null && image.length != 0) {
-
-					ZipEntry imageEntry = new ZipEntry(sanitizedTitle + ".jpg");  // Unsafe to assume .jpg, so someday inspect the byte stream for the proper extension
-					zos.putNextEntry(imageEntry);
-					zos.write(image);
-					zos.closeEntry();
-				}
-
-			} finally {
-				zos.close();
-			}
-
-			return zipFile;
-		}
-		finally
-		{
-			cursor.close();
-			db.close();
-			dbHelper.close();
-		}
-	}
-
-	private File createZipForRecipeFilesDontUseThisNoFilesExist(Recipe recipe)  throws Exception {
-
-		Context context = this.getApplicationContext();
-
-		RecipeDBHelper dbHelper = new RecipeDBHelper(context);
-
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-		String query = "SELECT XmlFileName, ImageFileName FROM Recipes WHERE Id = " + new Integer(this._recipeId).toString();
-
-		Cursor cursor = db.rawQuery(query, null);
-
-		String xmlFileName = null;
-		String imageFileName = null;
-
-		try
-		{
-			if (!(cursor.moveToFirst()))
-			{
-				return null;
-			}
-
-			xmlFileName = cursor.getString(cursor.getColumnIndexOrThrow("XmlFileName"));
-			imageFileName = cursor.getString(cursor.getColumnIndexOrThrow("ImageFileName"));
-		}
-		finally
-		{
-			cursor.close();
-			db.close();
-			dbHelper.close();
-		}
-
-		return createZipForRecipeFilesDoNotUseThisFilesDontExist(xmlFileName, imageFileName);
-	}
-
-	private File createZipForRecipeFilesDoNotUseThisFilesDontExist(String xmlFileName, String imageFileName) throws Exception {
-
-		File folder = RecipesLoader.GetDataFolder();
-
-		if (xmlFileName == null) {
-			return null;
-		}
-
-		Uri xmlFileUri = Uri.fromFile(new File(xmlFileName));
-
-		String zipFileName = xmlFileUri.getLastPathSegment();
-		zipFileName = zipFileName.substring(0, zipFileName.length() - 4);  // Remove .xml (probably unsafe to assume this, but meh)
-
-		File zipFile = new File(folder.getPath() + "/" + zipFileName + ".presto");
-		zipFile.setReadable(true, false);  // mimic world_readable
-
-
-		FileOutputStream fos = new FileOutputStream(zipFile);
-
-		ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(fos));
-		try {
-			BufferedInputStream origin;
-			FileInputStream fi;
-
-			int BUFFER = 2048;
-			byte data[] = new byte[BUFFER];
-			int count;
-
-			ZipEntry xmlEntry = new ZipEntry(xmlFileName);
-			zos.putNextEntry(xmlEntry);
-
-			fi = new FileInputStream(folder + "/" + xmlFileName);
-			origin = new BufferedInputStream(fi, BUFFER);
-
-			while ((count = origin.read(data, 0, BUFFER)) != -1) {
-				zos.write(data, 0, count);
-			}
-
-			zos.closeEntry();
-			origin.close();
-			fi.close();
-
-			////////
-			if (imageFileName != null) {
-
-				ZipEntry imageEntry = new ZipEntry(xmlFileName);
-				zos.putNextEntry(imageEntry);
-
-				fi = new FileInputStream(folder + "/" + imageFileName);
-				origin = new BufferedInputStream(fi, BUFFER);
-
-				while ((count = origin.read(data, 0, BUFFER)) != -1) {
-					zos.write(data, 0, count);
-				}
-
-				zos.closeEntry();
-				origin.close();
-				fi.close();
-			}
-		} finally {
-			zos.close();
-		}
-
-		long length = zipFile.length();
-
-		return zipFile;
-	}
 
 }
