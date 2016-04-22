@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class DisplayRecipeActivity extends Activity {
 
@@ -45,6 +47,7 @@ public class DisplayRecipeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_display_recipe);
 
 

@@ -36,6 +36,8 @@ import android.view.View.OnClickListener;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SearchView.OnQueryTextListener;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class RecipesListActivity extends Activity implements OnQueryTextListener {
 
@@ -48,6 +50,8 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Fabric.with(this, new Crashlytics());
+
 		setContentView(R.layout.activity_recipes_list);
 
 		if (this.getIntent().hasExtra("RepopulateRecipesWhenShown")) {
@@ -181,6 +185,10 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 					.show();
 
 			return false;
+		}
+
+		if ("intcrash".equalsIgnoreCase(newText)) {
+			throw new RuntimeException("MGN intentional crash to see if GA is working");
 		}
 
 		this.currentSearchQuery = newText;
