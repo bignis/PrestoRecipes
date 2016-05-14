@@ -93,6 +93,7 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 
 
 			ImageView imageView = new ImageView(this._context);
+			//noinspection ResourceType
 			imageView.setId(1);  // just picked a number
 			Drawable drawable = recipeImage.drawable;
 			LayoutParams params = new LayoutParams(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
