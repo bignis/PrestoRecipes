@@ -276,15 +276,30 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 				new RecipesLoaderTask(this).execute();
 				return true;
 				*/
-				android.net.Uri.Builder builder = new android.net.Uri.Builder();
-				builder.scheme("http");
-				builder.authority("presto.bignis.com");
 
-				builder.appendQueryParameter("fromApp", "true");
+				// Tell the user that the can use a full computer if they want...
+				AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+				alertDialog.setTitle("Reminder");
+				alertDialog.setMessage("If you want to use a full computer to load recipes, visit \n\"http://presto.bignis.com\"\n on your computer - you can email yourself recipes to load to your Android device.\n\nYou will now be taken to \"http://presto.bignis.com\".");
+				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
 
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(builder.build());
-				startActivity(Intent.createChooser(intent, "Choose Web Browser"));
+								android.net.Uri.Builder builder = new android.net.Uri.Builder();
+								builder.scheme("http");
+								builder.authority("presto.bignis.com");
+
+								builder.appendQueryParameter("fromApp", "true");
+
+								Intent intent = new Intent(Intent.ACTION_VIEW);
+								intent.setData(builder.build());
+								startActivity(Intent.createChooser(intent, "Choose Web Browser"));
+
+							}
+						});
+				alertDialog.show();
+
 				return true;
 			}
 	    
