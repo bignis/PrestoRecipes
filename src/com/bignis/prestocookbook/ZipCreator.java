@@ -3,6 +3,7 @@ package com.bignis.prestocookbook;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.bignis.prestocookbook.database.RecipeDBHelper;
 
@@ -115,6 +116,8 @@ public class ZipCreator {
             File zipFile = new File(saveFolderPath + "/AllRecipes-" + currentDate + ".presto");
             zipFile.setReadable(true, false);  // mimic world_readable
 
+            Log.i("ZipCreator", "Preparing zip file to save to " + zipFile.getAbsolutePath());
+
             FileOutputStream fos = new FileOutputStream(zipFile);
 
             ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(fos));
@@ -123,6 +126,8 @@ public class ZipCreator {
 
                 do {
                     String title = cursor.getString(cursor.getColumnIndexOrThrow("Title"));
+
+                    Log.i("ZipCreator", "Backing up " + title);
 
                     String sanitizedTitle = getSanitizedTitle(title);
 

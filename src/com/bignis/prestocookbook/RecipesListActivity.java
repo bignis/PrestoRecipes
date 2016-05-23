@@ -334,6 +334,16 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+			alertDialog.setTitle("Error backing up");
+			alertDialog.setMessage(e.getMessage());
+			alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+			alertDialog.show();
 		}
 	}
 	
