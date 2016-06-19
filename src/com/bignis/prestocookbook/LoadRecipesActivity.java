@@ -1,8 +1,10 @@
 package com.bignis.prestocookbook;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,8 +13,10 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.OpenableColumns;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -153,6 +157,24 @@ public class LoadRecipesActivity extends Activity {
         TextView text = new TextView(this);
         text.setText(textToDisplay);
         view.addView(text);
+    }
+
+    private void ensurePermissionsGranted() {
+
+        // Necessary because not having permissions to GMail and/or external storage causes crashes
+        // https://developer.android.com/training/secure-file-sharing/request-file.html
+        // source: https://fabric.io/michael-nistlers-projects/android/apps/com.bignis.prestorecipesunderground/issues/5747544affcdc042506c20c8
+
+        boolean haveStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+
+        if (!(haveStoragePermission)) {
+       /*     ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_RECORD_AUDIO_MGN);
+*/
+            // TODO someday, react to permissions granted/denied
+        }
     }
 
     private void extractZipFromIntentIntoStagingFolder()

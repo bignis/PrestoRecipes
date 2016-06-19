@@ -28,7 +28,8 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
-
+    //compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:appcompat-v7:19.0.+'
     // https://developers.google.com/analytics/devguides/collection/android/v4/#set-up-your-project "Add the dependency to your project-level build.gradle:"
     //classpath 'com.google.gms:google-services:2.0.0-alpha6'
 
