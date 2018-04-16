@@ -165,16 +165,16 @@ public class LoadRecipesActivity extends Activity {
         // https://developer.android.com/training/secure-file-sharing/request-file.html
         // source: https://fabric.io/michael-nistlers-projects/android/apps/com.bignis.prestorecipesunderground/issues/5747544affcdc042506c20c8
 
-        boolean haveStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+      //  boolean haveStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+       //         ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
 
-        if (!(haveStoragePermission)) {
+//        if (!(haveStoragePermission)) {
        /*     ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_RECORD_AUDIO_MGN);
 */
             // TODO someday, react to permissions granted/denied
-        }
+  //      }
     }
 
     private void extractZipFromIntentIntoStagingFolder()
