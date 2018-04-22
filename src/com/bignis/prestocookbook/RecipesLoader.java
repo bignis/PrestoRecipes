@@ -12,8 +12,10 @@ import java.util.zip.Adler32;
 
 import com.bignis.prestocookbook.database.RecipeDBHelper;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.DatabaseUtils.InsertHelper;
@@ -22,6 +24,8 @@ import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
@@ -464,11 +468,14 @@ public class RecipesLoader {
 		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
 		*/
         File folder = new File(STAGING_FOLDER_LOCATION);
-
-        if (!(folder.exists()))
+		Log.e("mgn", "folder " + folder.exists());
+		if (!(folder.exists()))
         {
             boolean success = folder.mkdirs();
-            //throw new RuntimeException("Folder " + folder.toString() + " does not exist");
+
+			if (!(success)) {
+				throw new RuntimeException("Tried and failed to create foldre: " + folder.toString());
+			}
         }
 
         if (!(folder.isDirectory()))
