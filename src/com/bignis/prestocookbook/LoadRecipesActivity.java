@@ -51,8 +51,6 @@ import io.fabric.sdk.android.Fabric;
 
 public class LoadRecipesActivity extends Activity {
 
-    private Uri uriFromIntent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,12 +196,12 @@ public class LoadRecipesActivity extends Activity {
         // First clear the staging folder, don't want other junk from "before" polluting it if we want to just load the from the Presto .zip given to us
         deleteFilesFromFolder(RecipesLoader.GetStagingFolder());
 
-        this.uriFromIntent = intent.getData();
+        Uri uriFromIntent = intent.getData();
 
         try
         {
 
-            InputStream attachment = this.getContentResolver().openInputStream(this.uriFromIntent);
+            InputStream attachment = this.getContentResolver().openInputStream(uriFromIntent);
 
             ZipInputStream zipStream = new ZipInputStream(new BufferedInputStream(attachment));
 

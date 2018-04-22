@@ -22,7 +22,7 @@ public class ZipCreator {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String query = "SELECT Title, Xml, ImageOriginal FROM Recipes WHERE Id = " + new Integer(recipeId).toString();
+        String query = "SELECT Title, Xml, ImageOriginal FROM Recipes WHERE Id = " + Integer.valueOf(recipeId).toString();
 
         Cursor cursor = db.rawQuery(query, null);
 

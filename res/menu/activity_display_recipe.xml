@@ -1,7 +1,7 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"  xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <item android:id="@+id/menu_edit_recipe" android:title="Edit this Recipe" android:icon="@android:drawable/ic_menu_edit" android:showAsAction="ifRoom|withText" />
-    <item android:id="@+id/menu_email_recipe" android:title="Email Recipe" android:icon="@android:drawable/ic_menu_send"  android:showAsAction="ifRoom|withText" />
-    <item android:id="@+id/menu_delete_recipe" android:title="Delete Recipe" android:icon="@android:drawable/ic_menu_delete" android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_edit_recipe" android:title="Edit this Recipe" android:icon="@android:drawable/ic_menu_edit" app:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_email_recipe" android:title="Email Recipe" android:icon="@android:drawable/ic_menu_send"  app:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_delete_recipe" android:title="Delete Recipe" android:icon="@android:drawable/ic_menu_delete" app:showAsAction="ifRoom|withText" />
 
 </menu>

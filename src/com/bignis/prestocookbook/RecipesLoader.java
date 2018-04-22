@@ -64,14 +64,9 @@ public class RecipesLoader {
 		// Need Maps to associate xml files and images with each other if they have the same name.
 
 		Map<String, File> xmlFilesByName = new HashMap<String, File>();
-		Map<String, File> imageFilesByName = new HashMap<String, File>();
 
 		for (File xmlFile : GetXmlFiles(folderToLoad)) {
 			xmlFilesByName.put(RecipesLoader.getFileNameWithoutExtension(xmlFile.getName()), xmlFile);
-		}
-
-		for (File imageFile : GetImageFiles(folderToLoad)) {
-			imageFilesByName.put(RecipesLoader.getFileNameWithoutExtension(imageFile.getName()), imageFile);
 		}
 
 		// We'll never load Images by themselves, they'll always be an accompanying Recipe XML file

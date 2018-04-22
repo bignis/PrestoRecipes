@@ -9,10 +9,10 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.1'
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.25.3'
     }
 }
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 //apply plugin: 'com.google.gms.google-services' // https://developers.google.com/analytics/devguides/collection/android/v4/#set-up-your-project
 
 apply plugin: 'io.fabric'

@@ -1,4 +1,4 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <!--
@@ -9,18 +9,18 @@
         android:title="@string/menu_load_recipes"
         android:icon="@android:drawable/ic_menu_set_as"
 
-        android:showAsAction="ifRoom|withText" />
+        app:actionViewClass="ifRoom|withText" />
 
 
     <item android:id="@+id/action_category"
         android:title="Category"
-        android:showAsAction="always|withText"
-        android:actionViewClass="android.widget.Spinner" />
+        app:showAsAction="always|withText"
+        app:actionViewClass="android.widget.Spinner" />
 
 	<item android:id="@+id/action_search"
           android:title="Search"
           android:icon="@android:drawable/ic_menu_search"
-          android:showAsAction="always|withText"
-          android:actionViewClass="android.widget.SearchView" />
+          app:showAsAction="always|withText"
+          app:actionViewClass="android.widget.SearchView" />
 
 </menu>

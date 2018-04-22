@@ -175,7 +175,9 @@ public class ImageAdapter extends BaseAdapter implements SpinnerAdapter {
 		{
 			throw new RuntimeException("More than 1 result came back?!?");
 		}
-		
+
+		cursor.close();
+
 		dbHelper.close();
 		
 		return ri;
