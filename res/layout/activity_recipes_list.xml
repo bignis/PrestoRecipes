@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayoutMgn"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/linearLayoutMgn"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+
+	<android.support.v7.widget.Toolbar
+		android:id="@+id/my_toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize"
+		android:background="?attr/colorPrimary"
+		android:elevation="4dp"
+		android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+		app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <TextView
         android:id="@+id/noRecipesInDatabaseMessage"
-		android:layout_width="fill_parent"  
+		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:gravity="center"
         android:text="@string/no_recipes_message"
         android:padding="50dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView

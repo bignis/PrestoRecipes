@@ -28,6 +28,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,8 +39,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SearchView.OnQueryTextListener;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
+import android.support.v7.widget.Toolbar;
 
-public class RecipesListActivity extends Activity implements OnQueryTextListener {
+public class RecipesListActivity extends AppCompatActivity implements OnQueryTextListener {
 
 	public final static String RECIPE_ID = "com.bignis.PrestoCookbook.RECIPE_ID";
 	public final static String ALL_RECIPES_CATEGORY = "All Recipes";
@@ -55,6 +57,9 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 
 
 		setContentView(R.layout.activity_recipes_list);
+
+		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+		this.setSupportActionBar(myToolbar);  // Get this from extending AppCompatActivity
 
 		if (this.getIntent().hasExtra("RepopulateRecipesWhenShown")) {
 			this.PopulateRecipes();  // After new recipes are loaded
@@ -216,12 +221,13 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_recipes_list, menu);
-		
+		/*
 		//http://stackoverflow.com/questions/11276043/how-to-add-a-searchwidget-to-the-actionbar
 		MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
-        
+        */
+
         this.populateCategorySpinner(menu);
              
 		return true;
