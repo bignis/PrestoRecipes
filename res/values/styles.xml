@@ -2,9 +2,10 @@
 
 
     <!-- Application theme. -->
-    <!-- mgn changed it to get it to compile with v26
-    <style name="AppTheme" parent="AppBaseTheme"> -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <style name="AppTheme" parent="AppBaseTheme">
+    <!--
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <!-- mgn http://stackoverflow.com/questions/12395381/android-actionbar-navigation-spinner-text-color -->
         <item name="android:spinnerDropDownItemStyle">@style/YourCustomDropDownItemStyle</item>

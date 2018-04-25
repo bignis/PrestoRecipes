@@ -52,6 +52,8 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 		super.onCreate(savedInstanceState);
 		Fabric.with(this, new Crashlytics());
 
+
+
 		setContentView(R.layout.activity_recipes_list);
 
 		if (this.getIntent().hasExtra("RepopulateRecipesWhenShown")) {
@@ -209,6 +211,9 @@ public class RecipesListActivity extends Activity implements OnQueryTextListener
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+
+		super.onCreateOptionsMenu(menu);
+
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_recipes_list, menu);
 		
