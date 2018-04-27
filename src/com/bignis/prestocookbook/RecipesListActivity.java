@@ -54,8 +54,6 @@ public class RecipesListActivity extends AppCompatActivity implements OnQueryTex
 		super.onCreate(savedInstanceState);
 		Fabric.with(this, new Crashlytics());
 
-
-
 		setContentView(R.layout.activity_recipes_list);
 
 		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);

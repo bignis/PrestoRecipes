@@ -59,6 +59,8 @@ public class LoadRecipesActivity extends Activity {
 
         setContentView(R.layout.activity_load_recipes);
 
+        //ensurePermissionsGranted();
+
         //showFakeData();
 
         extractZipFromIntentIntoStagingFolder();
