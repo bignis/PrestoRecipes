@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -59,7 +60,7 @@ public class LoadRecipesActivity extends Activity {
 
         setContentView(R.layout.activity_load_recipes);
 
-        //ensurePermissionsGranted();
+        ensurePermissionsGranted();
 
         //showFakeData();
 
@@ -73,7 +74,7 @@ public class LoadRecipesActivity extends Activity {
 
     private StagedRecipe[] getStagedRecipes()
     {
-        File[] xmlFiles = RecipesLoader.GetXmlFiles(RecipesLoader.GetStagingFolder());
+        File[] xmlFiles = RecipesLoader.GetXmlFiles(RecipesLoader.GetStagingFolder(this));
 
         HashMap<String, File> xmlFileSet = new HashMap<String, File>();
 
@@ -112,7 +113,7 @@ public class LoadRecipesActivity extends Activity {
                     continue;
                 }
 
-                Pair<Integer,Long> recipeReplacementInfo = RecipesLoader.getRecipeReplacementInfoFromStagingFolder();
+                Pair<Integer,Long> recipeReplacementInfo = RecipesLoader.getRecipeReplacementInfoFromStagingFolder(this);
 
                 if (recipeReplacementInfo != null) {
 
@@ -168,13 +169,38 @@ public class LoadRecipesActivity extends Activity {
         boolean haveStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
 
-//        if (!(haveStoragePermission)) {
-       /*     ActivityCompat.requestPermissions(this,
+        Log.i("mgn", "haveStoragePermission:" + haveStoragePermission);
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                69 /* this is a meaningless number */);
+
+        if (!(haveStoragePermission)) {
+            ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST_RECORD_AUDIO_MGN);
-*/
+                    69 /* this is a meaningless number */);
+
             // TODO someday, react to permissions granted/denied
-  //      }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        Log.i("mgn", "onRequestPermissionsResult:" + requestCode);
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted!
+                } else {
+
+                    // permission denied!
+                    //Toast.makeText(MainActivity.this, "Permission denied to write External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
     }
 
     private void extractZipFromIntentIntoStagingFolder()
@@ -196,7 +222,7 @@ public class LoadRecipesActivity extends Activity {
         }
 
         // First clear the staging folder, don't want other junk from "before" polluting it if we want to just load the from the Presto .zip given to us
-        deleteFilesFromFolder(RecipesLoader.GetStagingFolder());
+        deleteFilesFromFolder(RecipesLoader.GetStagingFolder(this));
 
         Uri uriFromIntent = intent.getData();
 
@@ -241,7 +267,7 @@ public class LoadRecipesActivity extends Activity {
     {
         // Delete the existing (if any) contents of the staging folder
 
-        File stagingFolder = RecipesLoader.GetStagingFolder();
+        File stagingFolder = RecipesLoader.GetStagingFolder(this);
 
         LoadRecipesActivity.deleteFilesFromFolder(stagingFolder);
 
@@ -296,7 +322,7 @@ public class LoadRecipesActivity extends Activity {
             }
         };
 
-        new RecipesLoaderTask(this, RecipeLoadType.StagingFolderOnly, new Handler(postExecuteCallback)).execute(); // Load recipes
+        new RecipesLoaderTask(this, new Handler(postExecuteCallback)).execute(); // Load recipes
     }
 
     public String getFileNameFromUri(Uri uri) {
@@ -334,7 +360,7 @@ public class LoadRecipesActivity extends Activity {
     public void cancelClick(View v) {
 
         // Delete things since we didn't choose to load
-        deleteFilesFromFolder(RecipesLoader.GetStagingFolder());
+        deleteFilesFromFolder(RecipesLoader.GetStagingFolder(this));
 
         Intent intent = new Intent(this, RecipesListActivity.class);
         this.startActivity(intent);

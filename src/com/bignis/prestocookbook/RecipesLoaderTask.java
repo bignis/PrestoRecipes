@@ -14,16 +14,14 @@ public class RecipesLoaderTask extends AsyncTask<Void, String, String> implement
 	private Activity _context;
 	private ProgressDialog _progressDialog;
 	private boolean _exceptionOccurredDuringRecipeLoading;
-	private RecipeLoadType _loadType;
 	private Handler _onPostExecuteCallback;
 	
-	public RecipesLoaderTask(Activity context, RecipeLoadType loadType, Handler onPostExecuteCallback) {
+	public RecipesLoaderTask(Activity context, Handler onPostExecuteCallback) {
 		if (context == null) {
 			throw new NullPointerException("context");
 		}
 		
 		this._context = context;
-		this._loadType = loadType;
 		this._onPostExecuteCallback = onPostExecuteCallback;
 	}	
 
@@ -34,7 +32,7 @@ public class RecipesLoaderTask extends AsyncTask<Void, String, String> implement
 		
     	try
     	{
-    		return RecipesLoader.LoadRecipes(_context, _loadType, this);
+    		return RecipesLoader.LoadRecipesFromStagingFolder(_context, this);
     	}
     	catch (RecipeLoadException ex)
     	{

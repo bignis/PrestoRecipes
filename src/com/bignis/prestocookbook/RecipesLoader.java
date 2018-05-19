@@ -31,11 +31,12 @@ import android.widget.Toast;
 
 
 public class RecipesLoader {
-	
-	public static final String DATA_FOLDER_LOCATION = "sdcard/Presto Recipes";  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
-    public static final String STAGING_FOLDER_LOCATION = "sdcard/Presto Recipes/Staging";  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
-	
-	public static String LoadRecipes(Context context, RecipeLoadType typeOfLoad, RecipeLoadProgressListener progressListener) throws RecipeLoadException
+
+	/*
+	public static final String DATA_FOLDER_LOCATION = "sdcard/PrestoRecipes";  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
+    public static final String STAGING_FOLDER_LOCATION = "sdcard/PrestoRecipes/Staging";  // "sdcard" is what's exposed (not actually an SD Card) via the USB connection to a PC
+	*/
+	public static String LoadRecipesFromStagingFolder(Context context, RecipeLoadProgressListener progressListener) throws RecipeLoadException
 	{
 		if (context == null)
 		{
@@ -44,28 +45,11 @@ public class RecipesLoader {
 		
 		String message = "";
 
-		File folderToLoad;
-
-		switch (typeOfLoad) {
-			case StagingFolderOnly:
-				folderToLoad = GetStagingFolder();
-				break;
-			case DataFolderOnlyAndResetDatabase:
-				folderToLoad = GetDataFolder();
-				break;
-			default:
-				throw new RuntimeException("RecipeLoadType enum invalid");
-		}
-
-		if (typeOfLoad == RecipeLoadType.DataFolderOnlyAndResetDatabase) {
-			RecipesLoader.ResetDatabase(context);  // Do this first!
-		}
-
 		// Need Maps to associate xml files and images with each other if they have the same name.
 
 		Map<String, File> xmlFilesByName = new HashMap<String, File>();
 
-		for (File xmlFile : GetXmlFiles(folderToLoad)) {
+		for (File xmlFile : GetXmlFiles(RecipesLoader.GetStagingFolder(context))) {
 			xmlFilesByName.put(RecipesLoader.getFileNameWithoutExtension(xmlFile.getName()), xmlFile);
 		}
 
@@ -101,7 +85,7 @@ public class RecipesLoader {
 			byte[] imageOriginal = null;
 			byte[] imageResized = null;
 
-			File imageFile = GetImageFile(folderToLoad, xmlFileNameWithoutExtension);
+			File imageFile = GetImageFile(RecipesLoader.GetStagingFolder(context), xmlFileNameWithoutExtension);
 
 			if (imageFile != null) {
 				try {
@@ -116,15 +100,13 @@ public class RecipesLoader {
 
 			Pair<Integer,Long> recipeReplacementInfo = null;
 
-			if (typeOfLoad == RecipeLoadType.StagingFolderOnly) {
-				recipeReplacementInfo = RecipesLoader.getRecipeReplacementInfoFromStagingFolder();
+			recipeReplacementInfo = RecipesLoader.getRecipeReplacementInfoFromStagingFolder(context);
 
-				if (recipeReplacementInfo != null) {
-					Recipe recipeInDatabase = Recipe.getFromDatabase(recipeReplacementInfo.first, context);
+			if (recipeReplacementInfo != null) {
+				Recipe recipeInDatabase = Recipe.getFromDatabase(recipeReplacementInfo.first, context);
 
-					if (recipeInDatabase == null || recipeInDatabase.XmlHash != recipeReplacementInfo.second) {
-						recipeReplacementInfo = null;  // Can't find the recipe in db or it's changed from the one we want to modify - insert this as new
-					}
+				if (recipeInDatabase == null || recipeInDatabase.XmlHash != recipeReplacementInfo.second) {
+					recipeReplacementInfo = null;  // Can't find the recipe in db or it's changed from the one we want to modify - insert this as new
 				}
 			}
 
@@ -202,22 +184,20 @@ public class RecipesLoader {
 
 			loadedCount++;
 
-			// Clean up files from Staging if it's loaded successfully
-			if (typeOfLoad == RecipeLoadType.StagingFolderOnly) {
 
-				// Delete image, .xml, and '.replacement' marker file
-				final String fileNamePrefix = xmlFileNameWithoutExtension + ".";
+			// Delete image, .xml, and '.replacement' marker file
+			final String fileNamePrefix = xmlFileNameWithoutExtension + ".";
 
-				FilenameFilter filter = new FilenameFilter() {
-					public boolean accept(File directory, String fileName) {
-						return fileName.startsWith(fileNamePrefix);
-					}
-				};
-
-				for (File file : GetStagingFolder().listFiles(filter)) {
-					file.delete();
+			FilenameFilter filter = new FilenameFilter() {
+				public boolean accept(File directory, String fileName) {
+					return fileName.startsWith(fileNamePrefix);
 				}
+			};
+
+			for (File file : RecipesLoader.GetStagingFolder(context).listFiles(filter)) {
+				file.delete();
 			}
+
 		}
 
 		db.close();
@@ -226,7 +206,7 @@ public class RecipesLoader {
 		return xmlFilesByName.size() + " recipes successfuly loaded";
 	}
 
-	private static void ResetDatabase(Context context) {
+	public static void ResetDatabase(Context context) {
 		RecipeDBHelper dbHelper = new RecipeDBHelper(context);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		dbHelper.onUpgrade(db, 1, 1);  // Triggers drop / recreate
@@ -417,21 +397,9 @@ public class RecipesLoader {
 
 		return result;
 	}
-	
+	/*
 	public static File GetDataFolder()
 	{
-		/*  // SD card
-		String state = Environment.getExternalStorageState();
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-			String foo = "";
-		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-		    String foo = "";
-		} 
-		
-		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
-		*/
 		File folder = new File(DATA_FOLDER_LOCATION);
 		
 		if (!(folder.exists()))
@@ -447,9 +415,12 @@ public class RecipesLoader {
 		
 		return folder;
 	}
+	*/
 
-    public static File GetStagingFolder()
+    public static File GetStagingFolder(Context context)
     {
+    	return context.getCacheDir();  // Returns the absolute path to the application specific cache directory on the filesystem. https://developer.android.com/reference/android/content/Context#getCacheDir()
+
 		/*  // SD card
 		String state = Environment.getExternalStorageState();
 
@@ -462,6 +433,7 @@ public class RecipesLoader {
 
 		File folder = Environment.getExternalStoragePublicDirectory("Presto Recipes");
 		*/
+		/*
         File folder = new File(STAGING_FOLDER_LOCATION);
 		Log.e("mgn", "folder " + folder.exists());
 		if (!(folder.exists()))
@@ -479,6 +451,7 @@ public class RecipesLoader {
         }
 
         return folder;
+        */
     }
 	
 	public static File[] GetImageFilesThatNeedLoading(File[] imageFiles, Context context) throws FileNotFoundException, IOException
@@ -727,14 +700,14 @@ public class RecipesLoader {
 	}
 
 	// <id, xmlHash>
-	public static Pair<Integer, Long> getRecipeReplacementInfoFromStagingFolder() {
+	public static Pair<Integer, Long> getRecipeReplacementInfoFromStagingFolder(Context context) {
 		FilenameFilter filter = new FilenameFilter() {
 			public boolean accept(File directory, String fileName) {
 				return RecipesLoader.endsWith(fileName, ".replacement", true);
 			}
 		};
 
-		File[] filesSignalingRecipeReplacement = RecipesLoader.GetStagingFolder().listFiles(filter);
+		File[] filesSignalingRecipeReplacement = RecipesLoader.GetStagingFolder(context).listFiles(filter);
 
 		if (filesSignalingRecipeReplacement.length > 1) {
 			throw new RuntimeException("Unexpected, multiple 'replacement' files in the folder, only 1 is ever expected");

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +46,9 @@ public class RecipesListActivity extends AppCompatActivity implements OnQueryTex
 
 	public final static String RECIPE_ID = "com.bignis.PrestoCookbook.RECIPE_ID";
 	public final static String ALL_RECIPES_CATEGORY = "All Recipes";
-	
+
+	private final int UNIQUE_REQUEST_CODE_FOR_SAVE_FILE = 952;
+
 	private String currentSearchQuery;
 	private String currentCategorySelection;
 	
@@ -219,12 +222,12 @@ public class RecipesListActivity extends AppCompatActivity implements OnQueryTex
 
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_recipes_list, menu);
-		/*
+
 		//http://stackoverflow.com/questions/11276043/how-to-add-a-searchwidget-to-the-actionbar
 		MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
-        */
+
 
         this.populateCategorySpinner(menu);
              
@@ -323,6 +326,7 @@ public class RecipesListActivity extends AppCompatActivity implements OnQueryTex
 			@Override
 			public boolean handleMessage(Message message) {
 
+				RecipesLoader.ResetDatabase(RecipesListActivity.this);
 
 				Toast.makeText(RecipesListActivity.this, "Database has been reset", Toast.LENGTH_SHORT).show();  // Must do this from the main thread
 
@@ -336,25 +340,20 @@ public class RecipesListActivity extends AppCompatActivity implements OnQueryTex
 			}
 		};
 
-		new RecipesLoaderTask(this, RecipeLoadType.DataFolderOnlyAndResetDatabase, new Handler(postExecuteCallback)).execute();
+		new RecipesLoaderTask(this, new Handler(postExecuteCallback)).execute();
 	}
 
 	private void downloadBackupOfAllRecipes() {
 		try {
-			File zipFile = ZipCreator.createZipBackupForAllRecipeFiles(this);
 
-			if (zipFile != null) {
-				AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-				alertDialog.setTitle("Download Complete");
-				alertDialog.setMessage("Your recipes have been saved to " + zipFile.getName() + " under the '/Presto Recipes/backups' folder on your device.\n\nYou must connect your device to a computer and browse for this file to retrieve it, using Android's 'Downloads' app won't show it.");
-				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						});
-				alertDialog.show();
-			}
+			SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+			String currentDate = sdf.format(new Date());
+			String proposedFileName = "AllRecipes-" + currentDate + ".presto";
+
+			Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+			intent.setType("*/*");
+			intent.putExtra(Intent.EXTRA_TITLE, proposedFileName);
+			startActivityForResult(intent, UNIQUE_REQUEST_CODE_FOR_SAVE_FILE);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -368,6 +367,36 @@ public class RecipesListActivity extends AppCompatActivity implements OnQueryTex
 						}
 					});
 			alertDialog.show();
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// Check which request we're responding to
+		if (requestCode == UNIQUE_REQUEST_CODE_FOR_SAVE_FILE) {
+			// Make sure the request was successful
+			if (resultCode == RESULT_OK) {
+				Uri uri = data.getData();
+
+				try {
+					OutputStream stream = this.getContentResolver().openOutputStream(uri);
+
+					ZipCreator.createZipBackupForAllRecipeFiles(this, stream);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+					AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+					alertDialog.setTitle("Error saving backup file");
+					alertDialog.setMessage(e.getMessage());
+					alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss();
+								}
+							});
+					alertDialog.show();
+				}
+			}
 		}
 	}
 	

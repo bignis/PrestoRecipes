@@ -7,9 +7,7 @@
 
     <item android:id="@+id/menu_load_recipes"
         android:title="@string/menu_load_recipes"
-        android:icon="@android:drawable/ic_menu_set_as"
-
-        app:actionViewClass="ifRoom|withText" />
+        android:icon="@android:drawable/ic_menu_set_as" />
 
 
     <item android:id="@+id/action_category"
